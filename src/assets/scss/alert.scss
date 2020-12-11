@@ -1,0 +1,14 @@
+@import "./var";
+.alert{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 20px;
+  color: $white;
+  &.error{
+    background: $error;
+  }
+  &.notification{
+    background: $attention;
+  }
+}

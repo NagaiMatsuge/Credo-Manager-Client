@@ -46,9 +46,25 @@
               {{ password.length }}</small
             >
           </div>
-          <div class="content__login-relog">
-            <router-link to="/password-reset">Забыли пороль?</router-link>
+          <div class="content__login-group">
+            <div class="checkbox">
+              <input
+                  id="checkbox"
+                  type="checkbox"
+                  v-model.trim="remember_me"
+              />
+              <label for="checkbox">
+                Запомнить меня
+              </label>
+              <div class="content__login-relog">
+                <router-link to="/password-reset">Забыли пороль?</router-link>
+              </div>
+            </div>
+
+
+
           </div>
+
           <button>ВОЙТИ</button>
         </form>
       </div>
@@ -66,6 +82,7 @@ export default {
     return {
       email: "",
       password: "",
+      remember_me: false
     };
   },
   validations: {
@@ -81,8 +98,8 @@ export default {
       const formData = {
         email: this.email,
         password: this.password,
+        remember_me: this.remember_me,
       };
-      console.log(formData);
       try {
         await this.$store.dispatch("login", formData);
         this.$router.push("/");

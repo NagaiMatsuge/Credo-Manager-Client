@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 import Vuelidate from 'vuelidate'
+import axios from 'axios'
 
 import App from './App.vue'
 import router from './router'
@@ -13,5 +14,6 @@ Vue.use(Vuelidate)
 new Vue({
   router,
   store,
+  axios,
   render: h => h(App)
 }).$mount('#app')
