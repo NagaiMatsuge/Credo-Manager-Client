@@ -11,6 +11,7 @@ export default{
     'auth/wrong-password' : 'Введите правельный пороль',
 
     'email-verify' : 'Емейл активации аккаунта был отправлен на почту email_of_the_user@gmail.com',
+    'auth/email-not-verified' : 'Ваш Email не активирован',
 
     'email-reset' : 'На ваш Email было отправлено письмо',
     'auth/email-verified' : "Email был успешно активирован",

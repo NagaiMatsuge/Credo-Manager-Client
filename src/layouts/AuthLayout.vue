@@ -1,5 +1,6 @@
 <template>
   <div class="empty__layout">
+
     <div class="empty__layout-left">
       <div class="empty__layout-log ">
         <img src="../assets/img/logo.svg" alt />
@@ -16,7 +17,7 @@
         <p>Credo Studio© 2020 Credo</p>
       </div>
     </div>
-    <Alert v-if="error || notification" :error="error" :notification="notification" />
+    <Alert :error="error" :notification="notification" />
     <div class="content__layout-rigth">
       <router-view />
     </div>

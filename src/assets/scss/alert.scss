@@ -5,6 +5,8 @@
   right: 20px;
   padding: 20px;
   color: $white;
+  z-index: 100000000;
+
   &.error{
     background: $error;
   }
