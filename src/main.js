@@ -1,19 +1,19 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import Vuelidate from 'vuelidate'
-import axios from 'axios'
+import Vuelidate from "vuelidate";
+import axios from "axios";
 
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.use(Vuelidate)
+Vue.use(Vuelidate);
 
 new Vue({
   router,
   store,
   axios,
-  render: h => h(App)
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");

@@ -1,7 +1,11 @@
 .main__layout {
   display: flex;
 }
-.content{
+.content {
   width: 100%;
-  background: #F5F6FA;
+  background: #f5f6fa;
+}
+._container {
+  margin-top: 240px;
+  position: relative;
 }

@@ -1,12 +1,12 @@
 <template>
-   <div>
-      <div class="page__title">
-      <h1>Проекты</h1>
+  <div>
+    <div class="page__title">
+      <h1>Проекты1</h1>
       <Header />
     </div>
-   </div>
+  </div>
 </template>
-<script > 
+<script >
 </script>
 <style scoped lang='scss'>
 </style>

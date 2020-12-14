@@ -1,10 +1,9 @@
 <template>
-<div>
-   <div class="page__title">
+  <div>
+    <div class="page__title">
       <h1>Статистика</h1>
-      <Header />
     </div>
-</div>
+  </div>
 </template>
 <script>
 </script>

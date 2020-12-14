@@ -2,7 +2,6 @@
   <div>
     <div class="page__title">
       <h1>Задачи</h1>
-      <Header />
     </div>
   </div>
 </template>
