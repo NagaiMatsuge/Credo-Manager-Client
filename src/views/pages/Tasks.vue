@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="page__title">
-      <h1>Задачи</h1>
     </div>
   </div>
 </template>

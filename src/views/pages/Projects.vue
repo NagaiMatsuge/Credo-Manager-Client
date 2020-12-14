@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="page__title">
-      <h1>Проекты1</h1>
-      <Header />
     </div>
   </div>
 </template>

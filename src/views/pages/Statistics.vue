@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="page__title">
-      <h1>Статистика</h1>
     </div>
   </div>
 </template>

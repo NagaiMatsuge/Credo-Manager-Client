@@ -2,7 +2,7 @@
   <div class="header">
     <div class="page_info">
       <div class="page_title">
-        <div class="back_icon">
+        <div v-if="breadcrumbs" class="back_icon">
           <svg
             width="21"
             height="24"
@@ -34,7 +34,7 @@
         </div>
         <div class="page_name">{{title}}</div>
       </div>
-      <div class="page_subtitle">
+      <div v-if="breadcrumbs" class="page_subtitle">
         Уведомления
       </div>
     </div>
@@ -71,7 +71,7 @@
           </svg>
         </div>
       </div>
-      <div class="user_credentials">
+      <div class="user_credentials" @click="dropdown = !dropdown">
         <div class="user_image">
           <img
             :src="!user.photo ? `photo1.png` : user.photo"
@@ -93,13 +93,14 @@
               />
             </svg>
           </div>
-          <div class="user_role">{{user.email}}</div>
-          <div>
+          <div class="user_role">{{user.role[0]}}</div>
+          <div class="header__dropdown" v-if="dropdown">
             <ul>
               <li>
-                <button @click="logout">
-                  ВЫХОД
-                </button>
+                <router-link to="/user-settings">Настройка аккаунта</router-link>
+              </li>
+              <li @click.prevent="logout">
+                <a href="#!" >Выход</a>
               </li>
             </ul>
           </div>
@@ -114,6 +115,7 @@ import DropDown from "@/components/DropDown";
 export default {
   data() {
     return {
+      dropdown: false,
       items: [
         {
           link: "/logout?message=logout",
@@ -144,6 +146,7 @@ export default {
   props: {
     user: {},
     title: null,
+    breadcrumbs: null
   },
   components: {
     DropDown,

@@ -6,9 +6,9 @@
         v-if="user && title"
         :user="user"
         :title="title"
+        :breadcrumbs="breadcrumbs"
       />
       <div class="_container">
-        <button @click.prevent="logout">ВЫХОД</button>
         <router-view />
       </div>
     </div>
@@ -38,13 +38,10 @@ export default {
     title() {
       return this.$route.meta.title;
     },
-  },
-  methods: {
-    async logout() {
-      await this.$store.dispatch("logout");
-      this.$router.push("/login?message=login");
-      localStorage.clear();
+    breadcrumbs() {
+      return null;
     },
+
   },
 };
 </script>

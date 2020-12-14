@@ -11,7 +11,7 @@ const routes = [
     meta: {
       layout: "main",
       auth: true,
-      title: "Some Title",
+      title: "Сводная информация",
     },
     component: () => import("../views/pages/Home.vue"),
   },
@@ -42,25 +42,31 @@ const routes = [
   {
     path: "/users",
     name: "Users",
-    meta: { layout: "main", auth: true },
-    component: () => import("../views/pages/users/User.vue"),
+    meta: { layout: "main", auth: true, title: "Команда" },
+    component: () => import("../views/pages/users/Users.vue"),
+  },
+  {
+    path: "/user-settings",
+    name: "User Setting",
+    meta: { layout: "main", auth: true, title: "Настройки", },
+    component: () => import("../views/pages/users/UserSettings"),
   },
   {
     path: "/projects",
     name: "Projects",
-    meta: { layout: "main", auth: true },
+    meta: { layout: "main", auth: true, title: "Проекты" },
     component: () => import("../views/pages/Projects.vue"),
   },
   {
     path: "/tasks",
     name: "Tasks",
-    meta: { layout: "main", auth: true },
+    meta: { layout: "main", auth: true, title: "Задачи" },
     component: () => import("../views/pages/Tasks.vue"),
   },
   {
     path: "/statistics",
     name: "Statistics",
-    meta: { layout: "main", auth: true },
+    meta: { layout: "main", auth: true, title: "Статистика" },
     component: () => import("../views/pages/Statistics.vue"),
   },
 ];

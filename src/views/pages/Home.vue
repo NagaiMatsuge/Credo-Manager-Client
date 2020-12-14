@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    <div class="page__title">
-      <h1>Сводная информация</h1>
-    </div>
     <div class="home__app">
     </div>
   </div>

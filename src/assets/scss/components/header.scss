@@ -1,24 +1,63 @@
 @import "../var.scss";
 
 .header {
-  // position: fixed;
-  // top: 0;
-  // right: 0;
-  padding: 48px 48px 48px 48px;
+  padding: 50px;
   display: flex;
+
   width: 100%;
   justify-content: space-between;
+  &__dropdown{
+    position: absolute;
+    top: calc(100% + 15px);
+    width: max-content;
+    background: $white;
+    right: 0;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0px 8px 15px rgba(9, 45, 147, 0.15);
+
+    ul{
+      list-style: none;
+      li{
+        border-bottom: 1px solid $light8;
+        padding: 6px 0;
+        &:last-child{
+          border: none;
+          padding-bottom: 0;
+        }
+        &:first-child{
+          padding-top: 0;
+        }
+        a{
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0em;
+          text-align: left;
+          color: $black;
+        }
+      }
+
+    }
+  }
+  &__dropdown-list{
+
+  }
   .page_info {
     display: flex;
     flex-direction: column;
+
     .page_title {
       display: flex;
+
       .back_icon {
         display: flex;
         justify-content: center;
         align-items: center;
         padding-right: 15px;
       }
+
       .page_name {
         font-family: Segoe UI;
         font-size: 28px;
@@ -27,51 +66,65 @@
         font-weight: bold;
       }
     }
+
     .page_subtitle {
       font-style: normal;
       font-weight: normal;
       color: $light8;
     }
   }
+
   .user_info {
     display: flex;
+
     .controls {
       display: flex;
       justify-content: center;
       align-items: center;
       border-right: solid 2px $light8;
+
       div {
         padding-right: 31px;
       }
     }
+
     .user_credentials {
+      cursor: pointer;
       display: flex;
       padding-left: 28px;
+      position: relative;
+      user-select: none;
+
       .user_image {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-right: 5px;
+
         img {
           width: 42px;
           height: 42px;
         }
       }
+
       .user_details {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+
         .user_name {
           font-weight: bold;
           font-size: 14px;
           display: flex;
           justify-content: center;
           align-items: center;
+
           svg {
             margin-left: 11px;
           }
         }
+
         .user_role {
           font-weight: normal;
           font-size: 11px;
