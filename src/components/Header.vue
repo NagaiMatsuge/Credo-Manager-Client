@@ -32,7 +32,7 @@
             />
           </svg>
         </div>
-        <div class="page_name">Логи</div>
+        <div class="page_name">{{title}}</div>
       </div>
       <div class="page_subtitle">
         Уведомления
@@ -72,9 +72,14 @@
         </div>
       </div>
       <div class="user_credentials">
-        <div class="user_image"></div>
+        <div class="user_image">
+          <img
+            :src="!user.photo ? `photo1.png` : user.photo"
+            alt=""
+          >
+        </div>
         <div class="user_details">
-          <div class="user_name">Иван Иванов
+          <div class="user_name">{{user.name}}
             <svg
               width="9"
               height="6"
@@ -88,8 +93,16 @@
               />
             </svg>
           </div>
-          <div class="user_role">Менеджер</div>
-          <!-- <DropDown :items="items" /> -->
+          <div class="user_role">{{user.email}}</div>
+          <div>
+            <ul>
+              <li>
+                <button @click="logout">
+                  ВЫХОД
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -97,7 +110,7 @@
 </template>
 
 <script>
-// import DropDown from "@/components/DropDown";
+import DropDown from "@/components/DropDown";
 export default {
   data() {
     return {
@@ -105,20 +118,42 @@ export default {
         {
           link: "/logout?message=logout",
           name: "Logout",
+          callBack: async function () {
+            await this.$store.dispatch("logout");
+            this.$router.push("/login?message=login");
+            localStorage.clear();
+          },
         },
         {
           link: "/login?message=login",
           name: "Login",
+          callBack: function () {
+            console.log("Login clicked");
+          },
         },
         {
           link: "/settings",
           name: "Settings",
+          callBack: function () {
+            console.log("Settings clicked");
+          },
         },
       ],
     };
   },
+  props: {
+    user: {},
+    title: null,
+  },
   components: {
-    // DropDown,
+    DropDown,
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch("logout");
+      this.$router.push("/login?message=login");
+      localStorage.clear();
+    },
   },
 };
 </script>

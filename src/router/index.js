@@ -1,89 +1,90 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 import axios from "axios";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-const routes = [{
-    path: '/',
-    name: 'Home',
+const routes = [
+  {
+    path: "/",
+    name: "Home",
     meta: {
-      layout: 'main',
-      auth: true
+      layout: "main",
+      auth: true,
+      title: "Some Title",
     },
-    component: () => import('../views/pages/Home.vue')
+    component: () => import("../views/pages/Home.vue"),
   },
   {
-    path: '/login',
-    name: 'Login',
+    path: "/login",
+    name: "Login",
     meta: {
-      layout: 'auth'
+      layout: "auth",
     },
-    component: () => import('../views/auth/Login.vue')
+    component: () => import("../views/auth/Login.vue"),
   },
   {
-    path: '/password-reset',
-    name: 'Password reset',
+    path: "/password-reset",
+    name: "Password reset",
     meta: {
-      layout: 'auth'
+      layout: "auth",
     },
-    component: () => import('../views/auth/PasswordReset.vue')
+    component: () => import("../views/auth/PasswordReset.vue"),
   },
   {
-    path: '/password/reset/:token',
-    name: 'Set New Password',
+    path: "/password/reset/:token",
+    name: "Set New Password",
     meta: {
-      layout: 'auth'
+      layout: "auth",
     },
-    component: () => import('../views/auth/SetNewPassword.vue')
+    component: () => import("../views/auth/SetNewPassword.vue"),
   },
   {
-    path: '/users',
-    name: 'Users',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/pages/users/User.vue')
+    path: "/users",
+    name: "Users",
+    meta: { layout: "main", auth: true },
+    component: () => import("../views/pages/users/User.vue"),
   },
   {
-    path: '/projects',
-    name: 'Projects',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/pages/Projects.vue')
+    path: "/projects",
+    name: "Projects",
+    meta: { layout: "main", auth: true },
+    component: () => import("../views/pages/Projects.vue"),
   },
   {
-    path: '/tasks',
-    name: 'Tasks',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/pages/Tasks.vue')
+    path: "/tasks",
+    name: "Tasks",
+    meta: { layout: "main", auth: true },
+    component: () => import("../views/pages/Tasks.vue"),
   },
   {
-    path: '/statistics',
-    name: 'Statistics',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/pages/Statistics.vue')
+    path: "/statistics",
+    name: "Statistics",
+    meta: { layout: "main", auth: true },
+    component: () => import("../views/pages/Statistics.vue"),
   },
-  
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-router.beforeEach( (to, from, next)=>{
-  let requireAuth = to.matched.some(record => record.meta.auth)
-  let token = localStorage.token
+router.beforeEach((to, from, next) => {
+  let requireAuth = to.matched.some((record) => record.meta.auth);
+  let token = localStorage.token;
   if (requireAuth && !token) {
-    next('/login?message=login')
-    localStorage.clear()
+    next("/login?message=login");
+    localStorage.clear();
   } else {
-    next()
+    next();
   }
   if (!requireAuth && token) {
-    next('/?message=auth-true')
+    next("/?message=auth-true");
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;

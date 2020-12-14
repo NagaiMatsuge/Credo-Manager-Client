@@ -48,13 +48,20 @@
       display: flex;
       padding-left: 28px;
       .user_image {
-        width: 42px;
-        height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 5px;
+        img {
+          width: 42px;
+          height: 42px;
+        }
       }
       .user_details {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-start;
         .user_name {
           font-weight: bold;
           font-size: 14px;

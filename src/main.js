@@ -2,8 +2,6 @@ import Vue from "vue";
 
 import Vuelidate from "vuelidate";
 import axios from "axios";
-import Vuelidate from "vuelidate";
-import axios from "axios";
 import vueTopprogress from "vue-top-progress";
 
 import App from "./App.vue";

@@ -1,10 +1,11 @@
 <template>
-  <ul>
+  <ul class="header__dropdown">
     <li
       v-for="(item, index) in items"
       :key="index"
+      class="header__dropdown__item"
     >
-      <router-link :to="item.link">{{item.name}}</router-link>
+      <div @click.prevent="item.callBack">{{item.name}}</div>
     </li>
   </ul>
 </template>

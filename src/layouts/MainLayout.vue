@@ -2,7 +2,11 @@
   <div class="main__layout">
     <Sidebar />
     <div class="content">
-      <Header />
+      <Header
+        v-if="user && title"
+        :user="user"
+        :title="title"
+      />
       <div class="_container">
         <button @click.prevent="logout">ВЫХОД</button>
         <router-view />
@@ -22,10 +26,21 @@ export default {
     Sidebar,
     Header,
   },
+  mounted() {
+    if (!this.$store.getters.getUserCredentials) {
+      this.$store.dispatch("fetchUserCredentials");
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.getUserCredentials;
+    },
+    title() {
+      return this.$route.meta.title;
+    },
+  },
   methods: {
     async logout() {
-      console.log(localStorage.token);
-
       await this.$store.dispatch("logout");
       this.$router.push("/login?message=login");
       localStorage.clear();
