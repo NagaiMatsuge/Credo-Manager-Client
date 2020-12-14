@@ -3,6 +3,7 @@
     <Sidebar />
     <div class="content">
       <div class="_container">
+        <button @click.prevent="logout">ВЫХОД</button>
         <router-view />
       </div>
     </div>
@@ -17,7 +18,17 @@ export default {
   },
   components:{
     Sidebar,
+  },
+  methods:{
+    async logout(){
+      console.log(localStorage.token)
+
+      await this.$store.dispatch('logout')
+      this.$router.push('/login?message=login')
+      localStorage.clear()
+    }
   }
+
 };
 </script>
 <style lang='scss'>

@@ -5,8 +5,10 @@ Vue.use(Vuex)
 
 export default {
     state: {
-        error: null,
-        notification: null,
+        error: 'null',
+        notification: 'null',
+        // progress: 'done'
+
     },
     mutations: {
         setError(state, error){
@@ -15,6 +17,9 @@ export default {
         setNotification(state, notification){
             state.notification = notification
         },
+        // setProgress(state, progress){
+        //     state.progress = progress
+        // },
         clearNotification(state){
             setTimeout(function (){
                 state.error = null
@@ -25,5 +30,7 @@ export default {
     getters: {
         error: s => s.error,
         notification: s => s.notification,
+        // getProgress: s => s.progress,
+
     },
 }

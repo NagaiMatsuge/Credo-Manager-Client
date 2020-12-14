@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from "axios";
 
 Vue.use(VueRouter)
 
@@ -67,6 +68,22 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach( (to, from, next)=>{
+  let requireAuth = to.matched.some(record => record.meta.auth)
+  let token = localStorage.token
+  if (requireAuth && !token) {
+    next('/login?message=login')
+    localStorage.clear()
+  } else {
+    next()
+  }
+  if (!requireAuth && token) {
+    next('/?message=auth-true')
+  } else {
+    next()
+  }
 })
 
 export default router
