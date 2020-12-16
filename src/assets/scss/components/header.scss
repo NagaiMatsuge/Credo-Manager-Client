@@ -56,10 +56,13 @@
         justify-content: center;
         align-items: center;
         padding-right: 15px;
+        a{
+          margin-right: 15px;
+          margin-top: 7px;
+        }
       }
 
       .page_name {
-        font-family: Segoe UI;
         font-size: 28px;
         line-height: 130%;
         color: $black;
@@ -71,6 +74,9 @@
       font-style: normal;
       font-weight: normal;
       color: $light8;
+      a{
+        color: #81839C;
+      }
     }
   }
 
@@ -100,10 +106,27 @@
         justify-content: center;
         align-items: center;
         margin-right: 5px;
+        border-radius: 3px;
+        overflow: hidden;
 
         img {
           width: 42px;
           height: 42px;
+
+        }
+        .user__img{
+          width: 42px;
+          height: 42px;
+          border-radius: 3px;
+          color: $white;
+          font-size: 22px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 36px;
+          letter-spacing: 0em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
       }
 

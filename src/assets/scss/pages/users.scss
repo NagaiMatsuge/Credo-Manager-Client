@@ -1,7 +1,26 @@
+@import "../var";
 .about {
   &__app {
   }
   &__body {
+  }
+  &__user-img{
+    width: 50px;
+    height: 50px;
+    background: #000;
+    margin-right: 10px;
+    color: $white;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: center;
+
   }
   &__info {
     display: flex;
@@ -76,10 +95,47 @@
   }
   &__card {
     display: flex;
-    padding: 14px;
+    padding: 14px 0;
     background: #ffffff;
-    box-shadow: 0px 1px 2px rgba(9, 45, 147, 0.1);
+    box-shadow: $bs;
     border-radius: 3px;
     margin-bottom: 5px;
+    position: relative;
+    transition: all 0.2s;
+    &:hover{
+      box-shadow: $bsactive;
+    }
+    .about{
+      &__info-user-name,
+      &__info-user-rol,
+      &__info-user-email,
+      &__info-user-tel{
+        align-items: center;
+        display: flex;
+      }
+      &__info-user-name{
+        align-items: center;
+        display: flex;
+        img{
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .about__info-user-edit{
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 55px;
+      height: 100%;
+      top: 0;
+      button{
+        border: none;
+        outline: none;
+        margin-left: 25px;
+        background: none;
+        cursor: pointer;
+      }
+    }
   }
 }

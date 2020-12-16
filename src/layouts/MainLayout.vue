@@ -39,7 +39,7 @@ export default {
       return this.$route.meta.title;
     },
     breadcrumbs() {
-      return null;
+      return this.$route.meta.breadcrumb;
     },
 
   },

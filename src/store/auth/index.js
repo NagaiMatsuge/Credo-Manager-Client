@@ -22,6 +22,7 @@ export default {
         commit("clearNotification");
         throw user.message;
       }
+      commit("removeProgress");
     },
     async logout({ dispatch, commit }) {
       commit("setProgress", "start");
@@ -42,6 +43,7 @@ export default {
         commit("clearNotification");
         throw user.message;
       }
+      commit("removeProgress");
     },
     async passwordReset({ dispatch, commit }, { email }) {
       commit("setProgress", "start");
@@ -60,7 +62,7 @@ export default {
         commit("clearNotification");
         throw forgot.message;
       }
-      commit("setProgress", "done");
+      commit("removeProgress");
     },
     async SetNewPassword({ dispatch, commit }, { password, token }) {
       commit("setProgress", "start");
@@ -78,6 +80,7 @@ export default {
         commit("clearNotification");
         throw newPassword.message;
       }
+      commit("removeProgress");
     },
   },
 };

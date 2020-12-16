@@ -4,10 +4,14 @@ export default {
   state: {
     user: null,
     users: null,
+    roles: null
   },
   mutations: {
     setUserCredentials(state, user) {
       state.user = user;
+    },
+    setRole(state, roles) {
+      state.roles = roles;
     },
     setUsersCredentials(state, users) {
       state.users = users;
@@ -49,9 +53,26 @@ export default {
         commit("clearNotification");
       }
     },
+    async fetchRoles({ commit }) {
+      axios.defaults.headers.common[
+          "Authorization"
+          ] = `Bearer ${localStorage.token}`;
+      commit("setProgress", "start");
+      const roles = (await axios.get(`${process.env.VUE_APP_SERVICE_URL}/params/roles`))
+          .data;
+      if (roles.success) {
+        commit("setRole", roles.data);
+        commit("removeProgress");
+      } else {
+        commit("removeProgress");
+        commit("setError", roles.message);
+        commit("clearNotification");
+      }
+    },
   },
   getters: {
     getUserCredentials: (s) => s.user,
     getUsersCredentials: (s) => s.users,
+    getRoles: (s) => s.roles,
   },
 };

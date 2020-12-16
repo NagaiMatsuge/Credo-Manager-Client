@@ -42,8 +42,29 @@ const routes = [
   {
     path: "/users",
     name: "Users",
-    meta: { layout: "main", auth: true, title: "Команда" },
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Команда"
+    },
     component: () => import("../views/pages/users/Users.vue"),
+  },
+  {
+    path: "/user-add",
+    name: "User Add",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Добавить сотрудника",
+      breadcrumb: {
+        parent: {
+          title: "Команда",
+          path: "/user"
+        },
+        child: "Добавить сотрудника"
+      }
+    },
+    component: () => import("../views/pages/users/UserAdd"),
   },
   {
     path: "/user-settings",

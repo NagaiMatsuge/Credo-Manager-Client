@@ -1,41 +1,46 @@
 <template>
   <div class="header">
     <div class="page_info">
-      <div class="page_title">
-        <div v-if="breadcrumbs" class="back_icon">
-          <svg
-            width="21"
-            height="24"
-            viewBox="0 0 21 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="0.5"
-              y="1"
-              width="20"
-              height="22"
-              rx="3.5"
-              fill="white"
-            />
-            <path
-              d="M6.54038 11.5404C6.28654 11.7942 6.28654 12.2058 6.54038 12.4596L10.677 16.5962C10.9308 16.85 11.3424 16.85 11.5962 16.5962C11.85 16.3424 11.85 15.9308 11.5962 15.677L7.91924 12L11.5962 8.32304C11.85 8.0692 11.85 7.65765 11.5962 7.40381C11.3424 7.14996 10.9308 7.14997 10.677 7.40381L6.54038 11.5404ZM8 11.35L7 11.35L7 12.65L8 12.65L8 11.35Z"
-              fill="#282B3D"
-            />
-            <rect
-              x="0.5"
-              y="1"
-              width="20"
-              height="22"
-              rx="3.5"
-              stroke="#B4B8CC"
-            />
-          </svg>
-        </div>
-        <div class="page_name">{{title}}</div>
-      </div>
       <div v-if="breadcrumbs" class="page_subtitle">
-        Уведомления
+        <router-link :to="breadcrumbs.parent.path">
+          {{ breadcrumbs.parent.title }}
+        </router-link>
+        <span>»{{ breadcrumbs.child }}</span>
+      </div>
+      <div class="page_title">
+        <div  class="back_icon">
+          <router-link v-if="breadcrumbs" :to="breadcrumbs.parent.path">
+            <svg
+                width="21"
+                height="24"
+                viewBox="0 0 21 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                  x="0.5"
+                  y="1"
+                  width="20"
+                  height="22"
+                  rx="3.5"
+                  fill="white"
+              />
+              <path
+                  d="M6.54038 11.5404C6.28654 11.7942 6.28654 12.2058 6.54038 12.4596L10.677 16.5962C10.9308 16.85 11.3424 16.85 11.5962 16.5962C11.85 16.3424 11.85 15.9308 11.5962 15.677L7.91924 12L11.5962 8.32304C11.85 8.0692 11.85 7.65765 11.5962 7.40381C11.3424 7.14996 10.9308 7.14997 10.677 7.40381L6.54038 11.5404ZM8 11.35L7 11.35L7 12.65L8 12.65L8 11.35Z"
+                  fill="#282B3D"
+              />
+              <rect
+                  x="0.5"
+                  y="1"
+                  width="20"
+                  height="22"
+                  rx="3.5"
+                  stroke="#B4B8CC"
+              />
+            </svg>
+          </router-link>
+          <div class="page_name">{{title}}</div>
+        </div>
       </div>
     </div>
     <div class="user_info">
@@ -74,9 +79,13 @@
       <div class="user_credentials" @click="dropdown = !dropdown">
         <div class="user_image">
           <img
-            :src="!user.photo ? `photo1.png` : user.photo"
+            v-if="user.photo"
+            :src="user.photo"
             alt=""
           >
+          <div class="user__img" :style="`background: ${user.color};`">
+            {{user.name.charAt(0).toUpperCase() || '--'}}
+          </div>
         </div>
         <div class="user_details">
           <div class="user_name">{{user.name}}
@@ -93,14 +102,14 @@
               />
             </svg>
           </div>
-          <div class="user_role">{{user.role[0]}}</div>
+          <div class="user_role">{{user.role}}</div>
           <div class="header__dropdown" v-if="dropdown">
             <ul>
               <li>
                 <router-link to="/user-settings">Настройка аккаунта</router-link>
               </li>
               <li @click.prevent="logout">
-                <a href="#!" >Выход</a>
+                <a href="#!">Выход</a>
               </li>
             </ul>
           </div>

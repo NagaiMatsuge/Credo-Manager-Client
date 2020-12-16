@@ -1,57 +1,27 @@
 <template>
   <div>
     <div class="about__card" v-for="(user, index) in users.data" :key="index">
-      <div class="draggable__dots">
-        <svg
-            width="12"
-            height="20"
-            viewBox="0 0 12 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-              d="M2 4C3.10457 4 4 3.10457 4 2C4 0.89543 3.10457 0 2 0C0.89543 0 0 0.89543 0 2C0 3.10457 0.89543 4 2 4Z"
-              fill="#CBCFE6"
-          />
-          <path
-              d="M10 4C11.1046 4 12 3.10457 12 2C12 0.89543 11.1046 0 10 0C8.89543 0 8 0.89543 8 2C8 3.10457 8.89543 4 10 4Z"
-              fill="#CBCFE6"
-          />
-          <path
-              d="M2 12C3.10457 12 4 11.1046 4 10C4 8.89543 3.10457 8 2 8C0.89543 8 0 8.89543 0 10C0 11.1046 0.89543 12 2 12Z"
-              fill="#CBCFE6"
-          />
-          <path
-              d="M10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12Z"
-              fill="#CBCFE6"
-          />
-          <path
-              d="M2 20C3.10457 20 4 19.1046 4 18C4 16.8954 3.10457 16 2 16C0.89543 16 0 16.8954 0 18C0 19.1046 0.89543 20 2 20Z"
-              fill="#CBCFE6"
-          />
-          <path
-              d="M10 20C11.1046 20 12 19.1046 12 18C12 16.8954 11.1046 16 10 16C8.89543 16 8 16.8954 8 18C8 19.1046 8.89543 20 10 20Z"
-              fill="#CBCFE6"
-          />
-        </svg>
-      </div>
       <div class="about__info-user-name">
         <img
-            src="#!"
+            v-if="user.photo"
+            :src="user.photo"
             width="42"
             height="42"
             alt
         />
-        {{user.name}}
+        <div class="about__user-img" :style="`background: ${user.color};`">
+          {{user.name.charAt(0).toUpperCase() || '--'}}
+        </div>
+        {{user.name || '--'}}
       </div>
       <div class="about__info-user-rol">
-        {{user.role}}
+        {{user.role || '--'}}
       </div>
       <div class="about__info-user-email">
-        {{user.email}}
+        {{user.email || '--'}}
       </div>
       <div class="about__info-user-tel">
-        {{user.phone}}
+        {{user.phone || '--'}}
       </div>
       <div class="about__info-user-edit">
         <button>

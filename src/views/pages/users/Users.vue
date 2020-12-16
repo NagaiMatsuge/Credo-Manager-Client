@@ -11,18 +11,13 @@
           <div class="about__add">
             <form>
               <div class="about__info-user-name">
-                <div class="about__group">
-                  <input
-                    type="email"
-                    placeholder="Введите email пользователя"
-                  />
-                </div>
               </div>
               <div class="about__info-user-rol">
-                select
               </div>
               <div class="about__info-user-email">
-                <button type="submit">Пригласить пользователя</button>
+              </div>
+              <div class="about__info-user-tel">
+                <button @click.prevent="$router.push('/user-add')" type="submit">Добавить сотрудника</button>
               </div>
             </form>
           </div>
