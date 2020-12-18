@@ -67,6 +67,23 @@ const routes = [
     component: () => import("../views/pages/users/UserAdd"),
   },
   {
+    path: "/user-edit/:id",
+    name: "User edit",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Редактирование пользователя",
+      breadcrumb: {
+        parent: {
+          title: "Команда",
+          path: "/users"
+        },
+        child: "Редактирование пользователя"
+      }
+    },
+    component: () => import("../views/pages/users/UserEdit"),
+  },
+  {
     path: "/user-settings",
     name: "User Setting",
     meta: { layout: "main", auth: true, title: "Настройки" },

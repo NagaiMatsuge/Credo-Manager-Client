@@ -12,6 +12,8 @@ export default{
 
     'email-verify' : 'Емейл активации аккаунта был отправлен на почту email_of_the_user@gmail.com',
     'auth/email-not-verified' : 'Ваш Email не активирован',
+    'user-edit-success' : 'Пользователь успешно редактирован',
+    'user-add-success' : 'Пользователь успешно создан',
 
     'email-reset' : 'На ваш Email было отправлено письмо',
     'auth/email-verified' : "Email был успешно активирован",

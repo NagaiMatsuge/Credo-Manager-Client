@@ -17,28 +17,18 @@
         <p>Credo Studio© 2020 Credo</p>
       </div>
     </div>
-    <Alert :error="error" :notification="notification" />
+
     <div class="content__layout-rigth">
       <router-view />
     </div>
   </div>
 </template>
 <script>
-import messages from '@/utils/messages'
-import Alert from '@/components/Alert'
-export default {
-  computed:{
-    error(){
-      return (messages[this.$store.getters.error])
-    },
-    notification(){
-      return (messages[this.$store.getters.notification])
-    },
-  },
 
-  components:{
-    Alert
-  }
+export default {
+
+
+
 }
 </script>
 <style lang='scss'>

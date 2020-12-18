@@ -125,31 +125,6 @@ export default {
   data() {
     return {
       dropdown: false,
-      items: [
-        {
-          link: "/logout?message=logout",
-          name: "Logout",
-          callBack: async function () {
-            await this.$store.dispatch("logout");
-            this.$router.push("/login?message=login");
-            localStorage.clear();
-          },
-        },
-        {
-          link: "/login?message=login",
-          name: "Login",
-          callBack: function () {
-            console.log("Login clicked");
-          },
-        },
-        {
-          link: "/settings",
-          name: "Settings",
-          callBack: function () {
-            console.log("Settings clicked");
-          },
-        },
-      ],
     };
   },
   props: {
@@ -163,7 +138,8 @@ export default {
   methods: {
     async logout() {
       await this.$store.dispatch("logout");
-      this.$router.push("/login?message=login");
+      this.$router.push("/login");
+      this.$store.commit('setNotification', 'logout')
       localStorage.clear();
     },
   },

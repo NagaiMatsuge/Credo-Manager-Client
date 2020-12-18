@@ -1,14 +1,18 @@
 <template>
   <div id="app">
     <vue-topprogress color="#4473F6" ref="topProgress"></vue-topprogress>
+    <Alert :error="error" :notification="notification" />
     <component :is="layout">
       <router-view />
     </component>
+
   </div>
 </template>
 <script>
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";
+import messages from '@/utils/messages'
+import Alert from '@/components/Alert'
 export default {
   computed: {
     layout() {
@@ -17,10 +21,14 @@ export default {
     progress(){
       return this.$store.getters.getProgress
     },
+    error(){
+      return (messages[this.$store.getters.error])
+    },
+    notification(){
+      return (messages[this.$store.getters.notification] || messages[this.$route.query.message])
+    },
   },
-  mounted() {
 
-  },
   watch:{
     progress: {
       handler(newValue) {
@@ -31,13 +39,13 @@ export default {
         }
       },
       deep: true
-    }
-
+    },
   },
-
   components: {
     AuthLayout,
     MainLayout,
+    Alert
+
   },
 };
 </script>

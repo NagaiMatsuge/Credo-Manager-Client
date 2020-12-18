@@ -7,11 +7,21 @@
 
 <script>
 export default {
-  props:{
+  props: {
     error: null,
     notification: null
+  },
+  watch:{
+    notification: {
+      handler(newValue) {
+        if(newValue) {
+          this.$store.commit('clearNotification')
+        }
+      },
+      deep: true
+    },
   }
-}
+};
 </script>
 <style lang="scss">
 @import "../assets/scss/alert.scss";
