@@ -6,6 +6,7 @@ import massages from "./massages";
 import progress from "./progress";
 import infoUser from "./info/user";
 import user from "./user";
+import projects from "./projects";
 
 Vue.use(Vuex);
 
@@ -19,5 +20,6 @@ export default new Vuex.Store({
     progress,
     user,
     infoUser,
+    projects,
   },
 });

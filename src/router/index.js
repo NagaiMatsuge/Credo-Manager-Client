@@ -45,7 +45,7 @@ const routes = [
     meta: {
       layout: "main",
       auth: true,
-      title: "Команда"
+      title: "Команда",
     },
     component: () => import("../views/pages/users/Users.vue"),
   },
@@ -59,24 +59,24 @@ const routes = [
       breadcrumb: {
         parent: {
           title: "Команда",
-          path: "/user"
+          path: "/user",
         },
-        child: "Добавить сотрудника"
-      }
+        child: "Добавить сотрудника",
+      },
     },
     component: () => import("../views/pages/users/UserAdd"),
   },
   {
     path: "/user-settings",
     name: "User Setting",
-    meta: { layout: "main", auth: true, title: "Настройки", },
+    meta: { layout: "main", auth: true, title: "Настройки" },
     component: () => import("../views/pages/users/UserSettings"),
   },
   {
     path: "/projects",
     name: "Projects",
     meta: { layout: "main", auth: true, title: "Проекты" },
-    component: () => import("../views/pages/Projects.vue"),
+    component: () => import("../views/pages/projects/Projects.vue"),
   },
   {
     path: "/tasks",

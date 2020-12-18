@@ -1,0 +1,67 @@
+@import "../var.scss";
+
+.projects {
+  &__container {
+    max-width: 1652px;
+  }
+  &__head {
+    display: flex;
+    padding-bottom: 7px;
+    border-bottom: 1px solid $Light9;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: $light8;
+    &__name {
+      width: 16.52%;
+      margin-left: 3.99%;
+    }
+    &__description {
+      width: 25.24%;
+    }
+    &__deadline {
+      width: 18.82%;
+    }
+    &__status {
+      width: 19.67%;
+    }
+    &__paid {
+      width: 19.75%;
+    }
+  }
+  &__body {
+    &-element {
+      display: flex;
+      background-color: $white;
+      height: 70px;
+      align-items: center;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+    &__name {
+      width: 16.52%;
+      margin-left: 3.99%;
+      &-text {
+        font-weight: 700;
+        line-height: 18px;
+      }
+    }
+    &__description {
+      width: 25.24%;
+    }
+    &__deadline {
+      width: 18.82%;
+    }
+    &__status {
+      width: 19.67%;
+    }
+    &__paid {
+      width: 19.75%;
+    }
+  }
+}

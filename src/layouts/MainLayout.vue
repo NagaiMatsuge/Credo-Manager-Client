@@ -41,7 +41,6 @@ export default {
     breadcrumbs() {
       return this.$route.meta.breadcrumb;
     },
-
   },
 };
 </script>
