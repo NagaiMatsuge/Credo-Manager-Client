@@ -216,7 +216,6 @@
               v-if="$v.pause_end_time.$dirty && !$v.pause_end_time.required"
             >Выберите завершение перерыва</small>
           </div>
-          {{working_days}}
           <div class="user__add-checkbox">
             <input
               type="checkbox"
