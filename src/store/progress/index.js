@@ -12,7 +12,7 @@ export default {
             state.progress = progress
         },
         removeProgress(state){
-                state.progress = ""
+            state.progress = ""
         },
     },
     getters: {

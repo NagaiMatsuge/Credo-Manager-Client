@@ -24,7 +24,7 @@
       <div class="about__info-user-tel">
         {{user.phone || '--'}}
       </div>
-      <div class="about__info-user-edit">
+      <div class="about__info-user-edit" v-if="user.id !== $store.getters.getUserCredentials.id">
         <button @click="$router.push(`/user-edit/${user.id}`)">
           <svg
               width="18"

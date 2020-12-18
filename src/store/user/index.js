@@ -51,6 +51,21 @@ export default {
                 throw user.message
             }
         },
+        async setingsUser({ commit }, obj) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const user = (await axios.put(`${process.env.VUE_APP_SERVICE_URL}/users/setting/update/${obj.id}`, obj)).data;
+            commit("removeProgress");
+
+            if (user.success) {
+                commit("setNotification", user.message);
+            } else {
+                commit("setError", user.message);
+                throw user.message
+            }
+        },
     },
     getters: {
 

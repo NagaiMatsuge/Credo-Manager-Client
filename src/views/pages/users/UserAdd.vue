@@ -41,7 +41,6 @@
                     ($v.email.$dirty && !$v.email.email),
                 }"
             />
-            {{$v.email}}
             <small
               class="error"
               v-if="$v.email.$dirty && !$v.email.required"

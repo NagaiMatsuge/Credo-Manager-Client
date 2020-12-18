@@ -278,12 +278,13 @@
       <button
         class="cancel"
         type="submit"
+        @click.prevent="$router.push('/users')"
       >Отменить изменения</button>
       <button
         class="add"
         @click.prevent="submitHandler"
         type="submit"
-      >Создать</button>
+      >Сохранить</button>
     </div>
   </div>
 </template>
@@ -348,7 +349,6 @@ export default {
         formData.password = this.password;
       }
 
-      console.log(formData);
       try {
         await this.$store.dispatch("updateUser", formData);
         await this.$router.push("/users");
