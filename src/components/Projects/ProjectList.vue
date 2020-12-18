@@ -15,12 +15,12 @@
             Not Image
           </div>
         </div>
-        <div class="projects__body__name-text">Text</div>
+        <div class="projects__body__name-text">{{project.title || '--'}}</div>
       </div>
-      <div class="projects__body__description">Description</div>
-      <div class="projects__body__deadline ">Deadline</div>
-      <div class="projects__body__status">Status</div>
-      <div class="projects__body__paid">Paid</div>
+      <div class="projects__body__description">{{project.description || '--'}}</div>
+      <div class="projects__body__deadline ">{{project.deadline || '--'}}</div>
+      <div class="projects__body__status">{{project.status || '--'}}</div>
+      <div class="projects__body__paid">{{project.paid || '--'}}</div>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@
 <script>
 export default {
   props: {
-    projects,
+    projects: {},
   },
 };
 </script>

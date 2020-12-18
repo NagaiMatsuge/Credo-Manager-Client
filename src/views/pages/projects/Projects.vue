@@ -9,7 +9,7 @@
         <div class="projects__head__paid">Оплачено</div>
       </div>
       <div class="projects__body">
-        <project-list
+        <ProjectList
           v-if="projects"
           :projects="projects"
         />
@@ -39,6 +39,6 @@ export default {
   },
 };
 </script>
-<style scoped lang='scss'>
+<style lang='scss'>
 @import "@/assets/scss/pages/projects";
 </style>
