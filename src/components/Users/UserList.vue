@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Modal v-if="modal" @modal='onModal' />
     <div class="about__card" v-for="(user, index) in users.data" :key="index">
       <div class="about__info-user-name">
         <img
@@ -24,7 +25,7 @@
         {{user.phone || '--'}}
       </div>
       <div class="about__info-user-edit">
-        <button>
+        <button @click="$router.push(`/user-edit/${user.id}`)">
           <svg
               width="18"
               height="18"
@@ -38,7 +39,7 @@
             />
           </svg>
         </button>
-        <button>
+        <button @click="deleteUser(user.id)">
           <svg
               width="18"
               height="18"
@@ -64,7 +65,37 @@
   </div>
 </template>
 <script>
+import Modal  from '@/components/Modal'
 export default {
-  props: {users: {}}
+  data(){
+    return{
+      modal: false,
+      id: null
+    }
+  },
+  props: {
+    users: {}
+  },
+  methods:{
+    async onModal (confirm) {
+      this.modal = false
+      if(confirm){
+        const formData = {
+          id: this.id,
+        }
+        try {
+          await this.$store.dispatch('deleteUser', formData)
+          await this.$store.dispatch('fetchUsersCredentials')
+        }catch (e){}
+      }else {
+        this.id = ''
+      }
+    },
+    deleteUser(id) {
+      this.id = id
+      this.modal = true
+    },
+  },
+  components: {Modal}
 }
 </script>

@@ -51,6 +51,33 @@
     span{
       width: 100%;
     }
+    .error{
+      color: $error;
+      margin-top: -5px;
+      display: block;
+      +.visible{
+        top: -6px;
+      }
+    }
+    &.user__add-group span{
+      &.invalid{
+        input{
+          border: 1px solid $error;
+          &::placeholder{
+            color: $error;
+          }
+        }
+
+      }
+    }
+    .vue__time-picker input.display-time{
+      width: 100% !important;
+      margin: 7.5px 0px;
+      display: block;
+      border: 1px solid $Light9;
+      padding: 10px 15px !important;
+      border-radius: 5px !important;
+    }
     select,
     input{
       width: 100% !important;
@@ -61,6 +88,12 @@
       border-radius: 5px;
       &::placeholder{
         color: $light8;
+      }
+      &.invalid{
+        border: 1px solid $error;
+        &::placeholder{
+          color: $error;
+        }
       }
     }
     .vue__time-picker .controls>*{
@@ -119,6 +152,7 @@
   }
   &-checkbox{
     display: flex;
+    flex-wrap: wrap;
     margin-top: 35px;
     input{
       display: none;
@@ -133,6 +167,11 @@
     input:checked + label{
       background: $attention;
       color: $white;
+    }
+    .error{
+      margin-top: 5px;
+      color: $error;
+      width: 100%;
     }
   }
 }

@@ -11,18 +11,15 @@ export default {
           remember_me,
         })
       ).data;
+      commit("removeProgress");
       if (user.success) {
         localStorage.clear();
         localStorage.setItem("token", user.data._token);
         commit("setUserCredentials", user.data);
-        commit("removeProgress");
       } else {
-        commit("removeProgress");
         commit("setError", user.message);
-        commit("clearNotification");
         throw user.message;
       }
-      commit("removeProgress");
     },
     async logout({ dispatch, commit }) {
       commit("setProgress", "start");
@@ -33,17 +30,15 @@ export default {
       const user = (
         await axios.post(`${process.env.VUE_APP_SERVICE_URL}/logout`)
       ).data;
+      commit("removeProgress");
+
       if (user.success) {
         localStorage.clear();
         commit("clearUserCredentials");
-        commit("removeProgress");
       } else {
-        commit("removeProgress");
         commit("setError", user.message);
-        commit("clearNotification");
         throw user.message;
       }
-      commit("removeProgress");
     },
     async passwordReset({ dispatch, commit }, { email }) {
       commit("setProgress", "start");
@@ -52,14 +47,11 @@ export default {
           email,
         })
       ).data;
+      commit("removeProgress");
       if (forgot.success) {
-        commit("removeProgress");
         commit("setNotification", forgot.message);
-        commit("clearNotification");
       } else {
-        commit("removeProgress");
         commit("setError", forgot.message);
-        commit("clearNotification");
         throw forgot.message;
       }
       commit("removeProgress");
@@ -72,15 +64,14 @@ export default {
           token,
         })
       ).data;
+      commit("removeProgress");
+
       if (newPassword.success) {
         commit("removeProgress");
       } else {
-        commit("removeProgress");
         commit("setError", newPassword.message);
-        commit("clearNotification");
         throw newPassword.message;
       }
-      commit("removeProgress");
     },
   },
 };

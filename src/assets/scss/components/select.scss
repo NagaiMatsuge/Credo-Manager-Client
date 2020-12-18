@@ -1,0 +1,35 @@
+@import "../var";
+.invalid{
+  .vue-dynamic-select{
+    input{
+      border: 1px solid $error !important;
+    }
+  }
+}
+.vue-dynamic-select{
+  padding: 0 !important;
+  border: none !important;
+  position: relative;
+  input{
+    border: 1px solid $Light9 !important;
+  }
+  .dropdown{
+    position: absolute;
+    top: 19.5px !important;
+    right: 15px;
+  }
+}
+.selected-option{
+  position: absolute;
+  top: 7.5px;
+  left: 15px;
+}
+.result-list{
+  margin: 0 !important;
+  margin-top: -8px !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  .result{
+    padding: 5px 10px 8px 10px !important;
+  }
+}
