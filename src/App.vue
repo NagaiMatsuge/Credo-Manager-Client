@@ -28,7 +28,6 @@ export default {
       return (messages[this.$store.getters.notification] || messages[this.$route.query.message])
     },
   },
-
   watch:{
     progress: {
       handler(newValue) {

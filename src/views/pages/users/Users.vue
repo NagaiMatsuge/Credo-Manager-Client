@@ -22,7 +22,7 @@
             </form>
           </div>
         </div>
-        <UserList v-if="users" :users="users" />
+        <UserList v-if="users && userId" :users="users" :userId="userId" />
       </div>
   </div>
 </template>
@@ -38,6 +38,9 @@ export default {
   computed:{
     users(){
       return this.$store.getters.getUsersCredentials
+    },
+    userId(){
+      return this.$store.getters.getUserCredentials
     }
   },
   components:{

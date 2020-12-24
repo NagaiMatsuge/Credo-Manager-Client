@@ -96,6 +96,40 @@ const routes = [
     component: () => import("../views/pages/projects/Projects.vue"),
   },
   {
+    path: "/add-projects",
+    name: "Add Projects",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Создание проекта",
+      breadcrumb: {
+        parent: {
+          title: "Проекты",
+          path: "/projects"
+        },
+        child: "Создание проекта"
+      }
+    },
+    component: () => import("../views/pages/projects/AddProject.vue"),
+  },
+  {
+    path: "/put-projects/:id",
+    name: "Put Projects",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Редактирование проекта",
+      breadcrumb: {
+        parent: {
+          title: "Проекты",
+          path: "/projects"
+        },
+        child: "Редактирование проекта"
+      }
+    },
+    component: () => import("../views/pages/projects/PutProject.vue"),
+  },
+  {
     path: "/tasks",
     name: "Tasks",
     meta: { layout: "main", auth: true, title: "Задачи" },

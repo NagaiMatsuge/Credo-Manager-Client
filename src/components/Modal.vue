@@ -3,10 +3,10 @@
     <div class="modal__wrapper"></div>
     <div class="modal__body">
       <div class="modal__text">
-        Вы увереный?
+        Вы уверены?
       </div>
       <div class="modal__button">
-        <button class="no" @click.prevent="modal(false)">Отмена</button>
+        <button class="no" @click.prevent="modal(false)">Нет я просто нажал</button>
         <button class="yes" @click.prevent="modal(true)">Да</button>
       </div>
     </div>
@@ -56,7 +56,7 @@ export default {
   &__body{
     background: $white;
     color: $black;
-    width: 300px;
+    width: 400px;
     position: relative;
     border-radius: 10px;
   }
@@ -76,6 +76,7 @@ export default {
         border-radius: 4px;
       }
       &.yes{
+        padding: 10px 45px;
         border: 1px solid $attention;
         color: $white;
         background: $attention;

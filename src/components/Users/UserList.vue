@@ -24,7 +24,7 @@
       <div class="about__info-user-tel">
         {{user.phone || '--'}}
       </div>
-      <div class="about__info-user-edit" v-if="user.id !== $store.getters.getUserCredentials.id">
+      <div class="about__info-user-edit" v-if="userId.id !== user.id">
         <button @click="$router.push(`/user-edit/${user.id}`)">
           <svg
               width="18"
@@ -66,6 +66,7 @@
 </template>
 <script>
 import Modal  from '@/components/Modal'
+
 export default {
   data(){
     return{
@@ -74,7 +75,8 @@ export default {
     }
   },
   props: {
-    users: {}
+    users: {},
+    userId: {}
   },
   methods:{
     async onModal (confirm) {

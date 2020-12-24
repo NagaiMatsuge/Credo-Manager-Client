@@ -38,6 +38,7 @@ export default {
         commit("setUserCredentials", user.data);
       } else {
         commit("setError", user.message);
+        throw user.message
       }
     },
     async fetchUsersCredentials({ commit }) {
@@ -53,6 +54,7 @@ export default {
         commit("setUsersCredentials", user.data);
       } else {
         commit("setError", user.message);
+        throw user.message
       }
     },
     async fetchUser({ commit }, {id}) {
@@ -68,6 +70,7 @@ export default {
         commit("setUser", user.data);
       } else {
         commit("setError", user.message);
+        throw user.message
       }
     },
     async fetchRoles({ commit }) {
@@ -83,6 +86,7 @@ export default {
         commit("setRole", roles.data);
       } else {
         commit("setError", roles.message);
+        throw roles.message
       }
     },
   },

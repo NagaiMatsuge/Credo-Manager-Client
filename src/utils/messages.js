@@ -14,6 +14,8 @@ export default{
     'auth/email-not-verified' : 'Ваш Email не активирован',
     'user-edit-success' : 'Пользователь успешно редактирован',
     'user-add-success' : 'Пользователь успешно создан',
+    'project-edit-success' : 'Проект успешно редактирован',
+    'project-add-success' : 'Проект успешно создан',
 
     'email-reset' : 'На ваш Email было отправлено письмо',
     'auth/email-verified' : "Email был успешно активирован",
