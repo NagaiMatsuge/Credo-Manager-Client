@@ -10,15 +10,20 @@
       </div>
       <div class="projects__body">
         <ProjectList
-          v-if="projects"
-          :projects="projects"
+          v-if="projects.data"
+          :projects="projects.data"
+          :archive="archive"
         />
       </div>
       <div class="projects__controls">
         <!-- Pagination and buttons -->
         <div class="projects__pagination"></div>
-        <div class="projects__active" :class="active" @click="archive='',active='active'">Актуальные проекты (5)</div>|
-        <div class="projects__archive" :class="archive" @click="active='',archive='active'">Архив проектов (7)</div>
+        <div class="projects__active" :class="active" @click="
+              archive='';
+              active='active';
+              getArchived(0)
+        ">Актуальные проекты ({{ projects.count_not_archived }})</div>|
+        <div class="projects__archive" :class="archive" @click="active='',archive='active'; getArchived(1)">Архив проектов ({{ projects.count_archived }})</div>
         <button class="projects__add" @click="$router.push('/add-projects')">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 8.4718H8.46612V14H5.56263V8.4718H0V5.55692H5.56263V0H8.46612V5.55692H14V8.4718Z" fill="white"/>
@@ -41,6 +46,13 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchProjects");
+  },
+  methods:{
+    getArchived(val){
+      try {
+        this.$store.dispatch("fetchProjectsArchive", val);
+      }catch (e){}
+    }
   },
   computed: {
     projects() {

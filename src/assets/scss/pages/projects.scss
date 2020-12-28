@@ -136,10 +136,16 @@
     overflow: hidden;
     margin-right: 15px;
     border-radius: 7px;
+    display: flex;
+    align-items: center;
+
 
     img,
     div{
       width: 100%;
+      object-fit: cover;
+    }
+    div{
       height: 100%;
     }
     div{

@@ -3,6 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
+  padding-bottom: 50px;
 
   //*********
   //INFO START
@@ -26,14 +27,16 @@
     label{
       width: 100px;
       height: 100px;
-      display: block;
+      display: flex;
+      align-items: center;
       position: relative;
       border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
+      background: $attention;
+
       img{
         width: 100%;
-        height: 100%;
         object-fit: cover;
         position: relative;
         z-index: 3;
@@ -73,6 +76,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 4;
     }
   }
   &__info-form{
@@ -207,7 +211,6 @@
     }
     &.currency{
       width: 10%;
-
     }
     .error{
       color: $error;

@@ -14,6 +14,8 @@ export default {
   watch:{
     notification: {
       handler(newValue) {
+        console.log(newValue)
+
         if(newValue) {
           this.$store.commit('clearNotification')
         }

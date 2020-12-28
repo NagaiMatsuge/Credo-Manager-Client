@@ -10,7 +10,6 @@
 
         <form>
           <div class="projectAdd__stage-card" v-for="(form, index) in getInfoProject.steps" :key="index">
-
             <div class="projectAdd__stage-group">
               <input type="text" :id="`stage_name_${index}`" v-model="form.title" :class="{
               invalid:
@@ -77,7 +76,7 @@
               <label :for="`stage_method_${index}`" :class="{focus: !(form.payment_type.name === '')}">Метод
                 оплаты</label>
             </div>
-            <div class="projectAdd__stage-group close" @click="deleteForm(index)">
+            <div class="projectAdd__stage-group close" @click="deleteForm(index, form.id)">
               <span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9.01836 8.00002L15.0056 2.0128C15.1239 1.87463 15.1857 1.69691 15.1787 1.51515C15.1717 1.33338 15.0963 1.16096 14.9677 1.03233C14.8391 0.90371 14.6667 0.828359 14.4849 0.821338C14.3031 0.814317 14.1254 0.876144 13.9873 0.994463L8.00003 6.98169L2.01281 0.987241C1.87681 0.851244 1.69236 0.774841 1.50003 0.774841C1.3077 0.774841 1.12325 0.851244 0.98725 0.987241C0.851253 1.12324 0.774851 1.30769 0.774851 1.50002C0.774851 1.69235 0.851253 1.8768 0.98725 2.0128L6.98169 8.00002L0.98725 13.9872C0.911647 14.052 0.850243 14.1317 0.806893 14.2213C0.763543 14.3109 0.739182 14.4085 0.73534 14.5079C0.731499 14.6074 0.748258 14.7066 0.784567 14.7993C0.820877 14.8919 0.875952 14.9761 0.946336 15.0465C1.01672 15.1169 1.10089 15.1719 1.19357 15.2083C1.28625 15.2446 1.38544 15.2613 1.4849 15.2575C1.58436 15.2536 1.68196 15.2293 1.77156 15.1859C1.86116 15.1426 1.94084 15.0812 2.00558 15.0056L8.00003 9.01835L13.9873 15.0056C14.1254 15.1239 14.3031 15.1857 14.4849 15.1787C14.6667 15.1717 14.8391 15.0963 14.9677 14.9677C15.0963 14.8391 15.1717 14.6667 15.1787 14.4849C15.1857 14.3031 15.1239 14.1254 15.0056 13.9872L9.01836 8.00002Z" fill="#E53750"/>
@@ -124,7 +123,14 @@ export default {
         },
       })
     },
-    deleteForm($event) {
+    async deleteForm($event, id) {
+      if (id !== null){
+        try {
+         await this.$store.dispatch('deleteStep', id)
+         await this.$store.dispatch('fetchProjectPayments', this.$route.params.id)
+        }catch (e) {}
+      }
+
       this.getInfoProject.steps.splice($event, 1)
       if (this.getInfoProject.steps.length === 0){
         this.pushForm()

@@ -4,13 +4,14 @@
     <div class="about__card" v-for="(user, index) in users.data" :key="index">
       <div class="about__info-user-name">
         <img
+            class="about__user-img"
             v-if="user.photo"
-            :src="user.photo"
+            :src="domain+user.photo"
             width="42"
             height="42"
             alt
         />
-        <div class="about__user-img" :style="`background: ${user.color};`">
+        <div v-else class="about__user-img" :style="`background: ${user.color};`">
           {{user.name.charAt(0).toUpperCase() || '--'}}
         </div>
         {{user.name || '--'}}
@@ -71,7 +72,8 @@ export default {
   data(){
     return{
       modal: false,
-      id: null
+      id: null,
+      domain: process.env.VUE_APP_DOMAIN
     }
   },
   props: {

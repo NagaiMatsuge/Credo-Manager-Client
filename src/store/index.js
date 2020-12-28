@@ -8,6 +8,7 @@ import infoUser from "./info/user";
 import infoProject from "./info/project";
 import user from "./user";
 import projects from "./projects";
+import pagination from "./pagination";
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     user,
     infoUser,
     projects,
-    infoProject
+    infoProject,
+    pagination
   },
 });

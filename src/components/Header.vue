@@ -80,10 +80,10 @@
         <div class="user_image">
           <img
             v-if="user.photo"
-            :src="user.photo"
+            :src="domain + user.photo"
             alt=""
           >
-          <div class="user__img" :style="`background: ${user.color};`">
+          <div v-else class="user__img" :style="`background: ${user.color};`">
             {{user.name.charAt(0).toUpperCase() || '--'}}
           </div>
         </div>
@@ -125,6 +125,7 @@ export default {
   data() {
     return {
       dropdown: false,
+      domain: process.env.VUE_APP_DOMAIN
     };
   },
   props: {

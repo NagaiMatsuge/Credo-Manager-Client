@@ -3,7 +3,8 @@ import axios from "axios";
 export default {
     state: {
         info: null,
-        info_project: null
+        info_project: null,
+        payments: null
     },
     mutations: {
         setInfoProject(state, info) {
@@ -11,6 +12,9 @@ export default {
         },
         setProjectInfo(state, info_project) {
             state.info_project = info_project;
+        },
+        setPayments(state, payments) {
+            state.payments = payments;
         },
     },
     actions: {
@@ -46,10 +50,27 @@ export default {
                 throw project.message
             }
         },
+        async fetchProjectPayments({ commit }, id) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const project = (await axios.get(`${process.env.VUE_APP_SERVICE_URL}/projects/${id}/payments`))
+                .data;
+            commit("removeProgress");
+
+            if (project.success) {
+                commit("setPayments", project);
+            } else {
+                commit("setError", project.message);
+                throw project.message
+            }
+        },
 
     },
     getters: {
         getInfoProject: (s) => s.info,
-        getProjectInfo: (s) => s.info_project
+        getProjectInfo: (s) => s.info_project,
+        getPayments: (s) => s.payments
     },
 };
