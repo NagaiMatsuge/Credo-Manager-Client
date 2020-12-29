@@ -1,0 +1,199 @@
+@import "../var";
+
+.task {
+  display: flex;
+  flex-wrap: wrap;
+  &__filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  &__filter-group {
+    width: 25%;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+
+    >div{
+      width: 100%;
+    }
+    input,
+    .vue-dynamic-select {
+      width: 100% !important;
+      padding: 10px 15px;
+
+      display: block;
+    }
+    input{
+      background: $white;
+      border: 1px solid $Light9;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+    label{
+      display: flex;
+      width: 100%;
+      input{
+        width: 18px !important;
+        height: 18px !important;
+        margin-right: 10px;
+      }
+    }
+    .task__filter-title{
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 18px;
+      color: $gray6;
+      padding: 0 !important;
+      width: auto !important;
+      margin-right: 25px;
+    }
+    .placeholder{
+      display: none !important;
+    }
+  }
+  &__card {
+    width: 25%;
+    padding-right: 30px;
+  }
+  &__card-body{
+    background: $white;
+  }
+  &__card-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    align-items: center;
+    border: 1px solid $bg;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  &__card-img{
+    height: 30px;
+    width: 30px;
+    background: #000;
+    margin-right: 15px;
+  }
+  &__card-name{
+    margin-right: auto;
+    p{
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 18px;
+      color: $black;
+
+    }
+    span{
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 15px;
+      color: $gray6;
+
+    }
+  }
+  &__body {
+    border-radius: 3px;
+    &.active{
+      padding-bottom: 20px;
+    }
+  }
+
+  &__body-title {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 15px;
+    color: $gray4;
+    padding: 0 20px;
+    margin-bottom: 6px;
+  }
+
+  &__body-worked {
+    margin: 0 20px;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #29cc9733;
+    height: 100%;
+    &.active{
+      padding: 10px 15px;
+    }
+    &.pause{
+      background: $bg;
+      margin-top: 20px;
+
+    }
+  }
+
+  &__body-pause {
+    margin-right: 20px;
+    cursor: pointer;
+  }
+
+  &__body-work-name {
+    margin-right: auto;
+    p {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 18px;
+      color: $attention;
+      margin-bottom: 10px;
+      &.active{
+        margin-bottom: 0;
+      }
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: $gray4;
+      border-bottom: 1px solid #B4B8CC;
+      cursor: pointer;
+    }
+  }
+
+  &__body-time {
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: $attention;
+      text-align: right;
+      margin-bottom: 8px;
+      display: block;
+      &.active{
+        margin-bottom: 0;
+      }
+    }
+
+    button {
+      border: none;
+      background: none;
+      margin-left: 13px;
+      cursor: pointer;
+    }
+  }
+
+  &__body-not-worked {
+    padding: 2px 15px;
+    background: #f5c54426;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: $wait;
+    cursor: pointer;
+    svg{
+      margin: 0 8px;
+      &.active{
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

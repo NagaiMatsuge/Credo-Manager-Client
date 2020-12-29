@@ -133,7 +133,7 @@ const routes = [
     path: "/tasks",
     name: "Tasks",
     meta: { layout: "main", auth: true, title: "Задачи" },
-    component: () => import("../views/pages/Tasks.vue"),
+    component: () => import("../views/pages/task/Tasks.vue"),
   },
   {
     path: "/statistics",

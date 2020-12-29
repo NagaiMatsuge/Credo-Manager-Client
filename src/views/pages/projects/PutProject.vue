@@ -1,9 +1,20 @@
 <template>
   <div class="projectAdd">
-    <ProjectAddInfo v-if="getInfoProject" :validator="$v.getInfoProject.project" :getInfoProject="getInfoProject" @changed="isChanged" />
-    <ProjectAddStage v-if="getInfoProject" :validator="$v.getInfoProject.steps" :getInfoProject="getInfoProject"  />
-    <PaymentsList v-if="getInfoProject && getPayments" :validator="$v.getInfoProject" :getInfoProjectInPayments="getInfoProjectInPayments" :getPayments="getPayments"  />
-    <Paginations v-if="getPayments && getPayments.meta.last_page !== 1" :pagination="getPayments" />
+    <ProjectAddInfo v-if="getInfoProject" :validator="$v.getInfoProject.project" :getInfoProject="getInfoProject"
+                    @changed="isChanged"/>
+    <ProjectAddStage v-if="getInfoProject" :validator="$v.getInfoProject.steps" :getInfoProject="getInfoProject"/>
+    <button class="projectAdd__btn-archive" @click.prevent="archivePush">Переместить проект в архив</button>
+    <PaymentsList v-if="getInfoProject && getPayments" :validator="$v.getInfoProject"
+                  :getInfoProjectInPayments="getInfoProjectInPayments" :getPayments="getPayments"/>
+    <div v-if="getPayments && getPayments.meta.last_page !== 1" class="pagination" >
+      <paginate
+          :page-count="getPayments.meta.last_page"
+          :prev-text="''"
+          :next-text="''"
+          :clickHandler="paginationLink"
+      >
+      </paginate>
+    </div>
     <button class="projectAdd__btn" @click.prevent="submitHandler">Сохранить</button>
   </div>
 </template>
@@ -11,18 +22,18 @@
 import ProjectAddInfo from "@/components/Projects/ProjectAddInfo"
 import ProjectAddStage from "@/components/Projects/ProjectAddStage"
 import PaymentsList from "@/components/Projects/PaymentsList"
-import Paginations from "@/components/Paginations"
-import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import {required, minLength, maxLength} from "vuelidate/lib/validators";
+
 export default {
-  data(){
-    return{
+  data() {
+    return {
       childPhotoChanged: false
     }
   },
   validations: {
     getInfoProject: {
       project: {
-        title:{
+        title: {
           required,
           minLength: minLength(4)
         },
@@ -31,7 +42,7 @@ export default {
           minLength: minLength(10)
         }
       },
-      steps:{
+      steps: {
         $each: {
           title: {
             required,
@@ -45,14 +56,14 @@ export default {
       }
     },
   },
-  computed:{
-    getInfoProject(){
+  computed: {
+    getInfoProject() {
       return this.$store.getters.getProjectInfo
     },
-    getInfoProjectInPayments(){
+    getInfoProjectInPayments() {
       return this.$store.getters.getProjectInfo
     },
-    getPayments(){
+    getPayments() {
       return this.$store.getters.getPayments
     },
   },
@@ -62,21 +73,21 @@ export default {
     this.$store.dispatch('fetchProjectPayments', this.$route.params.id)
   },
 
-  methods:{
-    isChanged(val){
-      if (val === false){
+  methods: {
+    isChanged(val) {
+      if (val === false) {
         delete this.getInfoProject.project.photo
         this.childPhotoChanged = false;
-      }else{
+      } else {
         this.childPhotoChanged = true;
       }
     },
-    async submitHandler(){
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
-      if (this.childPhotoChanged === false){
+      if (this.childPhotoChanged === false) {
         delete this.getInfoProject.project.photo
       }
       this.getInfoProject.project.deadline = document.getElementById('deadline').value
@@ -85,15 +96,32 @@ export default {
         await this.$router.push("/projects");
         this.$store.commit("setNotification", "project-edit-success");
         this.getInfoProject.project.photo = ''
-      } catch (e) {}
+      } catch (e) {
+      }
+    },
+    async paginationLink(url) {
+      try {
+        await this.$store.dispatch('paginationLink', this.getPayments.meta.links[url].url)
+        await this.getPayments
+      } catch (e) {
+      }
+    },
+    async archivePush(){
+      let id = this.$route.params.id
+      try {
+        await this.$store.dispatch('archivePush', {id, status: 1})
+        await this.$store.dispatch("fetchProjectsArchive", 0);
+        await this.$router.push('/projects')
+        this.$store.commit("setNotification", "project-archive-success");
+      }catch (e) {}
+
     }
   },
 
-  components:{
+  components: {
     ProjectAddInfo,
     ProjectAddStage,
-    PaymentsList,
-    Paginations
+    PaymentsList
   }
 }
 </script>

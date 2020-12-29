@@ -16,6 +16,8 @@ export default{
     'user-add-success' : 'Пользователь успешно создан',
     'project-edit-success' : 'Проект успешно редактирован',
     'project-add-success' : 'Проект успешно создан',
+    'project-archive-success' : 'Проект успешно добавлен в архив',
+    'project-archive-success-false' : 'Проект успешно выведен из архива',
     'file-size-PostTooLargeException' : 'Размер файла превышен загрузите файл меньше чем 1.5мб',
 
     'email-reset' : 'На ваш Email было отправлено письмо',

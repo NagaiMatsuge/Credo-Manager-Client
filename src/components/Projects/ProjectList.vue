@@ -106,9 +106,11 @@ export default {
         if (this.archive === 'active'){
           await this.$store.dispatch('archivePush', {id, status: 0})
           await this.$store.dispatch("fetchProjectsArchive", 1);
+          this.$store.commit("setNotification", "project-archive-success-false");
         }else{
           await this.$store.dispatch('archivePush', {id, status: 1})
           await this.$store.dispatch("fetchProjectsArchive", 0);
+          this.$store.commit("setNotification", "project-archive-success");
         }
       }catch (e) {
 

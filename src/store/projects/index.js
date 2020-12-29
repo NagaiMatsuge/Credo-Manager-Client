@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
   state: {
     projects: null,
+    projectsAll: null,
   },
   actions: {
     async fetchProjects({ commit }) {
@@ -11,10 +12,28 @@ export default {
       ] = `Bearer ${localStorage.token}`;
       commit("setProgress", "start");
       const projects = (
-        await axios.get(`${process.env.VUE_APP_SERVICE_URL}/projects`)
+        await axios.get(`${process.env.VUE_APP_SERVICE_URL}/projects?pagination=0`)
       ).data;
       if (projects.success) {
         commit("setProjects", projects.data);
+        commit("removeProgress");
+      } else {
+        commit("removeProgress");
+        commit("setError", projects.message);
+        commit("clearNotification");
+        throw projects.message
+      }
+    },
+    async fetchProjectsAll({ commit }) {
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${localStorage.token}`;
+      commit("setProgress", "start");
+      const projects = (
+        await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks/data`)
+      ).data;
+      if (projects.success) {
+        commit("setProjectsAll", projects.data);
         commit("removeProgress");
       } else {
         commit("removeProgress");
@@ -142,11 +161,16 @@ export default {
     setProjects(state, projects) {
       state.projects = projects;
     },
+    setProjectsAll(state, projectsAll) {
+      state.projectsAll = projectsAll;
+    },
     clearProjects(state) {
       state.projects = null;
     },
   },
   getters: {
     getProjects: (s) => s.projects,
+    getProjectsAll: (s) => s.projectsAll,
+    getDatalist: (s) => s.datalist,
   },
 };
