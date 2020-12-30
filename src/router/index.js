@@ -132,8 +132,22 @@ const routes = [
   {
     path: "/tasks",
     name: "Tasks",
-    meta: { layout: "main", auth: true, title: "Задачи" },
+    meta: { layout: "main", auth: true, title: "Задачи"
+    },
     component: () => import("../views/pages/task/Tasks.vue"),
+  },
+  {
+    path: "/add-task",
+    name: "Add Tasks",
+    meta: { layout: "main", auth: true, title: "Создание задачи",
+      breadcrumb: {
+        parent: {
+          title: "Задачи",
+          path: "/tasks"
+        },
+        child: "Создание задачи"
+      } },
+    component: () => import("../views/pages/task/AddTask"),
   },
   {
     path: "/statistics",

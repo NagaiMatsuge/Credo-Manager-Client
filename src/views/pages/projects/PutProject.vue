@@ -101,7 +101,7 @@ export default {
     },
     async paginationLink(url) {
       try {
-        await this.$store.dispatch('paginationLink', this.getPayments.meta.links[url].url)
+        await this.$store.dispatch('paginationLink', {url: this.getPayments.meta.links[url].url, name: 'payments'})
         await this.getPayments
       } catch (e) {
       }

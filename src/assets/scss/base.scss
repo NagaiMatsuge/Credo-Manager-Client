@@ -39,3 +39,46 @@ a {
 ::-webkit-scrollbar-thumb:hover {
     background: #555 ;
 }
+
+.pagination{
+    width: 100%;
+    height: auto;
+    ul {
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+        list-style: none;
+        li {
+            &:last-child,
+            &:first-child{
+                display: none;
+            }
+            &.active {
+                a{
+                    background: $attention;
+                    color: $white;
+                    border: 1px solid $attention;
+                }
+            }
+            a {
+                cursor: pointer;
+                padding: 0;
+                width: 40px;
+                height: 40px;
+                margin: 5px;
+                background: none;
+                color: $black;
+                border: 1px solid $light8;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+            }
+        }
+    }
+}
