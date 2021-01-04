@@ -10,6 +10,7 @@ import user from "./user";
 import projects from "./projects";
 import pagination from "./pagination";
 import tasks from "./tasks";
+import chat from "./chat";
 
 Vue.use(Vuex);
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     projects,
     infoProject,
     pagination,
-    tasks
+    tasks,
+    chat
   },
 });

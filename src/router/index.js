@@ -150,6 +150,19 @@ const routes = [
     component: () => import("../views/pages/task/AddTask"),
   },
   {
+    path: "/admin-chat/:id",
+    name: "Add Tasks",
+    meta: { layout: "main", auth: true, title: "Работа с задачей",
+      breadcrumb: {
+        parent: {
+          title: "Задачи",
+          path: "/tasks"
+        },
+        child: "Работа с задачей"
+      } },
+    component: () => import("../views/pages/task/AdminChat"),
+  },
+  {
     path: "/statistics",
     name: "Statistics",
     meta: { layout: "main", auth: true, title: "Статистика" },

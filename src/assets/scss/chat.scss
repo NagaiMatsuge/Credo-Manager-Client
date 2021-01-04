@@ -1,0 +1,134 @@
+@import "./var";
+
+.chat {
+  width: 75%;
+
+  &__body {
+    background: $white;
+
+  }
+
+  &__message {
+    padding: 40px;
+    padding-bottom: 30px;
+    height: 400px;
+    overflow: auto;
+    ul {
+      list-style: none;
+
+      li {
+        padding: 10px 10px 10px 20px;
+        background: #FFF;
+        margin-bottom: 5px;
+        border: 1px solid #CBCFE6;
+        box-sizing: border-box;
+
+        box-shadow: 0px 2px 3px rgba(29, 29, 29, 0.04);
+        border-radius: 0px 10px 10px 10px;
+      }
+    }
+  }
+
+  &__message-list {
+    min-width: 500px;
+    width: 50%;
+    &.you {
+      margin-left: auto;
+      .avatar{
+        margin-left: auto;
+      }
+      ul{
+        li{
+          background: #F5F6FA;
+          img{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .avatar {
+    margin-bottom: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+
+    }
+
+    &__noImg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      color: $white;
+    }
+
+  }
+
+  &__form {
+    padding: 20px 50px 30px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    .quillWrapper{
+      width: 100%;
+      height: 160px;
+      .ql-toolbar.ql-snow{
+        border: none;
+        border-top: 1px solid #B4B8CC;
+      }
+      .ql-container.ql-snow{
+        border: none;
+      }
+      .ql-container{
+        height: 110px;
+      }
+    }
+    .ql-editor{
+      min-height: 0;
+      img{
+        width: 100px;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      border: none;
+      border-top: 1px solid #B4B8CC;
+      padding-top: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+    }
+
+    button {
+      border: none;
+      background: none;
+      margin-left: auto;
+      cursor: pointer;
+      &.add_file{
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        cursor: pointer;
+        label{
+          cursor: pointer;
+        }
+        input{
+          display: none;
+        }
+      }
+    }
+  }
+
+
+}
