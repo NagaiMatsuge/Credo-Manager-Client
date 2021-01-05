@@ -18,11 +18,11 @@ Vue.config.productionTip = false;
 window.Echo = new Echo({
   broadcaster: "pusher",
   key: "time-manager-pusher-app-key",
-  wsHost: process.env.VUE_APP_DOMAIN,
-  wsPort: 60001,
+  wsHost: "time_manager.credo",
+  wsPort: 6001,
   forceTLS: false,
   disableStatus: true,
-  authEndpoint: `${process.env.VUE_APP_DOMAIN}broadcasting/auth`
+  authEndpoint: `http://time_manager.credo/broadcasting/auth`
 })
 
 Vue.use(vueTopprogress);
