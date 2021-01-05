@@ -18,7 +18,7 @@
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 export default {
-  name: "MainLayots",
+  name: "MainLayouts",
   data() {
     return {};
   },
@@ -30,6 +30,7 @@ export default {
     if (!this.$store.getters.getUserCredentials) {
       this.$store.dispatch("fetchUserCredentials");
     }
+    Echo.channel("to.1").listen("NewMessage", (e)=>{console.log(e)})
   },
   computed: {
     user() {

@@ -19,7 +19,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('fetchProjectsAll')
-    await this.$store.dispatch('allMessages')
+
     await this.$store.dispatch('tasksAll')
 
   },

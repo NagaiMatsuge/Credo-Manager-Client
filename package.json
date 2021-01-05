@@ -10,6 +10,8 @@
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "laravel-echo": "^1.10.0",
+    "pusher-js": "^7.0.2",
     "vue": "^2.6.11",
     "vue-dynamic-select": "^1.0.16",
     "vue-echo-laravel": "0.0.6",

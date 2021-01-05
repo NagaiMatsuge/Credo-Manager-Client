@@ -9,19 +9,25 @@ import Paginate from './utils/vuejs-paginate'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import VueEcho from 'vue-echo-laravel';
+import Echo from 'laravel-echo';
 
+window.Pusher = require("pusher-js")
 
 Vue.config.productionTip = false;
 
-Vue.use(Vuelidate);
+window.Echo = new Echo({
+  broadcaster: "pusher",
+  key: "time-manager-pusher-app-key",
+  wsHost: process.env.VUE_APP_DOMAIN,
+  wsPort: 60001,
+  forceTLS: false,
+  disableStatus: true,
+  authEndpoint: `${process.env.VUE_APP_DOMAIN}broadcasting/auth`
+})
+
 Vue.use(vueTopprogress);
 Vue.use(DynamicSelect)
 Vue.use(Vuelidate);
-Vue.use(VueEcho, {
-  broadcaster: 'socket.io',
-  host: process.env.VUE_APP_DOMAIN + ':6001',
-});
 Vue.component('paginate', Paginate)
 
 

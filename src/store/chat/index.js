@@ -14,14 +14,14 @@ export default {
     },
 
     actions: {
-        async allMessages({ commit }) {
+        async allMessages({ commit }, id) {
             axios.defaults.headers.common[
                 "Authorization"
                 ] = `Bearer ${localStorage.token}`;
             commit("setProgress", "start");
-            const messages = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks/7/messages`) ).data;
+            const messages = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks/${id}/messages`) ).data;
             if (messages.success) {
-                commit("setChat", messages.data);
+                commit("setChat", messages);
                 commit("removeProgress");
             } else {
                 commit("removeProgress");
