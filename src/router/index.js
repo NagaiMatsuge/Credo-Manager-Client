@@ -151,7 +151,7 @@ const routes = [
   },
   {
     path: "/admin-chat/:id",
-    name: "Add Tasks",
+    name: "Chat Tasks",
     meta: { layout: "main", auth: true, title: "Работа с задачей",
       breadcrumb: {
         parent: {

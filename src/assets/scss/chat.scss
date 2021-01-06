@@ -10,8 +10,15 @@
     box-sizing: border-box;
     box-shadow: $bs;
     border-radius: 5px;
+    overflow-anchor: none;
   }
+  #anchor {
+    /* allow the final child to be selected as an anchor node */
+    overflow-anchor: auto;
 
+    /* anchor nodes are required to have non-zero area */
+    height: 1px;
+  }
   &__message {
     padding: 40px;
     padding-bottom: 30px;

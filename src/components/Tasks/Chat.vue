@@ -1,15 +1,14 @@
 <template>
   <div class="chat">
     <div class="chat__body">
-      <div class="chat__message">
+      <div class="chat__message" id="block">
         <pre>
-        {{chat}}
-
+          {{id}}
         </pre>
         <div class="chat__message-list" v-for="(item, idx) in chat.data" :key="idx" :class="{you: $store.getters.getUserCredentials.id === item.user_id}">
-          <div class="avatar">
+          <div class="avatar" v-if="item.name">
             <img v-if="item.photo" :src="domain+item.photo" alt="">
-            <div v-else class="avatar__noImg" :style="`background: ${item.color};`">
+            <div v-else class="avatar__noImg" :style="`background: ${item.color};`" >
               {{item.name.charAt(0).toUpperCase() || '--'}}
             </div>
           </div>
@@ -17,7 +16,7 @@
             <li v-for="(items, idx) in item.content" :key="idx" v-html="items.text"></li>
           </ul>
         </div>
-
+        <div id="anchor"></div>
       </div>
       <div class="chat__form">
         <VueEditor v-model="text" />
@@ -41,6 +40,7 @@
   </div>
 </template>
 <script>
+
 import { VueEditor } from "vue2-editor";
 export default {
   data(){
@@ -61,40 +61,47 @@ export default {
     }
   },
   methods:{
-    send(){
-      console.log(this.$store.getters.getUserCredentials.id)
+    async send(){
       let formData = {
         user_id: this.$store.getters.getUserCredentials.id,
-        photo: null,
-        color: 'rgb(252, 115, 173)',
-        name: 'Ruslan',
-        text:[
+        text: this.text,
+        files: [
+
+        ],
+        task_id: this.id
+      }
+      let pushDataToLocalChat = {
+        color: this.$store.getters.getUserCredentials.color,
+        photo: this.$store.getters.getUserCredentials.photo,
+        name: this.$store.getters.getUserCredentials.name,
+        user_id: this.$store.getters.getUserCredentials.id,
+        content: [
           {
             text: this.text
           }
-        ],
-        file:[
-          {
-            name: 'File',
-            url: '/uploads/avatars/NZ4lRR7mnZk6uZb.jpeg'
-          }
         ]
       }
-      if (this.last_message_user_id === this.$store.getters.getUserCredentials.id){
-        this.chat[this.chat.length - 1].text.push({text: this.text})
+      if (this.chat.data[this.chat.data.length - 1].user_id === this.$store.getters.getUserCredentials.id){
+        this.chat.data[this.chat.data.length - 1].content.push({text: this.text})
       }else{
-        this.chat.push(formData)
+        this.chat.data.push(pushDataToLocalChat)
       }
-
+      try {
+       await this.$store.dispatch('sendMessage', formData)
+        this.text = "";
+      }catch (e){}
+      document.getElementById("block").scrollTop = document.getElementById("block").scrollHeight;
     }
+  },
+  mounted() {
+    document.getElementById("block").scrollTop = document.getElementById("block").scrollHeight;
+
   },
   computed:{
-    last_message_user_id(){
-      return this.chat[this.chat.length - 1].user_id
-    }
   },
   props: {
-    chat:{}
+    chat:{},
+    id: Number
   },
   components: {VueEditor}
 }

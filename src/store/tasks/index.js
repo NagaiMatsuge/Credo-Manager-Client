@@ -47,6 +47,7 @@ export default {
                 throw projects.message
             }
         },
+
     },
     getters: {
         getTasks: (s) => s.task,

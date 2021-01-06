@@ -186,6 +186,9 @@ export default {
   components:{
     DynamicSelect,
     Chat
+  },
+  async mounted() {
+    await this.$store.dispatch('fetchProjectsAll')
   }
 }
 </script>

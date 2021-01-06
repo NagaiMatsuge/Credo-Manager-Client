@@ -4,7 +4,7 @@
       <div class="task__card-body">
         <div class="task__body">
           <div class="task__body-title" style="margin-top: 15px;" v-if="tasks.data.tasks">Сейчас в работе</div>
-          <div class="task__body-worked" v-if="tasks.data.tasks">
+          <div class="task__body-worked" v-if="tasks.data.tasks.active">
             <div class="task__body-pause">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66666 2.22217C7.89396 2.22217 8.88889 3.21709 8.88889 4.44439L8.88888 15.5555C8.88888 16.7828 7.89396 17.7777 6.66666 17.7777C5.43936 17.7777 4.44444 16.7828 4.44444 15.5555L4.44444 4.44439C4.44444 3.21709 5.43936 2.22217 6.66666 2.22217Z" fill="#B4B8CC"/>
@@ -15,7 +15,7 @@
               <p>{{ tasks.data.tasks.active[0].title }}</p>
               <span>{{ tasks.data.tasks.active[0].project.title }}</span>
             </div>
-            <div class="task__body-time">
+            <div class="task__body-time" >
               <span>{{ timeConvert(tasks.data.tasks.active[0].time) }}</span>
               <div>
                 <button @click.prevent="getChat(tasks.data.tasks.active[0].id)">
@@ -25,6 +25,9 @@
                 </button>
               </div>
             </div>
+          </div>
+          <div class="task__body-worked" v-else>
+            Нет активных задач
           </div>
           <div class="task__body-not-worked" @click="tasks.data.active = !tasks.data.active">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +51,9 @@
             <div class="task__body-time">
               <span>{{timeConvert(inactive.time)}}</span>
               <div>
+
                 <button @click.prevent="getChat(inactive.id)">
+                  <div class="count__message">1</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
                   </svg>
@@ -62,7 +67,10 @@
         </div>
       </div>
     </div>
-    <Chat v-if="chat" :chat="chat"/>
+    <Chat v-if="chat" :chat="chat" :id="id_chat"/>
+    <div v-else class="chat">
+      <img src="../../assets/img/message.png" alt="">
+    </div>
   </div>
 </template>
 <script>
@@ -70,8 +78,11 @@ import Chat from "@/components/Tasks/Chat"
 export default {
   data(){
     return{
-
+      id_chat: null
     }
+  },
+  mounted() {
+    this.$store.commit('clearChat')
   },
   methods:{
     timeConvert(n) {
@@ -91,6 +102,7 @@ export default {
       return rhours + ":" + rminutes
     },
     async getChat(id){
+      this.id_chat = id
       await this.$store.dispatch('allMessages', id)
     }
   },

@@ -1,6 +1,6 @@
 <template >
-  <div class="task" v-if="role" >
-    <AdminTask v-if="role.role === 'Admin' && data && tasks" :data="data" :tasks="tasks" />
+  <div class="task" v-if="user" >
+    <AdminTask v-if="user.role === 'Admin' && data && tasks" :data="data" :tasks="tasks" />
     <Task v-else :tasks="tasks"/>
 
   </div>
@@ -17,12 +17,7 @@ export default {
 
     }
   },
-  async mounted() {
-    await this.$store.dispatch('fetchProjectsAll')
 
-    await this.$store.dispatch('tasksAll')
-
-  },
 
   computed:{
     data(){
@@ -31,14 +26,19 @@ export default {
     tasks(){
       return this.$store.getters.getTasks
     },
-    role(){
+    user(){
       return this.$store.getters.getUserCredentials
     }
   },
   components:{
     AdminTask,
     Task,
-  }
+  },
+  async created() {
+    await this.$store.dispatch('tasksAll')
+
+
+  },
 };
 </script>
 <style lang='scss'>

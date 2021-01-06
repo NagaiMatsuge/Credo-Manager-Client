@@ -15,6 +15,7 @@ export default {
       if (user.success) {
         localStorage.clear();
         localStorage.setItem("token", user.data._token);
+
         commit("setUserCredentials", user.data);
       } else {
         commit("setError", user.message);
