@@ -70,22 +70,7 @@ export default {
         ],
         task_id: this.id
       }
-      let pushDataToLocalChat = {
-        color: this.$store.getters.getUserCredentials.color,
-        photo: this.$store.getters.getUserCredentials.photo,
-        name: this.$store.getters.getUserCredentials.name,
-        user_id: this.$store.getters.getUserCredentials.id,
-        content: [
-          {
-            text: this.text
-          }
-        ]
-      }
-      if (this.chat.data[this.chat.data.length - 1].user_id === this.$store.getters.getUserCredentials.id){
-        this.chat.data[this.chat.data.length - 1].content.push({text: this.text})
-      }else{
-        this.chat.data.push(pushDataToLocalChat)
-      }
+
       try {
        await this.$store.dispatch('sendMessage', formData)
         this.text = "";

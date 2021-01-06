@@ -33,13 +33,13 @@ export default {
     if (this.user){
       console.log('start')
       Echo.channel(`new-message-to-${this.user.id}`).listen("NewMessage", (e)=>{
-        // let getters = this.$store.getters
+        console.log(e)
         // this.$store.commit('updateChat', {data:{e, id: this.id}, getters}, )
         let pushDataToLocalChat = {
-          color: this.user.color,
-          photo: this.user.photo,
-          name: this.user.name,
-          user_id: this.user.id,
+          color: e.user.color,
+          photo: e.user.photo,
+          name: e.user.name,
+          user_id: e.user.id,
           content: [
             {
               text: e.message
@@ -47,11 +47,19 @@ export default {
           ]
         }
         if(e.task_id === this.chat_id){
-          if (this.chat.data[this.chat.data.length - 1].user_id === this.user.id){
-            this.chat.data[this.chat.data.length - 1].content.push({text: e.message})
-          }else{
+          if (this.chat.data.length){
+            if (this.chat.data[this.chat.data.length - 1].user_id === e.user.id){
+              this.chat.data[this.chat.data.length - 1].content.push({text: e.message})
+              console.log('ok push')
+            }else{
+              this.chat.data.push(pushDataToLocalChat)
+              console.log('no push')
+            }
+          }else
+          {
             this.chat.data.push(pushDataToLocalChat)
           }
+
         }else{
           console.log('nochat')
         }
