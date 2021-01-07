@@ -1,6 +1,6 @@
 <template >
   <div class="task" v-if="user" >
-    <AdminTask v-if="user.role === 'Admin' && data && tasks" :data="data" :tasks="tasks" />
+    <AdminTask v-if="user.role === 'Admin'"  :data="data" :tasks="tasks" />
     <Task v-else :tasks="tasks"/>
 
   </div>

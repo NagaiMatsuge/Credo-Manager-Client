@@ -31,10 +31,7 @@ export default {
       await this.$store.dispatch("fetchUserCredentials");
     }
     if (this.user){
-      console.log('start')
       Echo.channel(`new-message-to-${this.user.id}`).listen("NewMessage", (e)=>{
-        console.log(e)
-        // this.$store.commit('updateChat', {data:{e, id: this.id}, getters}, )
         let pushDataToLocalChat = {
           color: e.user.color,
           photo: e.user.photo,
@@ -50,18 +47,46 @@ export default {
           if (this.chat.data.length){
             if (this.chat.data[this.chat.data.length - 1].user_id === e.user.id){
               this.chat.data[this.chat.data.length - 1].content.push({text: e.message})
-              console.log('ok push')
             }else{
               this.chat.data.push(pushDataToLocalChat)
-              console.log('no push')
             }
-          }else
-          {
+          }else {
             this.chat.data.push(pushDataToLocalChat)
           }
-
+          this.$store.dispatch('userHasReadMessages', e.task_id)
         }else{
-          console.log('nochat')
+          if (this.user.role === 'Admin'){
+            let data = this.tasks.data
+            let keys = Object.keys(data)
+            for (let i = 0; i < keys.length; i++) {
+              let el = data[keys[i]]
+
+              if (el.tasks.active.length !== 0){
+                if(el.tasks.active[0].id === e.task_id){
+                  el.tasks.active[0].unread_count++
+                }
+              }
+              if ( el.tasks.inactive.length !== 0){
+                for (let j = 0; j < el.tasks.inactive.length; j++) {
+                  let elm = el.tasks.inactive[j]
+                  if (elm.id === e.task_id){
+                    elm.unread_count++
+                  }
+                }
+              }else{}
+            }
+          }else{
+            if(this.tasks.data.tasks.active[0].id === e.task_id){
+              this.tasks.data.tasks.active[0].unread_count++
+            }else{
+              for (let i = 0; i < this.tasks.data.tasks.inactive; i++) {
+                let el = this.tasks.data.tasks.inactive[i]
+                if (el.id === e.task_id){
+                  el.unread_count++
+                }
+              }
+            }
+          }
         }
       })
     }
@@ -78,6 +103,9 @@ export default {
     },
     chat(){
       return this.$store.getters.chat
+    },
+    tasks(){
+      return this.$store.getters.getTasks
     },
     chat_id(){
       return this.$store.getters.chat_id

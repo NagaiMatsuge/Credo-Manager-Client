@@ -58,6 +58,20 @@ export default {
                 throw messages.message
             }
         },
+        async userHasReadMessages({ commit, dispatch }, id) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            const messages = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/messages/read`, {task_id: id}) ).data;
+
+            if (messages.success) {
+                dispatch('tasksAll')
+            } else {
+                commit("setError", messages.message);
+                commit("clearNotification");
+                throw messages.message
+            }
+        },
         async sendMessage({ commit }, obj) {
             axios.defaults.headers.common[
                 "Authorization"

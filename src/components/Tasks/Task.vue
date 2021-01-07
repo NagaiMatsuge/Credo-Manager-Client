@@ -4,7 +4,7 @@
       <div class="task__card-body">
         <div class="task__body">
           <div class="task__body-title" style="margin-top: 15px;" v-if="tasks.data.tasks">Сейчас в работе</div>
-          <div class="task__body-worked" v-if="tasks.data.tasks.active">
+          <div class="task__body-worked" v-if="tasks.data.tasks.active.length">
             <div class="task__body-pause">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66666 2.22217C7.89396 2.22217 8.88889 3.21709 8.88889 4.44439L8.88888 15.5555C8.88888 16.7828 7.89396 17.7777 6.66666 17.7777C5.43936 17.7777 4.44444 16.7828 4.44444 15.5555L4.44444 4.44439C4.44444 3.21709 5.43936 2.22217 6.66666 2.22217Z" fill="#B4B8CC"/>
@@ -19,6 +19,7 @@
               <span>{{ timeConvert(tasks.data.tasks.active[0].time) }}</span>
               <div>
                 <button @click.prevent="getChat(tasks.data.tasks.active[0].id)">
+                  <div class="count__message" v-if="tasks.data.tasks.active[0].unread_count">{{ tasks.data.tasks.active[0].unread_count }}</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
                   </svg>
@@ -53,7 +54,7 @@
               <div>
 
                 <button @click.prevent="getChat(inactive.id)">
-                  <div class="count__message">1</div>
+                  <div class="count__message" v-if="inactive.unread_count">{{ inactive.unread_count }}</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
                   </svg>
@@ -103,10 +104,12 @@ export default {
     },
     async getChat(id){
       this.id_chat = id
+      await this.$store.dispatch('userHasReadMessages', id)
       await this.$store.dispatch('allMessages', id)
     }
   },
   computed:{
+
     chat(){
       return this.$store.getters.chat
     }

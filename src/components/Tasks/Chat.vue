@@ -2,9 +2,6 @@
   <div class="chat">
     <div class="chat__body">
       <div class="chat__message" id="block">
-        <pre>
-          {{id}}
-        </pre>
         <div class="chat__message-list" v-for="(item, idx) in chat.data" :key="idx" :class="{you: $store.getters.getUserCredentials.id === item.user_id}">
           <div class="avatar" v-if="item.name">
             <img v-if="item.photo" :src="domain+item.photo" alt="">
@@ -47,17 +44,7 @@ export default {
     return {
       text: '',
       domain: process.env.VUE_APP_DOMAIN
-    //   customToolbar: [
-    //       ["bold", "italic", "underline"],
-    //       [
-    //         {
-    //           list: "ordered"
-    //         },
-    //         {
-    //           list: "bullet"
-    //         }
-    //       ],
-    //       ["image", "code-block"]]
+
     }
   },
   methods:{

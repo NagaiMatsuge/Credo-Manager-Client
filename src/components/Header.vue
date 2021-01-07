@@ -45,7 +45,7 @@
     </div>
     <div class="user_info">
       <div class="controls">
-        <div class="notifications">
+        <div class="notifications" >
           <svg
             width="20"
             height="20"
@@ -59,7 +59,7 @@
             />
           </svg>
         </div>
-        <div class="theme">
+        <div class="theme" >
           <svg
             width="18"
             height="18"
@@ -139,10 +139,11 @@ export default {
   methods: {
     async logout() {
       await this.$store.dispatch("logout");
-      this.$router.push("/login");
+      await this.$router.push("/login");
       this.$store.commit('setNotification', 'logout')
       localStorage.clear();
     },
+
   },
 };
 </script>
