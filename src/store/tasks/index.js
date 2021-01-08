@@ -4,6 +4,7 @@ export default {
     state: {
         task: null,
         addTaskInfo: null,
+        id: null
     },
     mutations: {
         setTask(state, task) {
@@ -12,6 +13,9 @@ export default {
         setAddTaskInfo(state, addTaskInfo) {
             state.addTaskInfo = addTaskInfo;
         },
+        setTaskId(state, id) {
+            state.id = id;
+        },
     },
 
     actions: {
@@ -19,11 +23,9 @@ export default {
             axios.defaults.headers.common[
                 "Authorization"
                 ] = `Bearer ${localStorage.token}`;
-            commit("setProgress", "start");
             const projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks`) ).data;
             if (projects.success) {
                 commit("setTask", projects);
-                commit("removeProgress");
             } else {
                 commit("removeProgress");
                 commit("setError", projects.message);
@@ -52,5 +54,6 @@ export default {
     getters: {
         getTasks: (s) => s.task,
         getAddTaskInfo: (s) => s.task,
+        getTaskId: (s) => s.id,
     },
 };

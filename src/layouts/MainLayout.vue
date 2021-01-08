@@ -26,12 +26,14 @@ export default {
     Sidebar,
     Header,
   },
+
   async mounted() {
     if (!this.$store.getters.getUserCredentials) {
       await this.$store.dispatch("fetchUserCredentials");
     }
     if (this.user){
       Echo.channel(`new-message-to-${this.user.id}`).listen("NewMessage", (e)=>{
+        console.log(e)
         let pushDataToLocalChat = {
           color: e.user.color,
           photo: e.user.photo,
@@ -39,14 +41,15 @@ export default {
           user_id: e.user.id,
           content: [
             {
-              text: e.message
+              text: e.message,
+              files: e.files
             }
           ]
         }
         if(e.task_id === this.chat_id){
           if (this.chat.data.length){
             if (this.chat.data[this.chat.data.length - 1].user_id === e.user.id){
-              this.chat.data[this.chat.data.length - 1].content.push({text: e.message})
+              this.chat.data[this.chat.data.length - 1].content.push({text: e.message, files: e.files})
             }else{
               this.chat.data.push(pushDataToLocalChat)
             }
@@ -88,6 +91,7 @@ export default {
             }
           }
         }
+
       })
     }
   },

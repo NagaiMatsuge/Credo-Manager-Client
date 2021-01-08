@@ -5,7 +5,6 @@ import axios from "axios";
 import vueTopprogress from "vue-top-progress";
 import DynamicSelect from 'vue-dynamic-select'
 import Paginate from './utils/vuejs-paginate'
-
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -14,7 +13,6 @@ import Echo from 'laravel-echo';
 window.Pusher = require("pusher-js")
 
 Vue.config.productionTip = false;
-
 window.Echo = new Echo({
   broadcaster: "pusher",
   key: "time-manager-pusher-app-key",

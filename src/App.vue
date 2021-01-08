@@ -52,4 +52,5 @@ export default {
 //@import url(//db.onlinewebfonts.com/c/623c7118249e082fe87a78e08506cb4b?family=Segoe+UI);
 @import "@/assets/scss/base.scss";
 
+
 </style>

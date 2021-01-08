@@ -77,7 +77,6 @@ export default {
         password: this.password,
         token: this.token,
       };
-      console.log(formData);
       try {
         await this.$store.dispatch("SetNewPassword", formData);
         this.$router.push('/login')

@@ -80,7 +80,7 @@
         </div>
       </div>
     </div>
-    <Chat v-if="chat" :chat="chat" :id="+($route.params.task_id)"/>
+    <Chat v-if="chat" :chat="chat" :id="$store.getters.getTaskId"/>
     <div v-else class="chat">
       <img src="../../../assets/img/message.png" alt="">
     </div>
@@ -116,6 +116,7 @@ export default {
       return rhours + ":" + rminutes
     },
     async getChat(id){
+      this.$store.commit('setTaskId', id)
       await this.$store.dispatch('allMessages', id)
       await this.$store.dispatch('userHasReadMessages', id)
     },

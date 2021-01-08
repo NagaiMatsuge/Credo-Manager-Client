@@ -150,7 +150,7 @@ const routes = [
     component: () => import("../views/pages/task/AddTask"),
   },
   {
-    path: "/admin-chat/:id/:task_id",
+    path: "/admin-chat/:id",
     name: "Chat Tasks",
     meta: { layout: "main", auth: true, title: "Работа с задачей",
       breadcrumb: {

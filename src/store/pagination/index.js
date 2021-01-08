@@ -23,5 +23,21 @@ export default {
                 throw projects.message
             }
         },
+        async paginationScrollLink({ commit }, url) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const messages = ( await axios.get(url) ).data;
+            if (messages.success) {
+                commit("pushChat", messages.data);
+                commit("removeProgress");
+            } else {
+                commit("removeProgress");
+                commit("setError", messages.message);
+                commit("clearNotification");
+                throw messages.message
+            }
+        },
     },
 };

@@ -184,7 +184,8 @@ export default {
       return rHours + ":" + rMinutes
     },
     toMessage(id, task_id){
-      this.$router.push(`/admin-chat/${id}/${task_id}`)
+      this.$store.commit('setTaskId', task_id)
+      this.$router.push(`/admin-chat/${id}`)
       this.$store.dispatch('userHasReadMessages', task_id)
       this.$store.dispatch('allMessages', task_id)
     }
