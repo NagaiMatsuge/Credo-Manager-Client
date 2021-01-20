@@ -9,6 +9,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Echo from 'laravel-echo';
+import AudioRecorder from 'vue-audio-recorder'
 
 window.Pusher = require("pusher-js")
 
@@ -25,6 +26,8 @@ window.Echo = new Echo({
 
 Vue.use(vueTopprogress);
 Vue.use(DynamicSelect)
+Vue.use(AudioRecorder)
+
 Vue.use(Vuelidate);
 Vue.component('paginate', Paginate)
 

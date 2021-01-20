@@ -1,5 +1,6 @@
 export default{
     'logout': 'Вы вышли из системы',
+    'Login Successfull': 'Добро пожаловать',
     'login': 'Для начала войдите в систему',
     'password-reset': 'Проверьте почту вам выслано сообщение для сброса пароля',
 
@@ -14,6 +15,7 @@ export default{
     'auth/email-not-verified' : 'Ваш Email не активирован',
     'user-edit-success' : 'Пользователь успешно редактирован',
     'user-add-success' : 'Пользователь успешно создан',
+    'task-add-success' : 'Задача успешно создана',
     'project-edit-success' : 'Проект успешно редактирован',
     'project-add-success' : 'Проект успешно создан',
     'project-archive-success' : 'Проект успешно добавлен в архив',

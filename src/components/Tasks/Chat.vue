@@ -90,7 +90,20 @@
             <path d="M18.9997 22.667C21.0218 22.667 22.6663 21.0225 22.6663 19.0004V13.5004C22.6663 11.4681 21.0301 9.81445 19.0189 9.81445C18.9544 9.81484 18.8901 9.82253 18.8273 9.83737C17.8862 9.883 16.9985 10.2887 16.3481 10.9705C15.6977 11.6523 15.3343 12.5581 15.333 13.5004V19.0004C15.333 21.0225 16.9775 22.667 18.9997 22.667Z" fill="#B4B8CC"/>
             <path d="M18.0837 26.2701V28.1667H19.917V26.2701C23.5277 25.8163 26.3337 22.7336 26.3337 19H24.5003C24.5003 22.0333 22.0336 24.5 19.0003 24.5C15.9671 24.5 13.5003 22.0333 13.5003 19H11.667C11.667 22.7327 14.4729 25.8163 18.0837 26.2701Z" fill="#B4B8CC"/>
           </svg>
+
         </button>
+<!--        <audio-player src="/assets/mp3.mp3"/>-->
+<!--        <audio-recorder-->
+<!--            upload-url="YOUR_API_URL"-->
+<!--            :attempts="3"-->
+<!--            :time="2"-->
+<!--            :before-recording="callback"-->
+<!--            :pause-recording="callback"-->
+<!--            :after-recording="callback"-->
+<!--            :select-record="callback"-->
+<!--            :before-upload="callback"-->
+<!--            :successful-upload="callback"-->
+<!--            :failed-upload="callback"/>-->
         <button class="send" @click.prevent="send">
           <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="19" cy="19" r="18.5" fill="#F5F6FA" stroke="#4473F6"/>
@@ -195,47 +208,8 @@ export default {
 
 
     },
-    audio(){
-      console.log("Start");
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-        const mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.start();
-
-        const audioChunks = [];
-        mediaRecorder.addEventListener("dataavailable", (event) => {
-          audioChunks.push(event.data);
-        });
-
-        mediaRecorder.addEventListener("stop", () => {
-          const audioBlob = new Blob(audioChunks);
-          const audioUrl = URL.createObjectURL(audioBlob);
-          const audio = new Audio(audioUrl);
-
-          console.log(audioUrl);
-          audio.play();
-          getData(audioBlob, function (data) {
-            let render = {
-              content: data,
-              name: 'voice',
-              size: null
-            }
-            this.files.push(render)
-          });
-        });
-
-        setTimeout(() => {
-          mediaRecorder.stop();
-        }, 3000);
-      });
-      function getData(audioFile, callback) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-          var data = event.target.result.split(","),
-              decodedImageData = btoa(data[1]); // the actual conversion of data from binary to base64 format
-          callback(decodedImageData);
-        };
-        reader.readAsDataURL(audioFile);
-      }
+    callback (data) {
+      console.debug(data)
     }
   },
   mounted() {

@@ -103,6 +103,7 @@ export default {
       try {
         await this.$store.dispatch("login", formData);
         await this.$router.push("/");
+        await this.$store.commit('setNotification', 'Login Successfull');
       } catch (e) {}
     },
   },

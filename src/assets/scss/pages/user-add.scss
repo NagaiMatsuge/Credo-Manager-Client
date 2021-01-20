@@ -139,6 +139,7 @@
       border: 1px solid $error;
       border-radius: 3px;
       padding: 10px 45px;
+      cursor: pointer;
     }
     .add{
       color: $white;
@@ -148,6 +149,7 @@
       padding: 10px 45px;
       border: none;
       margin-left: 40px;
+      cursor: pointer;
     }
   }
   &-checkbox{

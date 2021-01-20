@@ -4,7 +4,8 @@ export default {
     state: {
         info: null,
         info_project: null,
-        payments: null
+        payments: null,
+        info_user: null
     },
     mutations: {
         setInfoProject(state, info) {
@@ -15,6 +16,9 @@ export default {
         },
         setPayments(state, payments) {
             state.payments = payments;
+        },
+        setInfoUser(state, info_user) {
+            state.info_user = info_user;
         },
     },
     actions: {
@@ -66,11 +70,28 @@ export default {
                 throw project.message
             }
         },
+        async fetchInfoUser({ commit }) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const InfoUser = (await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks/users`))
+                .data;
+            commit("removeProgress");
+
+            if (InfoUser.success) {
+                commit("setInfoUser", InfoUser.data);
+            } else {
+                commit("setError", InfoUser.message);
+                throw InfoUser.message
+            }
+        },
 
     },
     getters: {
         getInfoProject: (s) => s.info,
         getProjectInfo: (s) => s.info_project,
-        getPayments: (s) => s.payments
+        getPayments: (s) => s.payments,
+        getInfoUser: (s) => s.info_user
     },
 };

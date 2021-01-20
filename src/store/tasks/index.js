@@ -49,6 +49,22 @@ export default {
                 throw projects.message
             }
         },
+        async sendTask({ commit }, obj) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const task = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/tasks/create`, obj) ).data;
+            if (task.success) {
+                commit("setAddTaskInfo", task);
+                commit("removeProgress");
+            } else {
+                commit("removeProgress");
+                commit("setError", task.message);
+                commit("clearNotification");
+                throw task.message
+            }
+        },
 
     },
     getters: {

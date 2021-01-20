@@ -43,19 +43,18 @@ export default {
     },
     async passwordReset({ dispatch, commit }, { email }) {
       commit("setProgress", "start");
-      const forgot = (
-        await axios.post(`${process.env.VUE_APP_SERVICE_URL}/password/forgot`, {
-          email,
-        })
-      ).data;
-      commit("removeProgress");
+
+      const forgot = (await axios.post(`${process.env.VUE_APP_SERVICE_URL}/password/forgot`, {email})).data;
+
       if (forgot.success) {
         commit("setNotification", forgot.message);
+        commit("removeProgress");
+
       } else {
+        commit("removeProgress");
         commit("setError", forgot.message);
         throw forgot.message;
       }
-      commit("removeProgress");
     },
     async SetNewPassword({ dispatch, commit }, { password, token }) {
       commit("setProgress", "start");
@@ -65,11 +64,11 @@ export default {
           token,
         })
       ).data;
-      commit("removeProgress");
 
       if (newPassword.success) {
         commit("removeProgress");
       } else {
+        commit("removeProgress");
         commit("setError", newPassword.message);
         throw newPassword.message;
       }

@@ -18,8 +18,12 @@ export default {
         },
         clearNotification(state){
             setTimeout(function (){
-                state.error = null
                 state.notification = null
+            }, 3000)
+        },
+        clearError(state){
+            setTimeout(function (){
+                state.error = null
             }, 3000)
         },
     },

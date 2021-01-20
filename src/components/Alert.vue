@@ -14,11 +14,13 @@ export default {
   watch:{
     notification: {
       handler(newValue) {
-        console.log(newValue)
-
-        if(newValue) {
-          this.$store.commit('clearNotification')
-        }
+        if(newValue) this.$store.commit('clearNotification')
+      },
+      deep: true
+    },
+    error: {
+      handler(newValue) {
+        if(newValue) this.$store.commit('clearError')
       },
       deep: true
     },
