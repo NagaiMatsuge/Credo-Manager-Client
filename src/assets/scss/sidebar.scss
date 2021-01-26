@@ -1,3 +1,4 @@
+@import "./var";
 .nav {
   display: flex;
   flex-direction: column;
@@ -40,13 +41,13 @@
     font-size: 11px;
     line-height: 125%;
     text-align: center;
-    color: #b4b8cc;
+    color: var(--light8);
     height: 72px;
     width: 100%;
     margin: 2.5px 0;
     svg {
       path {
-        fill: #b4b8cc;
+        fill: var(--light8);
       }
     }
     &[aria-current="page"] {

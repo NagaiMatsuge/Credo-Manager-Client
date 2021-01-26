@@ -1,4 +1,3 @@
-
 <template>
   <div class="task__card-container">
     <div class="task__card" v-for="(task, index) in taskId()" :key="index" >
@@ -17,7 +16,7 @@
         <div class="task__body" v-if="task.tasks">
           <div class="task__body-title" style="margin-top: 15px;" v-if="task.tasks">Сейчас в работе</div>
           <div class="task__body-worked" v-if="task.tasks.active.length">
-            <div class="task__body-pause">
+            <div class="task__body-pause" >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66666 2.22217C7.89396 2.22217 8.88889 3.21709 8.88889 4.44439L8.88888 15.5555C8.88888 16.7828 7.89396 17.7777 6.66666 17.7777C5.43936 17.7777 4.44444 16.7828 4.44444 15.5555L4.44444 4.44439C4.44444 3.21709 5.43936 2.22217 6.66666 2.22217Z" fill="#B4B8CC"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.3333 2.22217C14.5606 2.22217 15.5556 3.21709 15.5556 4.44439L15.5556 15.5555C15.5556 16.7828 14.5606 17.7777 13.3333 17.7777C12.106 17.7777 11.1111 16.7828 11.1111 15.5555L11.1111 4.44439C11.1111 3.21709 12.106 2.22217 13.3333 2.22217Z" fill="#B4B8CC"/>
@@ -152,5 +151,5 @@ export default {
 }
 </script>
 <style lang='scss'>
-@import "@/assets/scss/pages/task";
+@import '@/assets/scss/pages/task/app';
 </style>

@@ -1,4 +1,4 @@
-@import "./components/select";
+@import "./var";
 
 * {
     padding: 0;
@@ -8,7 +8,7 @@
     outline: none;
 }
 body{
-    background: $bg;
+    background: var(--bg);
 }
 
 a {
@@ -55,9 +55,9 @@ a {
             }
             &.active {
                 a{
-                    background: $attention;
-                    color: $white;
-                    border: 1px solid $attention;
+                    background: var(--attention);
+                    color: var(--white);
+                    border: 1px solid var(--attention);
                 }
             }
             a {
@@ -67,8 +67,8 @@ a {
                 height: 40px;
                 margin: 5px;
                 background: none;
-                color: $black;
-                border: 1px solid $light8;
+                color: var(--black);
+                border: 1px solid var(--light8);
                 border-radius: 4px;
                 font-size: 14px;
                 font-weight: 400;

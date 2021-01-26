@@ -121,7 +121,8 @@ export default {
   props: {
     getInfoProject: {},
     validator: {},
-    changed: Boolean
+    changed: Boolean,
+
   },
 
   components: {

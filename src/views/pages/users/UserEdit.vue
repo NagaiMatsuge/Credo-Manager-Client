@@ -130,18 +130,26 @@
             </span>
           </div>
           <div class="user__add-group">
-            <dynamic-select
-              v-if="roles"
-              :options="roles"
-              option-value="name"
-              option-text="name"
-              placeholder="Выберите роль"
-              v-model="role"
-              :class="{ invalid: ($v.role.$dirty && $v.role.$model.name == 'Выберите роль')}"
+
+            <Select
+                :options="roles"
+                :value="role"
+                :optionId="'id'"
+                :optionValue="'name'"
+                id="projects"
+                @change="e => role = e"
+                :class="{ invalid: ($v.role.$dirty && $v.role.$model.name == '')}"
             />
+            <label
+                for="projects"
+                :class="{focus: !(role.name === ''),invalid: ($v.role.$dirty && $v.role.$model.name == '')}"
+
+            >
+              Выберите роль
+            </label>
             <small
               class="error"
-              v-if="$v.role.$dirty && $v.role.$model.name == 'Выберите роль'"
+              v-if="$v.role.$dirty && $v.role.$model.name == ''"
             >Выберите роль</small>
           </div>
         </form>
@@ -291,7 +299,7 @@
 <script>
 import VueTimepicker from "vue2-timepicker";
 import { email, minLength, required } from "vuelidate/lib/validators";
-import DynamicSelect from "vue-dynamic-select";
+import Select from "@/components/Select";
 export default {
   data() {
     return {
@@ -304,7 +312,10 @@ export default {
       pause_start_time: null,
       pause_end_time: null,
       working_days: null,
-      role: null,
+      role: {
+        id: 0,
+        name: "",
+      },
       color: null,
       type: "password",
     };
@@ -381,11 +392,10 @@ export default {
       return this.$store.getters.getUserRename;
     },
   },
-  components: { VueTimepicker, DynamicSelect },
+  components: { VueTimepicker, Select },
 };
 </script>
 <style lang="scss">
-@import "@/assets/scss/pages/user-add";
-
+@import "@/assets/scss/pages/user/app";
 @import "~vue2-timepicker/dist/VueTimepicker.css";
 </style>

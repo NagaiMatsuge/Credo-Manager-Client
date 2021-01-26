@@ -5,7 +5,8 @@ export default {
         info: null,
         info_project: null,
         payments: null,
-        info_user: null
+        info_user: null,
+        editInfo: null
     },
     mutations: {
         setInfoProject(state, info) {
@@ -19,6 +20,13 @@ export default {
         },
         setInfoUser(state, info_user) {
             state.info_user = info_user;
+        },
+        setEditInfo(state, editInfo) {
+            state.editInfo = editInfo;
+            state.editInfo.times = {
+                hh: parseInt(state.editInfo.time / 60),
+                mm: state.editInfo.time % 60
+            }
         },
     },
     actions: {
@@ -86,12 +94,28 @@ export default {
                 throw InfoUser.message
             }
         },
+        async fetchEditInfo({ commit },id) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const editInfo = (await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks/${id}`))
+                .data;
+            commit("removeProgress");
 
+            if (editInfo.success) {
+                commit("setEditInfo", editInfo.data);
+            } else {
+                commit("setError", editInfo.message);
+                throw editInfo.message
+            }
+        },
     },
     getters: {
         getInfoProject: (s) => s.info,
         getProjectInfo: (s) => s.info_project,
         getPayments: (s) => s.payments,
-        getInfoUser: (s) => s.info_user
+        getInfoUser: (s) => s.info_user,
+        getEditInfo: (s) => s.editInfo,
     },
 };

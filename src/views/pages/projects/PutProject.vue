@@ -126,5 +126,5 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/assets/scss/pages/projects-add';
+@import '@/assets/scss/pages/project/app';
 </style>

@@ -4,27 +4,25 @@
       <div class="task__filter-group">
         <div class="task__filter-title">Фильтр</div>
         <div class="task__filter-group" >
-          <DynamicSelect
-              v-if="data.projects"
-              :options="data.projects.data"
-              option-value="id"
-              option-text="title"
-              :placeholder="'Все проекты'"
-              v-model="projects"
+          <Select
+              :options="data.projects"
+              :value="projects"
+              :optionId="'id'"
+              :optionValue="'title'"
               id="projects"
+              @change="getProject"
           />
           <label for="projects" class="label" :class="{focus: !(projects.title === '')}">Все проекты</label>
         </div>
       </div>
       <div class="task__filter-group">
-        <DynamicSelect
-            v-if="data.users"
-            :options="data.users.data"
-            option-value="id"
-            option-text="name"
-            :placeholder="'Все сотрудники'"
-            v-model="users"
+        <Select
+            :options="data.users"
+            :value="users"
+            :optionId="'id'"
+            :optionValue="'name'"
             id="users"
+            @change="getUser"
         />
         <label for="users" class="label" :class="{focus: !(users.name === '')}">Все сотрудники</label>
       </div>
@@ -55,7 +53,7 @@
           <div class="task__body">
             <div class="task__body-title" v-if="item.tasks">Сейчас в работе</div>
             <div class="task__body-worked" v-if="item.tasks && item.tasks.active.length" :class="{active: !item.hide}">
-              <div class="task__body-pause">
+              <div class="task__body-pause" @click="pushInactive(item.tasks.active[0], item.user.id)">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66666 2.22217C7.89396 2.22217 8.88889 3.21709 8.88889 4.44439L8.88888 15.5555C8.88888 16.7828 7.89396 17.7777 6.66666 17.7777C5.43936 17.7777 4.44444 16.7828 4.44444 15.5555L4.44444 4.44439C4.44444 3.21709 5.43936 2.22217 6.66666 2.22217Z" fill="#B4B8CC"/>
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M13.3333 2.22217C14.5606 2.22217 15.5556 3.21709 15.5556 4.44439L15.5556 15.5555C15.5556 16.7828 14.5606 17.7777 13.3333 17.7777C12.106 17.7777 11.1111 16.7828 11.1111 15.5555L11.1111 4.44439C11.1111 3.21709 12.106 2.22217 13.3333 2.22217Z" fill="#B4B8CC"/>
@@ -68,7 +66,7 @@
               <div class="task__body-time">
                 <span :class="{active: !item.hide}">{{ timeConvert(item.tasks.active[0].time) }}</span>
                 <div v-if="item.hide">
-                  <button>
+                  <button @click.prevent="editTask(item.tasks.active[0].id,item.tasks.active[0].project.id)">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M3.7749 11.0156C3.8042 11.0156 3.8335 11.0127 3.86279 11.0083L6.32666 10.5762C6.35596 10.5703 6.38379 10.5571 6.4043 10.5352L12.6138 4.32568C12.6273 4.31213 12.6381 4.29604 12.6455 4.27831C12.6528 4.26059 12.6566 4.2416 12.6566 4.22241C12.6566 4.20323 12.6528 4.18423 12.6455 4.16651C12.6381 4.14879 12.6273 4.13269 12.6138 4.11914L10.1792 1.68311C10.1514 1.65527 10.1147 1.64062 10.0752 1.64062C10.0356 1.64062 9.99902 1.65527 9.97119 1.68311L3.76172 7.89258C3.73975 7.91455 3.72656 7.94092 3.7207 7.97021L3.28857 10.4341C3.27432 10.5126 3.27942 10.5933 3.30341 10.6694C3.3274 10.7454 3.36957 10.8145 3.42627 10.8706C3.52295 10.9644 3.64453 11.0156 3.7749 11.0156ZM4.76221 8.46094L10.0752 3.14941L11.1489 4.22314L5.83594 9.53467L4.53369 9.76465L4.76221 8.46094ZM12.8906 12.2461H2.10938C1.8501 12.2461 1.64062 12.4556 1.64062 12.7148V13.2422C1.64062 13.3066 1.69336 13.3594 1.75781 13.3594H13.2422C13.3066 13.3594 13.3594 13.3066 13.3594 13.2422V12.7148C13.3594 12.4556 13.1499 12.2461 12.8906 12.2461Z" fill="#CBCFE6"/>
                     </svg>
@@ -92,7 +90,7 @@
               </svg>
             </div>
             <div class="task__body-worked pause" v-if="item.active && item.hide && item.tasks" :class="{active: item.active}" v-for="(inactive, index) in item.tasks.inactive" :key="index">
-              <div class="task__body-pause">
+              <div class="task__body-pause" @click="pushActive(inactive,item.user.id, index)">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19.55 10.2598C19.75 10.1443 19.75 9.85566 19.55 9.74019L5.45 1.59955C5.25 1.48408 5 1.62842 5 1.85936L5 18.1406C5 18.3716 5.25 18.5159 5.45 18.4004L19.55 10.2598Z" fill="#39A571"/>
                 </svg>
@@ -104,7 +102,7 @@
               <div class="task__body-time">
                 <span>{{timeConvert(inactive.time)}}</span>
                 <div>
-                  <button>
+                  <button @click.prevent="editTask(inactive.id,inactive.project.id)">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M3.7749 11.0156C3.8042 11.0156 3.8335 11.0127 3.86279 11.0083L6.32666 10.5762C6.35596 10.5703 6.38379 10.5571 6.4043 10.5352L12.6138 4.32568C12.6273 4.31213 12.6381 4.29604 12.6455 4.27831C12.6528 4.26059 12.6566 4.2416 12.6566 4.22241C12.6566 4.20323 12.6528 4.18423 12.6455 4.16651C12.6381 4.14879 12.6273 4.13269 12.6138 4.11914L10.1792 1.68311C10.1514 1.65527 10.1147 1.64062 10.0752 1.64062C10.0356 1.64062 9.99902 1.65527 9.97119 1.68311L3.76172 7.89258C3.73975 7.91455 3.72656 7.94092 3.7207 7.97021L3.28857 10.4341C3.27432 10.5126 3.27942 10.5933 3.30341 10.6694C3.3274 10.7454 3.36957 10.8145 3.42627 10.8706C3.52295 10.9644 3.64453 11.0156 3.7749 11.0156ZM4.76221 8.46094L10.0752 3.14941L11.1489 4.22314L5.83594 9.53467L4.53369 9.76465L4.76221 8.46094ZM12.8906 12.2461H2.10938C1.8501 12.2461 1.64062 12.4556 1.64062 12.7148V13.2422C1.64062 13.3066 1.69336 13.3594 1.75781 13.3594H13.2422C13.3066 13.3594 13.3594 13.3066 13.3594 13.2422V12.7148C13.3594 12.4556 13.1499 12.2461 12.8906 12.2461Z" fill="#CBCFE6"/>
                     </svg>
@@ -126,7 +124,7 @@
         </div>
       </div>
     </div>
-    <div class="task__btn">
+    <div class="task__btn" v-if="tasks.links">
       <div class="pagination" v-if="tasks && tasks.links.last_page !== 1">
         <paginate
             :page-count="tasks.links.last_page"
@@ -146,8 +144,9 @@
   </div>
 </template>
 <script>
-import DynamicSelect from "vue-dynamic-select";
+import Select from "@/components/Select";
 import Chat from "@/components/Tasks/Chat"
+import user from "@/store/info/user";
 export default {
   data(){
     return{
@@ -176,10 +175,10 @@ export default {
       let toStringHours = (rHours + "").length
       let toStringMinutes = (rMinutes + "").length
       if (toStringHours === 1){
-        rHours += '0'
+        rHours = '0' + rHours
       }
       if (toStringMinutes === 1){
-        rMinutes += '0'
+        rMinutes = '0' + rMinutes
       }
       return rHours + ":" + rMinutes
     },
@@ -188,10 +187,47 @@ export default {
       this.$router.push(`/admin-chat/${id}`)
       this.$store.dispatch('userHasReadMessages', task_id)
       this.$store.dispatch('allMessages', task_id)
+    },
+    editTask(id,project_id){
+      this.$router.push(`/edit-task/${id}/${project_id}`)
+    },
+    async pushActive(e, user_id, index) {
+      if (this.tasks.data[user_id].tasks.active.length) {
+        this.tasks.data[user_id].tasks.inactive.push(this.tasks.data[user_id].tasks.active[0])
+      }
+      this.tasks.data[user_id].tasks.inactive.splice(index, 1);
+      this.tasks.data[user_id].tasks.active = []
+      this.tasks.data[user_id].tasks.active.push(e)
+
+      try {
+        await this.$store.dispatch('editActive', {user_id:user_id,task_id:e.id})
+      }catch (e) {}
+
+
+    },
+    async pushInactive(active, user_id){
+      this.tasks.data[user_id].tasks.active.splice(0, 1);
+      this.tasks.data[user_id].tasks.inactive.push(active)
+      try {
+        await this.$store.dispatch('editActive', {user_id:user_id})
+      }catch (e) {}
+    },
+    async getProject(e){
+      this.projects = e;
+      try{
+        await this.$store.dispatch('tasksAll', {project_id: e.id, user_id: this.users.id || 0})
+      }catch (e){}
+    },
+    async getUser(e){
+      this.users = e
+      try{
+        await this.$store.dispatch('tasksAll', {project_id: this.projects.id || 0, user_id: e.id})
+      }catch (e){}
     }
+
   },
   components:{
-    DynamicSelect,
+    Select,
     Chat
   },
   async mounted() {

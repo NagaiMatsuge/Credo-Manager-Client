@@ -89,6 +89,21 @@ export default {
         throw roles.message
       }
     },
+    async theme({ commit }, str) {
+      axios.defaults.headers.common[
+          "Authorization"
+          ] = `Bearer ${localStorage.token}`;
+      commit("setProgress", "start");
+      const roles = (await axios.put(`${process.env.VUE_APP_SERVICE_URL}/users/theme`, {theme:str})).data;
+      commit("removeProgress");
+
+      if (roles.success) {
+        commit("setNotification", roles.data.messages);
+      } else {
+        commit("setError", roles.message);
+        throw roles.message
+      }
+    },
   },
   getters: {
     getUserCredentials: (s) => s.user,

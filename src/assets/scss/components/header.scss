@@ -10,7 +10,7 @@
     position: absolute;
     top: calc(100% + 15px);
     width: max-content;
-    background: $white;
+    background: var(--white);
     right: 0;
     padding: 15px;
     border-radius: 4px;
@@ -19,7 +19,7 @@
     ul{
       list-style: none;
       li{
-        border-bottom: 1px solid $light8;
+        border-bottom: 1px solid var(--light8);
         padding: 6px 0;
         &:last-child{
           border: none;
@@ -35,7 +35,7 @@
           line-height: 20px;
           letter-spacing: 0em;
           text-align: left;
-          color: $black;
+          color: var(--black);
         }
       }
 
@@ -59,13 +59,27 @@
         a{
           margin-right: 15px;
           margin-top: 7px;
+          svg{
+            rect{
+              &:first-child{
+                fill: var(--white);
+              }
+              &:last-child{
+                stroke: var(--black);
+              }
+            }
+            path{
+              fill: var(--black);
+              stroke: var(--black);
+            }
+          }
         }
       }
 
       .page_name {
         font-size: 28px;
         line-height: 130%;
-        color: $black;
+        color: var(--black);
         font-weight: bold;
       }
     }
@@ -73,7 +87,7 @@
     .page_subtitle {
       font-style: normal;
       font-weight: normal;
-      color: $light8;
+      color: var(--light8);
       a{
         color: #81839C;
       }
@@ -87,10 +101,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-right: solid 2px $light8;
+      border-right: solid 2px var(--light8);
 
       div {
         padding-right: 31px;
+        cursor: pointer;
       }
     }
 
@@ -118,7 +133,7 @@
           width: 42px;
           height: 42px;
           border-radius: 3px;
-          color: $white;
+          color: var(--white);
           font-size: 22px;
           font-style: normal;
           font-weight: 400;
@@ -142,6 +157,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          color: var(--black);
 
           svg {
             margin-left: 11px;
@@ -151,7 +167,7 @@
         .user_role {
           font-weight: normal;
           font-size: 11px;
-          color: $gray6;
+          color: var(--gray6);
         }
       }
     }

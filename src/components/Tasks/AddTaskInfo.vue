@@ -2,44 +2,70 @@
   <div class="addTask__info">
     <div class="addTask__info-body">
       <div class="addTask__info-title">Основаная информация о задаче</div>
-      <div class="addTask__info-group">
-        <input type="text" id="title" v-model="formData.title">
+      <div class="addTask__info-group" >
+        <input
+            type="text"
+            id="title"
+            v-model="formData.title"
+            :class="{
+              invalid:
+              (validator.title.$dirty && !validator.title.required) ||
+              (validator.title.$dirty && !validator.title.minLength),
+            }"
+        >
         <label for="title" class="label" :class="{focus: !(formData.title === '')}">Название задачи</label>
+        <small
+            class="error"
+            v-if="validator.title.$dirty && !validator.title.required"
+        >Введите название задачи</small>
+        <small
+            class="error"
+            v-else-if="validator.title.$dirty && !validator.title.minLength"
+        >
+          Название задачи должен содержать минимум {{ validator.title.$params.minLength.min }} символов. Сейчас он
+          {{ formData.title.length }}
+        </small>
       </div>
+        <div class="addTask__info-group">
+          <Select
+              :options="allProjects.projects"
+              :value="formData.projects"
+              :optionId="'id'"
+              :optionValue="'title'"
+              id="projects"
+              @change="getStep"
+              :class="{
+                invalid: validator.projects.id.$dirty && !validator.title.required
+              }"
+          />
+          <label for="projects" class="label" v-if="formData.projects" :class="{focus: !(formData.projects.title === '')}">Выберите проект</label>
+          <small
+              class="error"
+              v-if="validator.projects.id.$dirty && !validator.projects.id.required"
+          >Выберите проект</small>
+        </div>
+        <div class="addTask__info-group" v-if="allSteps && formData.projects">
+          <Select
+              :options="allSteps.steps"
+              :value="formData.step_ids"
+              :optionId="'id'"
+              :optionValue="'title'"
+              id="step_id"
+              @change="stepId"
+              :class="{
+                invalid: validator.step_ids.id.$dirty && !validator.step_ids.id.required
+              }"
+          />
+          <label for="step_id" class="label" v-if="formData.step_ids" :class="{focus: !(formData.step_ids.title === '')}">Выберите этап проекта</label>
+          <small
+              class="error"
+              v-if="validator.step_ids.id.$dirty && !validator.step_ids.id.required"
+          >Выберите этап</small>
+        </div>
       <div class="addTask__info-group">
-        <DynamicSelect
-            v-if="allProjects.projects"
-            :options="allProjects.projects.data"
-            option-value="id"
-            option-text="title"
-            placeholder=""
-            v-model="formData.projects"
-            @input="getStep"
-            id="projects"
-            style="width: 100%;"
-        />
-        <label for="projects" class="label" :class="{focus: !(formData.projects.title === '')}">Выберите проект</label>
-      </div>
-      <template v-if="allSteps">
-      <div class="addTask__info-group">
-        <DynamicSelect
-            v-if="allSteps.steps"
-            :options="allSteps.steps"
-            option-value="id"
-            option-text="title"
-            placeholder=""
-            v-model="formData.step_ids"
-            @input="stepId($event)"
-            id="step_id"
-            style="width: 100%;"
-        />
-        <label for="step_id" class="label" :class="{focus: !(formData.step_ids.title === '')}">Выберите этап проекта</label>
-      </div>
-      </template>
-      <div class="addTask__info-group">
-        <input type="radio" name="time" v-model="formData.type" value="1" @change="formData.times.hh = '00'; formData.times.mm = '00'; formData.deadline = null; formData.time = 0" id="time_1">
+        <input type="radio" name="time" v-model.number="formData.type" value="1" @change="formData.times.hh = '00'; formData.times.mm = '00'; formData.deadline = null; formData.time = 0" id="time_1">
         <label for="time_1" class="label__radio">Время на выполнение</label>
-        <div class="time__picker" v-if="formData.type === '1'">
+        <div class="time__picker" v-if="formData.type === 1">
           <div class="time__picker-group">
             <div class="vue__time-picker">
               <input type="number" minlength="0" v-model="formData.times.hh" id="time_hh" @change="timeCalc(formData.times)">
@@ -47,9 +73,7 @@
                 Часов
               </label>
             </div>
-
           </div>
-
           <div class="time__picker-group">
             <div class="vue__time-picker">
               <input type="number"  v-model="formData.times.mm" id="time_mm" @change="timeCalc(formData.times)">
@@ -57,16 +81,13 @@
                 Минут
               </label>
             </div>
-
           </div>
-
         </div>
-
       </div>
       <div class="addTask__info-group">
-        <input type="radio" name="time" v-model="formData.type" value="2" @change="formData.times.hh = '00'; formData.times.mm = '00'; formData.deadline = null; formData.time = 0" id="time_2">
+        <input type="radio" name="time" v-model.number="formData.type" value="2" @change="formData.times.hh = '00'; formData.times.mm = '00'; formData.deadline = null; formData.time = 0" id="time_2">
         <label for="time_2" class="label__radio">Дедлаин</label>
-        <div class="data__picker" v-if="formData.type === '2'" >
+        <div class="data__picker" v-if="formData.type === 2" >
           <Datepicker  :language="lang" :disabled-dates="disabledDates" id="deadline" @input="dataPick($event)"
                        placeholder="" :format="format"/>
           <label for="deadline" :class="{focus: !(formData.deadline === null)}">
@@ -76,7 +97,7 @@
 
       </div>
       <div class="addTask__info-group">
-        <input type="radio" name="time" v-model="formData.type"  value="3" id="time_3">
+        <input type="radio" name="time" v-model.number="formData.type"  value="3" id="time_3">
         <label for="time_3" class="label__radio">Без времени</label>
       </div>
     </div>
@@ -85,10 +106,10 @@
   </div>
 </template>
 <script>
-import DynamicSelect from "vue-dynamic-select";
 import VueTimepicker from "vue2-timepicker";
 import Datepicker from 'vuejs-datepicker';
 import lang from 'vuejs-datepicker/dist/locale/translations/ru';
+import Select from "@/components/Select";
 export default {
   data(){
     return{
@@ -101,19 +122,23 @@ export default {
     }
   },
   props:{
-    addTaskInfo:{},
     allProjects:{},
     allSteps:{},
-    formData:{}
+    formData:{},
+    validator:{}
   },
   methods:{
     getStep(id){
-      this.$store.dispatch('fetchProjectInfo', id.id)
-      this.formData.step_ids.id=null
-      this.formData.step_ids.title=''
+        this.formData.projects = id
+        this.$store.dispatch('fetchProjectInfo', id.id)
+        this.formData.step_ids = {
+          id: null,
+          title: ''
+        }
     },
     stepId(e){
-      this.formData.step_id = e.id
+        this.formData.step_ids = e
+        this.formData.step_id = e.id
     },
     timeCalc(obj){
       this.formData.time = (parseInt(obj.hh) * 60) + parseInt(obj.mm)
@@ -127,89 +152,12 @@ export default {
 
   },
   components:{
-    DynamicSelect,
     VueTimepicker,
-    Datepicker
+    Datepicker,
+    Select
   }
 }
 </script>
 <style lang="scss">
 @import "~vue2-timepicker/dist/VueTimepicker.css";
-
-</style>
-<style lang="scss">
-
-.vdp-datepicker{
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-}
-.data__picker{
-  display: flex;
-  position: absolute;
-  right: 0;
-  top: 0;
-  label{
-    position: absolute;
-    top: 13px;
-    left: 15px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    color: #B4B8CC;
-    transition: 0.2s;
-    user-select: none;
-    &.focus{
-      top: 0;
-      font-size: 11px;
-      line-height: 15px;
-    }
-  }
-}
-.time{
-  &__picker{
-    display: flex;
-    position: absolute;
-    right: 0;
-    top: 0;
-    .vue__time-picker{
-      margin-left: 10px;
-      width: 100px;
-      height: 50px;
-      input{
-        height: 50px !important;
-        &:focus{
-          +label{
-            top: 0;
-          }
-        }
-      }
-    }
-  }
-  &__picker-group{
-    position: relative;
-    label{
-      position: absolute;
-      top: 13px;
-      left: 15px;
-      font-size: 11px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 20px;
-      color: #B4B8CC;
-      transition: 0.2s;
-      user-select: none;
-      &.focus{
-        top: 0;
-      }
-
-    }
-
-  }
-}
-
-
-
 </style>

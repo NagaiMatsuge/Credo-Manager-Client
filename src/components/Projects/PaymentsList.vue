@@ -26,15 +26,13 @@
         </div>
         <div class="payments__step">
           <div class="payments__form-group">
-            <DynamicSelect
-                v-if="getInfoProjectInPayments.steps"
+            <Select
                 :options="getInfoProjectInPayments.steps"
-                option-value="id"
-                option-text="title"
-                placeholder=""
-                v-model="formData.step"
+                :value="formData.step"
+                :optionId="'id'"
+                :optionValue="'title'"
+                @change="step($event)"
                 id="step"
-                @input="step($event)"
             />
             <label for="step" :class="{focus: !(formData.step.title === '')}">Оплачиваемый этап</label>
           </div>
@@ -52,17 +50,16 @@
           </div>
         </div>
         <div class="payments__payment">
-          <div class="payments__form-group">
-            <DynamicSelect
-                v-if="getInfoProjectInPayments.payment_types"
+          <div class="payments__form-group" style="width: 100%;">
+            <Select
                 :options="getInfoProjectInPayments.payment_types"
-                option-value="id"
-                option-text="name"
-                placeholder=""
-                v-model="formData.payment_type"
-                :id="`method`"
+                :value="formData.payment_type"
+                :optionId="'id'"
+                :optionValue="'name'"
+                @change="e => formData.payment_type = e"
+                id="method"
             />
-            <label :for="`method`" :class="{focus: !(formData.payment_type === '')}">Метод
+            <label :for="`method`" :class="{focus: !(formData.payment_type.name === '')}">Метод
               оплаты</label>
           </div>
         </div>
@@ -72,7 +69,7 @@
               <path d="M5.40909 11.3724L2.02841 7.99174C1.65499 7.61832 1.04956 7.61832 0.676136 7.99174V7.99174C0.302716 8.36516 0.302717 8.9706 0.676136 9.34402L5.40909 14.077L16.3239 3.1622C16.6973 2.78878 16.6973 2.18335 16.3239 1.80993V1.80993C15.9504 1.43651 15.345 1.43651 14.9716 1.80993L5.40909 11.3724Z" fill="#29CC97"/>
             </svg>
           </button>
-          <button>
+          <button @click.prevent="cls">
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.58204 8.49999L15.9435 2.13857C16.0692 1.99177 16.1349 1.80294 16.1274 1.60982C16.12 1.41669 16.0399 1.23349 15.9032 1.09683C15.7666 0.960166 15.5834 0.880105 15.3902 0.872645C15.1971 0.865185 15.0083 0.930877 14.8615 1.05659L8.50006 7.41801L2.13864 1.04892C1.99414 0.90442 1.79816 0.823242 1.59381 0.823242C1.38946 0.823242 1.19348 0.90442 1.04899 1.04892C0.904491 1.19341 0.823313 1.38939 0.823313 1.59374C0.823313 1.79809 0.904491 1.99407 1.04899 2.13857L7.41809 8.49999L1.04899 14.8614C0.968659 14.9302 0.903418 15.0149 0.857358 15.1101C0.811299 15.2053 0.785416 15.309 0.781334 15.4146C0.777252 15.5203 0.795059 15.6257 0.833637 15.7242C0.872216 15.8227 0.930734 15.9121 1.00552 15.9869C1.0803 16.0617 1.16973 16.1202 1.26821 16.1587C1.36668 16.1973 1.47206 16.2151 1.57774 16.2111C1.68342 16.207 1.78712 16.1811 1.88232 16.135C1.97752 16.089 2.06218 16.0237 2.13097 15.9434L8.50006 9.58197L14.8615 15.9434C15.0083 16.0691 15.1971 16.1348 15.3902 16.1273C15.5834 16.1199 15.7666 16.0398 15.9032 15.9032C16.0399 15.7665 16.12 15.5833 16.1274 15.3902C16.1349 15.197 16.0692 15.0082 15.9435 14.8614L9.58204 8.49999Z" fill="#E53750"/>
             </svg>
@@ -84,7 +81,7 @@
               <path d="M5.40909 11.3724L2.02841 7.99174C1.65499 7.61832 1.04956 7.61832 0.676136 7.99174V7.99174C0.302716 8.36516 0.302717 8.9706 0.676136 9.34402L5.40909 14.077L16.3239 3.1622C16.6973 2.78878 16.6973 2.18335 16.3239 1.80993V1.80993C15.9504 1.43651 15.345 1.43651 14.9716 1.80993L5.40909 11.3724Z" fill="#29CC97"/>
             </svg>
           </button>
-          <button>
+          <button @click.prevent="cls">
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.58204 8.49999L15.9435 2.13857C16.0692 1.99177 16.1349 1.80294 16.1274 1.60982C16.12 1.41669 16.0399 1.23349 15.9032 1.09683C15.7666 0.960166 15.5834 0.880105 15.3902 0.872645C15.1971 0.865185 15.0083 0.930877 14.8615 1.05659L8.50006 7.41801L2.13864 1.04892C1.99414 0.90442 1.79816 0.823242 1.59381 0.823242C1.38946 0.823242 1.19348 0.90442 1.04899 1.04892C0.904491 1.19341 0.823313 1.38939 0.823313 1.59374C0.823313 1.79809 0.904491 1.99407 1.04899 2.13857L7.41809 8.49999L1.04899 14.8614C0.968659 14.9302 0.903418 15.0149 0.857358 15.1101C0.811299 15.2053 0.785416 15.309 0.781334 15.4146C0.777252 15.5203 0.795059 15.6257 0.833637 15.7242C0.872216 15.8227 0.930734 15.9121 1.00552 15.9869C1.0803 16.0617 1.16973 16.1202 1.26821 16.1587C1.36668 16.1973 1.47206 16.2151 1.57774 16.2111C1.68342 16.207 1.78712 16.1811 1.88232 16.135C1.97752 16.089 2.06218 16.0237 2.13097 15.9434L8.50006 9.58197L14.8615 15.9434C15.0083 16.0691 15.1971 16.1348 15.3902 16.1273C15.5834 16.1199 15.7666 16.0398 15.9032 15.9032C16.0399 15.7665 16.12 15.5833 16.1274 15.3902C16.1349 15.197 16.0692 15.0082 15.9435 14.8614L9.58204 8.49999Z" fill="#E53750"/>
             </svg>
@@ -129,7 +126,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 import lang from 'vuejs-datepicker/dist/locale/translations/ru';
-import DynamicSelect from "vue-dynamic-select";
+import Select from '@/components/Select';
 export default {
   data(){
     return{
@@ -223,18 +220,20 @@ export default {
     },
     step(e){
       if (e){
+        this.formData.step = e
         this.formData.currency_id.name = e.currency_id.name
         this.formData.currency_id.id = e.currency_id.id
-
       }
     },
     cls(){
       this.edit = false
       this.formData.comment = ''
-      // this.formData.step.id = null
-      // this.formData.step.title = ''
+      this.formData.step.id = null
+      this.formData.step.title = ''
       this.formData.payment_date = new Date()
       this.formData.amount = null
+      this.formData.currency_id.name = ''
+      this.formData.currency_id.id = null
       this.formData.payment_type.id = 1
       this.formData.payment_type.name =  "Qiwi"
 
@@ -247,10 +246,7 @@ export default {
   },
   components: {
     Datepicker,
-    DynamicSelect
+    Select
   }
 }
 </script>
-<style lang="scss">
-@import "@/assets/scss/pages/payments";
-</style>

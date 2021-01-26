@@ -1,13 +1,11 @@
 <template>
   <div class="projectAdd">
-
     <ProjectAddInfo v-if="getInfoProject" :validator="$v.getInfoProject.project" :getInfoProject="getInfoProject"/>
     <ProjectAddStage v-if="getInfoProject" :validator="$v.getInfoProject.steps" :getInfoProject="getInfoProject"/>
     <div class="projectAdd__button">
       <button class="projectAdd__btn close" @click.prevent="$router.push('/projects')">Отмена</button>
       <button class="projectAdd__btn" @click.prevent="submitHandler">Сохранить</button>
     </div>
-
   </div>
 </template>
 <script>
@@ -83,5 +81,5 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/assets/scss/pages/projects-add';
+@import '@/assets/scss/pages/project/app';
 </style>

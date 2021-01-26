@@ -14,7 +14,7 @@
         padding: 0 15px;
 
         h1 {
-            color: $black;
+            color: var(--black);
             margin-bottom: 28px;
         }
 
@@ -28,8 +28,8 @@
 
             input {
                 width: 100%;
-                background: $white;
-                border: 1px solid $Light9;
+                background: var(--white);
+                border: 1px solid var(--Light9);
                 border-radius: 5px;
                 height: 50px;
                 margin-bottom: 10px;
@@ -38,10 +38,10 @@
                 padding-bottom: 15px;
 
                 &.invalid {
-                    border: 1px solid $error;
+                    border: 1px solid var(--error);
 
                     &::placeholder {
-                        color: $error;
+                        color: var(--error);
                     }
                 }
 
@@ -55,7 +55,7 @@
                     font-weight: normal;
                     font-size: 14px;
                     line-height: 140%;
-                    color: $light8;
+                    color: var(--light8);
                 }
             }
             .checkbox{
@@ -65,7 +65,7 @@
                 label{
                     display: block;
                     flex-shrink: 0;
-                    color: $gray4;
+                    color: var(--gray4);
                 }
             }
             input[type="checkbox"]{
@@ -86,7 +86,7 @@
                     font-weight: normal;
                     font-size: 14px;
                     line-height: 140%;
-                    color: $attention;
+                    color: var(--attention);
                 }
             }
 
@@ -110,7 +110,7 @@
                     font-weight: normal;
                     font-size: 14px;
                     line-height: 140%;
-                    color: $black;
+                    color: var(--black);
                 }
 
                 a {
@@ -118,12 +118,12 @@
                     font-weight: normal;
                     font-size: 14px;
                     line-height: 140%;
-                    color: $attention;
+                    color: var(--attention);
                 }
             }
 
             small {
-                color: $gray6;
+                color: var(--gray6);
                 display: block;
                 margin-bottom: 10px;
                 margin-top: -5px;
@@ -131,7 +131,7 @@
                 width: 100%;
                 text-align: left;
                 &.erorr {
-                    color: $error;
+                    color: var(--error);
                 }
             }
 
@@ -140,13 +140,13 @@
                 align-items: center;
                 justify-content: center;
                 padding: 10px 45px;
-                background: $attention;
+                background: var(--attention);
                 border-radius: 3px;
                 font-style: normal;
                 font-weight: normal;
                 font-size: 14px;
                 line-height: 140%;
-                color: $white;
+                color: var(--white);
                 border: none;
                 cursor: pointer;
                 margin-top: 30px;
@@ -166,14 +166,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid $Light9;
+    border-top: 1px solid var(--Light9);
 
     span {
         font-style: normal;
         font-weight: normal;
         font-size: 14px;
         line-height: 140%;
-        color: $gray4;
+        color: var(--gray4);
         margin-right: 25px;
     }
 
@@ -182,7 +182,7 @@
         font-weight: normal;
         font-size: 14px;
         line-height: 140%;
-        color: $attention;
+        color: var(--attention);
         margin-left: 25px;
     }
 }

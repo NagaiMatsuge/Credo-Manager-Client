@@ -150,6 +150,19 @@ const routes = [
     component: () => import("../views/pages/task/AddTask"),
   },
   {
+    path: "/edit-task/:id/:projects_id",
+    name: "Edit Tasks",
+    meta: { layout: "main", auth: true, title: "Редактирование задачи",
+      breadcrumb: {
+        parent: {
+          title: "Задачи",
+          path: "/tasks"
+        },
+        child: "Редактирование задачи"
+      } },
+    component: () => import("../views/pages/task/EditTask"),
+  },
+  {
     path: "/admin-chat/:id",
     name: "Chat Tasks",
     meta: { layout: "main", auth: true, title: "Работа с задачей",
@@ -158,15 +171,59 @@ const routes = [
           title: "Задачи",
           path: "/tasks"
         },
-        child: "Работа с задачей"
-      } },
+      child: "Работа с задачей"
+      }
+    },
     component: () => import("../views/pages/task/AdminChat"),
   },
   {
     path: "/statistics",
     name: "Statistics",
-    meta: { layout: "main", auth: true, title: "Статистика" },
+    meta: { layout: "main", auth: true, title: "Стастика" },
+
     component: () => import("../views/pages/Statistics.vue"),
+  },
+  {
+    path: "/server/:id",
+    name: "Server",
+    meta: { layout: "main", auth: true, title: "Сервера и адреса",
+      breadcrumb: {
+        parent: {
+          title: "Проекты",
+          path: "/projects"
+        },
+        child: "Сервера и адреса"
+      }
+    },
+    component: () => import("../views/pages/server/AllServer"),
+  },
+  {
+    path: "/add-server",
+    name: "Add Server",
+    meta: { layout: "main", auth: true, title: "Создание сервера",
+      breadcrumb: {
+        parent: {
+          title: "Сервера и адреса",
+          path: "/server"
+        },
+        child: "Создание сервера"
+      }
+    },
+    component: () => import("../views/pages/server/AddServer"),
+  },
+  {
+    path: "/edit-server",
+    name: "Edit Server",
+    meta: { layout: "main", auth: true, title: "Редактирование сервера",
+      breadcrumb: {
+        parent: {
+          title: "Сервера и адреса",
+          path: "/server"
+        },
+        child: "Редактирование сервера"
+      }
+    },
+    component: () => import("../views/pages/server/EditServer"),
   },
 ];
 

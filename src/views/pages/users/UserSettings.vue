@@ -253,5 +253,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/pages/user-settings.scss";
+@import "@/assets/scss/pages/user/app";
 </style>

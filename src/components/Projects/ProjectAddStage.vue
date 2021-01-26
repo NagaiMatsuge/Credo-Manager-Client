@@ -51,27 +51,29 @@
                 Сумма этапа должен содержать максимум {{ validator.$each[index].price.$params.maxLength.max }} символов. Сейчас он {{ (form.price).toString().length }}
               </small>
             </div>
-            <div class="projectAdd__stage-group currency">
-              <DynamicSelect
-                  v-if="getInfoProject.currencies"
+            <div class="projectAdd__stage-group currency" >
+
+              <Select
                   :options="getInfoProject.currencies"
-                  option-value="name"
-                  option-text="name"
-                  placeholder=""
-                  v-model="form.currency_id"
-                  :id="`stage_currency_${index}`"
+                  :value="form.currency_id"
+                  :optionId="'id'"
+                  :optionValue="'name'"
+                  id="projects"
+                  @change="e => form.currency_id = e"
+                  :disabled="$route.params.id"
+
               />
               <label :for="`stage_currency_${index}`" :class="{focus: !(form.currency_id.name === '')}">Валюта</label>
             </div>
             <div class="projectAdd__stage-group">
-              <DynamicSelect
-                  v-if="getInfoProject.payment_types"
+
+              <Select
                   :options="getInfoProject.payment_types"
-                  option-value="name"
-                  option-text="name"
-                  placeholder=""
-                  v-model="form.payment_type"
+                  :value="form.payment_type"
+                  :optionId="'id'"
+                  :optionValue="'name'"
                   :id="`stage_method_${index}`"
+                  @change="e => form.payment_type = e"
               />
               <label :for="`stage_method_${index}`" :class="{focus: !(form.payment_type.name === '')}">Метод
                 оплаты</label>
@@ -97,7 +99,7 @@
 </template>
 <script>
 
-import DynamicSelect from "vue-dynamic-select";
+import Select from "@/components/Select";
 export default {
   data() {
     return {}
@@ -138,7 +140,7 @@ export default {
     },
   },
   components: {
-    DynamicSelect
+    Select
   }
 }
 </script>

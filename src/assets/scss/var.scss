@@ -1,17 +1,39 @@
-$attention: #4473f6;
-$error: #e53750;
-$wait: #f5c544;
-$purple: #a38ce8;
-$green: #29cc97;
-$black: #282b3d;
-$gray4: #575a64;
-$gray6: #81839c;
-$light8: #b4b8cc;
-$Light9: #cbcfe6;
-$bg: #f5f6fa;
-$white: #fff;
-$white2: #a9b6ff;
-
+:root {
+--attention: #4473F6;
+--attentionBg: #4473F6;
+--attentionText: #4473F6;
+--error: #e53750;
+--wait: #f6b400;
+--waitO: rgba(245, 179, 2, 0.15);
+--purple: #a38ce8;
+--green: #29cc97;
+--black: #282b3d;
+--gray4: #575a64;
+--gray6: #81839c;
+--light8: #b4b8cc;
+--Light9: #cbcfe6;
+--bg: #f5f6fa;
+--white: #fff;
+--whiteText: #fff;
+}
+.dark__theme{
+  --attention: #707bf1;
+  --attentionBg: #707bf1;
+  --attentionText: #f7f5ee;
+  --error: #e53750;
+  --wait: #f5c544;
+  --waitO: rgba(245, 179, 2, 0.15);
+  --purple: #a38ce8;
+  --green: #29cc97;
+  --black: #f7f5ee;
+  --gray4: #575a64;
+  --gray6: #81839c;
+  --light8: #b4b8cc;
+  --Light9: #cbcfe6;
+  --bg: #0e0d1a;
+  --white: #161628;
+  --whiteText: #fff;
+}
 $bs: 0px 1px 2px rgba(9, 45, 147, 0.1);
 $bsactive: 0px 8px 15px rgba(9, 45, 147, 0.1);
 

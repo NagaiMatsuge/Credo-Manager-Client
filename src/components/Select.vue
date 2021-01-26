@@ -1,43 +1,58 @@
 <template>
-  <div class="app">
-    <div class="wrap">
-      <div ref="select"></div>
+  <div class="select">
+    <div class="select__value" @click="open = !open">
+      <div class="select__text" v-text="value[optionValue]"></div>
+      <div class="select__icon">
+        <img :class="{open: open}" src="../assets/img/arrow.svg" alt="">
+      </div>
     </div>
+    <div class="select__list" v-if="open">
+      <div class="select__item"
+           v-for="(item, index) in options"
+           :key="index"
+           @click="inputValue(item)"
+
+           :class="{active: value === item}"
+      >
+        {{item[optionValue]}}
+      </div>
+    </div>
+
   </div>
 </template>
-<script>
-import {Select} from '@/utils/select/index'
-export default {
-  data(){
-    return{
 
+<script>
+export default {
+  data() {
+    return {
+      open: false
     }
   },
-  props: {
-    data: {},
-    text: String,
-    value: String,
-    placeholder: String,
+  props:{
+    options:{},
+    value: {},
+    optionId: String,
+    optionValue: String
+  },
+  methods:{
+    inputValue(e){
+      this.$emit('change', e)
+      this.hide()
+    },
+    hide(){
+      this.open = false;
+    }
   },
   mounted() {
-    new Select(this.$refs.select, {
-      placeholder: this.placeholder,
-      value: this.value,
-      text: this.text,
-      data: this.data,
-      onSelect(item) {
-        // this.onSelect(item)
-        console.log(item)
+    document.addEventListener('click', (e)=>{
+      if (!e.target.closest('.select')){
+        this.hide()
       }
     })
-  },
-  // methods:{
-  //   onSelect(item){
-  //     this.$emit('modal', item)
-  //   }
-  // }
+  }
 }
 </script>
+
 <style lang="scss">
-@import "@/assets/scss/components/select";
+@import "../assets/scss/components/select";
 </style>

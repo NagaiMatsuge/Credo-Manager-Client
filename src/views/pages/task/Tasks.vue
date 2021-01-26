@@ -11,14 +11,6 @@ import AdminTask from "@/components/Tasks/AdminTask";
 import Task from "@/components/Tasks/Task";
 
 export default {
-  data(){
-    return{
-
-
-    }
-  },
-
-
   computed:{
     data(){
       return this.$store.getters.getProjectsAll
@@ -36,11 +28,9 @@ export default {
   },
   async created() {
     await this.$store.dispatch('tasksAll')
-
-
   },
 };
 </script>
 <style lang='scss'>
-@import "@/assets/scss/pages/task";
+@import '@/assets/scss/pages/task/app';
 </style>

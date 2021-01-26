@@ -3,15 +3,11 @@ import axios from "axios";
 export default {
     state: {
         task: null,
-        addTaskInfo: null,
         id: null
     },
     mutations: {
         setTask(state, task) {
             state.task = task;
-        },
-        setAddTaskInfo(state, addTaskInfo) {
-            state.addTaskInfo = addTaskInfo;
         },
         setTaskId(state, id) {
             state.id = id;
@@ -19,11 +15,24 @@ export default {
     },
 
     actions: {
-        async tasksAll({ commit }) {
+        async tasksAll({ commit }, obj = {project_id: 0,user_id: 0 }) {
+            console.log(obj)
             axios.defaults.headers.common[
                 "Authorization"
                 ] = `Bearer ${localStorage.token}`;
-            const projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks`) ).data;
+            let projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?project_id=${obj.project_id}&user_id=${obj.user_id}`) ).data;
+            // let queryString = "tasks?";
+            // if(obj.pro)
+            // if (obj.project_id && !obj.user_id){
+            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?project_id=${obj.project_id}`) ).data;
+            // }else if  (obj.project_id && obj.user_id) {
+            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?project_id=${obj.project_id}&user_id=${obj.user_id}`) ).data;
+            // }else if  (!obj.project_id && obj.user_id){
+            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?user_id=${obj.user_id}`) ).data;
+            // }else{
+            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks`) ).data;
+            // }
+
             if (projects.success) {
                 commit("setTask", projects);
             } else {
@@ -33,22 +42,7 @@ export default {
                 throw projects.message
             }
         },
-        async AddTaskInfo({ commit }) {
-            axios.defaults.headers.common[
-                "Authorization"
-                ] = `Bearer ${localStorage.token}`;
-            commit("setProgress", "start");
-            const projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks`) ).data;
-            if (projects.success) {
-                commit("setAddTaskInfo", projects);
-                commit("removeProgress");
-            } else {
-                commit("removeProgress");
-                commit("setError", projects.message);
-                commit("clearNotification");
-                throw projects.message
-            }
-        },
+
         async sendTask({ commit }, obj) {
             axios.defaults.headers.common[
                 "Authorization"
@@ -56,7 +50,7 @@ export default {
             commit("setProgress", "start");
             const task = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/tasks/create`, obj) ).data;
             if (task.success) {
-                commit("setAddTaskInfo", task);
+                commit("setTask", task);
                 commit("removeProgress");
             } else {
                 commit("removeProgress");
@@ -65,11 +59,39 @@ export default {
                 throw task.message
             }
         },
+        async editTask({ commit }, {obj, id}) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const task = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/tasks/update/${id}`, obj) ).data;
+            if (task.success) {
+                commit("setTask", task);
+                commit("removeProgress");
+            } else {
+                commit("removeProgress");
+                commit("setError", task.message);
+                throw task.message
+            }
+        },
+        async editActive({ commit }, {user_id, task_id}) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            commit("setProgress", "start");
+            const task = ( await axios.put(`${process.env.VUE_APP_SERVICE_URL}/tasks/clock`, {user_id: user_id, task_id: task_id}) ).data;
+            if (task.success) {
+                commit("removeProgress");
+            } else {
+                commit("removeProgress");
+                commit("setError", task.message);
+                throw task.message
+            }
+        },
 
     },
     getters: {
         getTasks: (s) => s.task,
-        getAddTaskInfo: (s) => s.task,
         getTaskId: (s) => s.id,
     },
 };

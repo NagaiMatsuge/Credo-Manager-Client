@@ -54,8 +54,8 @@ export default {
     padding: 15px 30px;
   }
   &__body{
-    background: $white;
-    color: $black;
+    background: var(--white);
+    color: var(--black);
     width: 400px;
     position: relative;
     border-radius: 10px;
@@ -64,22 +64,22 @@ export default {
     display: flex;
     align-items: center;
     padding: 15px 30px;
-    border-top: 1px solid $light8 ;
+    border-top: 1px solid var(--light8) ;
     justify-content: space-between;
     button{
       padding: 10px 25px;
       cursor: pointer;
       &.no{
-        border: 1px solid $error;
-        color: $error;
+        border: 1px solid var(--error);
+        color: var(--error);
         background: none;
         border-radius: 4px;
       }
       &.yes{
         padding: 10px 45px;
-        border: 1px solid $attention;
-        color: $white;
-        background: $attention;
+        border: 1px solid var(--attention);
+        color: var(--white);
+        background: var(--attention);
       }
 
     }

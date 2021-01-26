@@ -11,10 +11,15 @@
             <label v-for="(user) in infoUser[index]">
               <input type="checkbox" v-model="formData.user_ids" :value="user.id">
               <div v-if="!user.photo" class="addTask__user-noImg" :style="`background: ${user.color}`">{{ user.name.charAt(0).toUpperCase() }}</div>
-              <img v-else :src="user.photo" alt="">
+              <img v-else :src="domain + user.photo" alt="">
               <p>{{ user.name }}</p>
             </label>
+            <label v-if="!item.length"><p>Увас нет {{index === 'designers' ? 'Дизайнеров' : 'Прогеров'}}</p></label>
           </div>
+          <small
+              class="error"
+              v-if="validator.user_ids.$dirty && !validator.user_ids.required"
+          >Выберите исполнителя</small>
         </div>
       </div>
     </div>
@@ -25,16 +30,15 @@ export default {
   data(){
     return{
       tab: 'developers',
+      domain: process.env.VUE_APP_DOMAIN
     }
   },
   props:{
     infoUser: {},
-    formData:{}
+    formData:{},
+    validator:{}
   }
 
 }
 </script>
 
-<style scoped>
-
-</style>

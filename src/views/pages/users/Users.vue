@@ -49,5 +49,5 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "@/assets/scss/pages/users";
+@import "@/assets/scss/pages/user/app";
 </style>

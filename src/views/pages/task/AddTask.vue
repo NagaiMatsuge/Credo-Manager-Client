@@ -1,7 +1,7 @@
 <template>
   <div class="addTask">
-    <AddTaskInfo v-if="allProjects" :formData="formData" :addTaskInfo="addTaskInfo" :allProjects="allProjects" :allSteps="allSteps"/>
-    <AddTaskUser v-if="infoUser" :formData="formData" :infoUser="infoUser"/>
+    <AddTaskInfo v-if="allProjects" :validator="$v.formData" :formData="formData" :allProjects="allProjects" :allSteps="allSteps"/>
+    <AddTaskUser v-if="infoUser" :validator="$v.formData" :formData="formData" :infoUser="infoUser"/>
     <div class="user__add-submit">
       <button
           class="cancel"
@@ -19,6 +19,7 @@
 <script>
 import AddTaskInfo from '@/components/Tasks/AddTaskInfo'
 import AddTaskUser from '@/components/Tasks/AddTaskUser'
+import {maxLength, minLength, required} from "vuelidate/lib/validators";
 export default {
   data(){
     return{
@@ -44,8 +45,27 @@ export default {
         }
     }
   },
+  validations: {
+    formData: {
+      title:{
+        required,
+        minLength: minLength(4)
+      },
+      user_ids: {required},
+      step_ids:{
+        id:{required}
+      },
+      projects:{
+        id:{required}
+      }
+    },
+  },
   methods:{
     async sendTask(){
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
       try {
         await this.$store.dispatch('sendTask', this.formData)
         await this.$router.push('/tasks')
@@ -54,14 +74,10 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('AddTaskInfo')
     await this.$store.dispatch('fetchProjectsAll')
     await this.$store.dispatch('fetchInfoUser')
   },
   computed:{
-    addTaskInfo(){
-      return this.$store.getters.getAddTaskInfo
-    },
     allProjects(){
       return this.$store.getters.getProjectsAll
     },
@@ -76,5 +92,5 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/assets/scss/pages/task-add';
+@import '@/assets/scss/pages/task/app';
 </style>

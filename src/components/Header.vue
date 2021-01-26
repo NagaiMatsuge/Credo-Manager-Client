@@ -10,33 +10,10 @@
       <div class="page_title">
         <div  class="back_icon">
           <router-link v-if="breadcrumbs" :to="breadcrumbs.parent.path">
-            <svg
-                width="21"
-                height="24"
-                viewBox="0 0 21 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                  x="0.5"
-                  y="1"
-                  width="20"
-                  height="22"
-                  rx="3.5"
-                  fill="white"
-              />
-              <path
-                  d="M6.54038 11.5404C6.28654 11.7942 6.28654 12.2058 6.54038 12.4596L10.677 16.5962C10.9308 16.85 11.3424 16.85 11.5962 16.5962C11.85 16.3424 11.85 15.9308 11.5962 15.677L7.91924 12L11.5962 8.32304C11.85 8.0692 11.85 7.65765 11.5962 7.40381C11.3424 7.14996 10.9308 7.14997 10.677 7.40381L6.54038 11.5404ZM8 11.35L7 11.35L7 12.65L8 12.65L8 11.35Z"
-                  fill="#282B3D"
-              />
-              <rect
-                  x="0.5"
-                  y="1"
-                  width="20"
-                  height="22"
-                  rx="3.5"
-                  stroke="#B4B8CC"
-              />
+            <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.5" y="1" width="20" height="22" rx="3.5" fill="white"/>
+              <path d="M6.54038 11.5404C6.28654 11.7942 6.28654 12.2058 6.54038 12.4596L10.677 16.5962C10.9308 16.85 11.3424 16.85 11.5962 16.5962C11.85 16.3424 11.85 15.9308 11.5962 15.677L7.91924 12L11.5962 8.32304C11.85 8.0692 11.85 7.65765 11.5962 7.40381C11.3424 7.14996 10.9308 7.14997 10.677 7.40381L6.54038 11.5404ZM8 11.35L7 11.35L7 12.65L8 12.65L8 11.35Z" fill="#282B3D"/>
+              <rect x="0.5" y="1" width="20" height="22" rx="3.5" stroke="#B4B8CC"/>
             </svg>
           </router-link>
           <div class="page_name">{{title}}</div>
@@ -59,7 +36,7 @@
             />
           </svg>
         </div>
-        <div class="theme" >
+        <div class="theme" @click="themeEvent">
           <svg
             width="18"
             height="18"
@@ -125,7 +102,8 @@ export default {
   data() {
     return {
       dropdown: false,
-      domain: process.env.VUE_APP_DOMAIN
+      domain: process.env.VUE_APP_DOMAIN,
+      theme: false,
     };
   },
   props: {
@@ -143,7 +121,16 @@ export default {
       this.$store.commit('setNotification', 'logout')
       localStorage.clear();
     },
+    themeEvent(){
 
+      if(this.user.theme === 'light'){
+        this.user.theme = 'dark';
+        this.$store.dispatch('theme', 'dark')
+      }else{
+        this.user.theme = 'light';
+        this.$store.dispatch('theme', 'light')
+      }
+    }
   },
 };
 </script>

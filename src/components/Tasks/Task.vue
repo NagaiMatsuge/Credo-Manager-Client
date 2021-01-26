@@ -95,10 +95,10 @@ export default {
       let toStringHours = (rhours + "").length
       let toStringMinutes = (rminutes + "").length
       if (toStringHours === 1){
-        rhours += '0'
+        rhours = '0' + rhours
       }
       if (toStringMinutes === 1){
-        rminutes += '0'
+        rminutes = '0' + rminutes
       }
       return rhours + ":" + rminutes
     },

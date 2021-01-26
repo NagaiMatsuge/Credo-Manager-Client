@@ -1,5 +1,5 @@
 <template>
-  <div class="main__layout">
+  <div class="main__layout" v-if="user" :class="{dark__theme: user.theme === 'dark'}">
     <Sidebar />
     <div class="content">
       <Header

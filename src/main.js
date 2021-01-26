@@ -3,7 +3,6 @@ import Vue from "vue";
 import Vuelidate from "vuelidate";
 import axios from "axios";
 import vueTopprogress from "vue-top-progress";
-import DynamicSelect from 'vue-dynamic-select'
 import Paginate from './utils/vuejs-paginate'
 import App from "./App.vue";
 import router from "./router";
@@ -25,7 +24,6 @@ window.Echo = new Echo({
 })
 
 Vue.use(vueTopprogress);
-Vue.use(DynamicSelect)
 Vue.use(AudioRecorder)
 
 Vue.use(Vuelidate);

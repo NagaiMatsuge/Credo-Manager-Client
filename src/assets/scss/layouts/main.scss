@@ -1,8 +1,11 @@
+@import "../var";
 .main__layout {
   display: flex;
 }
 .content {
   width: 100%;
-  background: #f5f6fa;
+  background: var(--bg);
   padding-left: 80px;
+  height: 100vh;
+  overflow: auto;
 }

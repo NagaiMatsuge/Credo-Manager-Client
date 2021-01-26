@@ -1,5 +1,6 @@
 <template>
-  <div id="app" ref="app">
+                 <!-- dark__theme  -->
+  <div id="app"  ref="app">
     <vue-topprogress color="#4473F6" ref="topProgress"></vue-topprogress>
     <Alert :error="error" :notification="notification" />
     <component :is="layout">
@@ -27,13 +28,18 @@ export default {
     notification(){
       return (messages[this.$store.getters.notification] || messages[this.$route.query.message])
     },
+    user() {
+      if (this.$store.getters.getUserCredentials){
+        return this.$store.getters.getUserCredentials;
+      }
+    },
   },
-  watch:{
+  watch: {
     progress: {
       handler(newValue) {
-        if(newValue === "start") {
+        if (newValue === "start") {
           this.$refs.topProgress.start()
-        }else {
+        } else {
           this.$refs.topProgress.done()
         }
       },
@@ -53,6 +59,11 @@ export default {
 @import "@/assets/scss/base.scss";
 input{
   padding-left: 15px !important;
+  background: var(--white);
+  color: var(--black);
+}
+.placeholder{
+  display: none !important;
 }
 
 </style>
