@@ -5,7 +5,9 @@
   user-select: none;
   cursor: pointer;
   &[disabled="disabled"]{
+    cursor: no-drop;
     pointer-events:none;
+    opacity: 0.7;
   }
   &.invalid{
     +label{

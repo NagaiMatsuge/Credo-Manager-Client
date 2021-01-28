@@ -21,17 +21,6 @@ export default {
                 "Authorization"
                 ] = `Bearer ${localStorage.token}`;
             let projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?project_id=${obj.project_id}&user_id=${obj.user_id}`) ).data;
-            // let queryString = "tasks?";
-            // if(obj.pro)
-            // if (obj.project_id && !obj.user_id){
-            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?project_id=${obj.project_id}`) ).data;
-            // }else if  (obj.project_id && obj.user_id) {
-            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?project_id=${obj.project_id}&user_id=${obj.user_id}`) ).data;
-            // }else if  (!obj.project_id && obj.user_id){
-            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks?user_id=${obj.user_id}`) ).data;
-            // }else{
-            //     projects = ( await axios.get(`${process.env.VUE_APP_SERVICE_URL}/tasks`) ).data;
-            // }
 
             if (projects.success) {
                 commit("setTask", projects);

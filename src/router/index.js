@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import axios from "axios";
 
 Vue.use(VueRouter);
 
@@ -198,13 +197,13 @@ const routes = [
     component: () => import("../views/pages/server/AllServer"),
   },
   {
-    path: "/add-server",
+    path: "/add-Server/:id",
     name: "Add Server",
     meta: { layout: "main", auth: true, title: "Создание сервера",
       breadcrumb: {
         parent: {
-          title: "Сервера и адреса",
-          path: "/server"
+          title: "Проекты",
+          path: "/projects"
         },
         child: "Создание сервера"
       }
@@ -212,13 +211,13 @@ const routes = [
     component: () => import("../views/pages/server/AddServer"),
   },
   {
-    path: "/edit-server",
+    path: "/edit-server/:id",
     name: "Edit Server",
     meta: { layout: "main", auth: true, title: "Редактирование сервера",
       breadcrumb: {
         parent: {
-          title: "Сервера и адреса",
-          path: "/server"
+          title: "Проекты",
+          path: "/projects"
         },
         child: "Редактирование сервера"
       }
