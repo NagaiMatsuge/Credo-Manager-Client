@@ -1,0 +1,88 @@
+@import "../var.scss";
+.notif {
+  padding: 15px 25px;
+  width: 393px;
+  margin-top: 66px;
+  &:hover {
+    background: var(--white);
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  &__title-text {
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--light8);
+    margin-right: auto;
+    margin-left: 17px;
+  }
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__controls-time {
+    display: flex;
+    align-items: center;
+    p {
+      margin-right: 10px;
+      font-family: Segoe UI;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 15px;
+      color: var(--light8);
+    }
+  }
+  &__controls-move {
+    display: flex;
+    align-items: center;
+  }
+  &__controls-current {
+    margin-left: 12px;
+    margin-right: 12px;
+    font-family: Segoe UI;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--gray6);
+  }
+  &__controls-right,
+  &__controls-left {
+    cursor: pointer;
+  }
+  &__input {
+    margin-top: 12px;
+    position: relative;
+    textarea {
+      height: 174px;
+      width: 100% !important;
+      border: 1px solid var(--Light9);
+      border-radius: 4px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 17px 20px;
+      padding-right: 60px;
+      font-family: Segoe UI;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      text-align: left;
+      color: var(--gray4);
+    }
+  }
+  &__input-controls {
+    position: absolute;
+    top: 14px;
+    right: 17px;
+    display: flex;
+    width: 50px;
+    justify-content: space-between;
+  }
+}

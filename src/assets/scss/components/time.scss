@@ -1,0 +1,14 @@
+@import "../var.scss";
+.time-wrapper {
+  &__date {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140%;
+    color: var(--gray6);
+  }
+  &__time {
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 130%;
+  }
+}
