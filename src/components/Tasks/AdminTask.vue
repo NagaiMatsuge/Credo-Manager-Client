@@ -64,7 +64,9 @@
                 <span v-if="item.hide">{{ item.tasks.active[0].project.title }}</span>
               </div>
               <div class="task__body-time">
-                <span :class="{active: !item.hide}">{{ timeConvert(item.tasks.active[0].time) }}</span>
+                <span :class="{active: !item.hide}" v-if="item.tasks.active[0].type === 1">{{timeConvert(item.tasks.active[0].time -(item.tasks.active[0].time_spent + item.tasks.active[0].last_time))}}</span>
+                <span :class="{active: !item.hide}" v-if="item.tasks.active[0].type === 2">{{item.tasks.active[0].deadline}}</span>
+                <span :class="{active: !item.hide}" v-if="item.tasks.active[0].type === 3">{{timeConvert(item.tasks.active[0].time_spent + item.tasks.active[0].last_time)}}</span>
                 <div v-if="item.hide">
                   <button @click.prevent="editTask(item.tasks.active[0].id,item.tasks.active[0].project.id)">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +102,9 @@
                 <span>{{ inactive.project.title }}</span>
               </div>
               <div class="task__body-time">
-                <span>{{timeConvert(inactive.time)}}</span>
+                <span v-if="inactive.type === 1">{{timeConvert(inactive.time -(inactive.time_spent + inactive.last_time))}}</span>
+                <span v-if="inactive.type === 2">{{inactive.deadline}}</span>
+                <span v-if="inactive.type === 3">{{timeConvert(inactive.time_spent + inactive.last_time)}}</span>
                 <div>
                   <button @click.prevent="editTask(inactive.id,inactive.project.id)">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -170,17 +174,23 @@ export default {
       } catch (e) {}
     },
     timeConvert(n) {
-      let rHours = Math.floor((n / 60));
-      let rMinutes = Math.round(((n / 60) -  Math.floor((n / 60))) * 60);
-      let toStringHours = (rHours + "").length
-      let toStringMinutes = (rMinutes + "").length
+
+      let rHours = parseInt(n / 60);
+      let rMinutes = parseInt(n % 60);
+
+      let toStringHours = (rHours + "").replace('-', "").length
+      let toStringMinutes = (rMinutes + "").replace('-', "").length
       if (toStringHours === 1){
         rHours = '0' + rHours
       }
       if (toStringMinutes === 1){
         rMinutes = '0' + rMinutes
       }
-      return rHours + ":" + rMinutes
+      if (n < 0){
+        return "-" + rHours + ":" + rMinutes.toString().replace('-', "")
+      }else{
+        return rHours + ":" + rMinutes
+      }
     },
     toMessage(id, task_id){
       this.$store.commit('setTaskId', task_id)

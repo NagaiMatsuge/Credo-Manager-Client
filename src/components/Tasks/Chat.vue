@@ -161,7 +161,6 @@ export default {
       }
 
       try {
-        console.log(formData)
         await this.$store.dispatch('sendMessage', formData)
         this.text = "";
       } catch (e) {

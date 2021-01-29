@@ -87,16 +87,19 @@ export default {
               }else{}
             }
           }else{
-            if(this.tasks.data.tasks.active[0].id === e.task_id){
-              this.tasks.data.tasks.active[0].unread_count++
-            }else{
-              for (let i = 0; i < this.tasks.data.tasks.inactive; i++) {
-                let el = this.tasks.data.tasks.inactive[i]
-                if (el.id === e.task_id){
-                  el.unread_count++
+            if (this.tasks.data.tasks.active.length){
+              if(this.tasks.data.tasks.active[0].id === e.task_id){
+                this.tasks.data.tasks.active[0].unread_count++
+              }else{
+                for (let i = 0; i < this.tasks.data.tasks.inactive; i++) {
+                  let el = this.tasks.data.tasks.inactive[i]
+                  if (el.id === e.task_id){
+                    el.unread_count++
+                  }
                 }
               }
             }
+
           }
         }
 

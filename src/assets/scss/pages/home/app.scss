@@ -1,5 +1,119 @@
 .home {
+  display: flex;
+
   &__app {
-    width: 33%;
+    width: 33.33%;
+  }
+
+  &__users{
+    width: 33.33%;
+    .tuday{
+      &__work {
+        width: 100%;
+        margin-right: 50px;
+      }
+      &__work-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      &__work-body {
+        height: 75vh;
+        overflow: auto;
+        padding-right: 10px;
+      }
+      &__work-card {
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        margin-bottom: 5px;
+        box-shadow: 0 1px 2px rgb(9 45 147 / 10%);
+        border-radius: 3px;
+      }
+      &__work-info {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f5f6fa;
+        padding: 15px 22px;
+        img {
+          margin-right: 14px;
+        }
+        p {
+          margin-right: auto;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 130%;
+          color: #282b3d;
+        }
+        span {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 140%;
+          color: #81839c;
+        }
+      }
+      &__work-content {
+        padding: 15px 22px;
+        padding-right: 5px;
+        width: 70%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        p {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 140%;
+          width: 100%;
+        }
+        a {
+          color: #b4b8cc;
+          width: 50%;
+        }
+      }
+      &__work-time {
+        width: 30%;
+        padding: 15px 22px;
+        padding-left: 0;
+        padding-right: 22px;
+
+      }
+      &__work-timer {
+        width: 100%;
+        padding: 5px;
+        border-radius: 58px;
+        font-size: 14px;
+        line-height: 140%;
+        border: 1px solid var(--green);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--green);
+      }
+      &__work-content-info{
+        display: flex;
+        align-items: center;
+        width: 50%;
+        color: var(--green);
+
+        span{
+          width: 16px;
+          height: 16px;
+          display: block;
+          margin-right: 5px;
+        }
+      }
+    }
+
+  }
+
+  &__projects{
+    width: 33.33%;
+
   }
 }

@@ -6,7 +6,9 @@
       <Notes />
     </div>
     <div class="home__users">
-      <Users />
+      <Users
+      :mid="mid"
+      />
     </div>
     <div class="home__projects">
       <Projects />
@@ -23,6 +25,14 @@ import Users from "@/components/Home/Users";
 export default {
   data() {
     return {};
+  },
+  async mounted() {
+    await this.$store.dispatch('getMidUser')
+  },
+  computed:{
+    mid(){
+      return this.$store.getters.getMid
+    }
   },
   components: {
     Time,

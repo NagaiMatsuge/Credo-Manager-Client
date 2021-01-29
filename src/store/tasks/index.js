@@ -16,7 +16,6 @@ export default {
 
     actions: {
         async tasksAll({ commit }, obj = {project_id: 0,user_id: 0 }) {
-            console.log(obj)
             axios.defaults.headers.common[
                 "Authorization"
                 ] = `Bearer ${localStorage.token}`;
