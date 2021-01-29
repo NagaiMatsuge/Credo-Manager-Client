@@ -14,6 +14,8 @@ export default {
     'email-verify': 'Емейл активации аккаунта был отправлен на почту email_of_the_user@gmail.com',
     'auth/email-not-verified': 'Ваш Email не активирован',
     'user-edit-success': 'Пользователь успешно редактирован',
+    'successes-add-server': 'Сервер успешно создан',
+    'successes-edit-server': 'Сервер успешно редактирован',
     'user-add-success': 'Пользователь успешно создан',
     'task-add-success': 'Задача успешно создана',
     'task-edit-success': 'Задача успешно редактирована',

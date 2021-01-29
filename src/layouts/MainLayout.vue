@@ -1,5 +1,5 @@
 <template>
-  <div class="main__layout" v-if="user" :class="{dark__theme: user.theme === 'dark'}">
+  <div class="main__layout" v-if="user" :class="themeEvent()">
     <Sidebar />
     <div class="content">
       <Header
@@ -20,7 +20,15 @@ import Header from "@/components/Header";
 export default {
   name: "MainLayouts",
   data() {
-    return {};
+    return {
+      themeEvent() {
+        if (this.user.theme === "dark"){
+          return 'dark__theme'
+        }else{
+          return 'light__theme'
+        }
+      }
+    };
   },
   components: {
     Sidebar,

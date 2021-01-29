@@ -197,7 +197,7 @@ const routes = [
     component: () => import("../views/pages/server/AllServer"),
   },
   {
-    path: "/add-Server/:id",
+    path: "/add-server/:id",
     name: "Add Server",
     meta: { layout: "main", auth: true, title: "Создание сервера",
       breadcrumb: {
@@ -211,7 +211,7 @@ const routes = [
     component: () => import("../views/pages/server/AddServer"),
   },
   {
-    path: "/edit-server/:id",
+    path: "/edit-server/:server_id/:id",
     name: "Edit Server",
     meta: { layout: "main", auth: true, title: "Редактирование сервера",
       breadcrumb: {

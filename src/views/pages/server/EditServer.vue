@@ -4,19 +4,19 @@
         v-if="serverEdit"
         :server="serverEdit.server"
         :validator="$v.serverEdit"
-        :blocked="true"
+        :blocked="blocked"
     />
     <ServerFtp
         v-if="serverEdit"
         :ftp="serverEdit.ftp_access"
         :validator="$v.serverEdit"
-        :blocked="true"
+        :blocked="blocked"
     />
     <ServerDB
         v-if="serverEdit"
         :db="serverEdit.db_access"
         :validator="$v.serverEdit"
-        :blocked="true"
+        :blocked="blocked"
     />
     <div class="server_add">
       <div class="server_add-submit">
@@ -28,13 +28,14 @@
         </button>
         <button
             class="add"
-            @click.prevent="sendServer"
+            @click.prevent="saveServer"
             type="submit"
         >Сохранить
         </button>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -42,31 +43,40 @@ import SelectForm from '@/components/Server/ServerForm';
 import ServerDB from '@/components/Server/ServerDB';
 import ServerFtp from '@/components/Server/ServerFtp';
 import {minLength, required} from "vuelidate/lib/validators";
+
 export default {
-   mounted() {
-     this.$store.dispatch('getEditServer', this.$route.params.id)
-   },
+  data() {
+    return {
+      blocked: true
+    }
+  },
+  async mounted() {
+    await this.$store.commit('clearServer')
+    await this.$store.dispatch('getEditServer', this.$route.params.server_id)
+    if (this.serverEdit.server.type.id === '2') {
+      this.blocked = false
+    } else {
+      this.blocked = true
+    }
+  },
+
   validations: {
     serverEdit: {
-      server:{
+      server: {
         title: {
           required,
           minLength: minLength(4)
         },
-        host:{
-          required,
-          minLength: minLength(4)
-        },
-        type_id:{
-          required
-        }
-      },
-      db_access:{
         host: {
           required,
           minLength: minLength(4)
         },
-        server_name: {
+        type_id: {
+          required
+        }
+      },
+      db_access: {
+        host: {
           required,
           minLength: minLength(4)
         },
@@ -87,7 +97,7 @@ export default {
           minLength: minLength(10)
         },
       },
-      ftp_access:{
+      ftp_access: {
         host: {
           required,
           minLength: minLength(4)
@@ -110,12 +120,27 @@ export default {
       }
     },
   },
-  computed:{
-   serverEdit(){
-     return this.$store.getters.getEditServer
-   }
+  computed: {
+    serverEdit() {
+      return this.$store.getters.getEditServer
+    }
   },
-  components:{
+  methods: {
+    async saveServer() {
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
+      try {
+        await this.$store.dispatch('updateServer', this.serverEdit)
+        await this.$store.dispatch('serverAll', this.$route.params.id)
+        await this.$store.commit('setNotification', 'successes-edit-server')
+        await this.$router.push(`/server/${this.$route.params.id}`)
+      }catch (e) {
+      }
+    }
+  },
+  components: {
     SelectForm,
     ServerDB,
     ServerFtp

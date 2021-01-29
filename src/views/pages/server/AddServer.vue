@@ -1,21 +1,22 @@
 <template>
   <div class="server">
-    {{serverAdd}}
     <SelectForm
       v-if="serverAdd"
       :server="serverAdd.server"
       :validator="$v.serverAdd"
     />
     <ServerFtp
-        v-if="serverAdd && serverAdd.server.type_id"
+        v-if="serverAdd"
         :ftp="serverAdd.ftp_access"
         :type_id="serverAdd.server.type_id"
+        :host="serverAdd.server.host"
         :validator="$v.serverAdd"
     />
     <ServerDB
-        v-if="serverAdd && serverAdd.server.type_id"
+        v-if="serverAdd"
         :db="serverAdd.db_access"
         :type_id="serverAdd.server.type_id"
+        :host="serverAdd.server.host"
         :validator="$v.serverAdd"
     />
     <div class="server_add">
@@ -23,7 +24,7 @@
         <button
             class="cancel"
             type="submit"
-            @click.prevent="$router.push('/projects');"
+            @click.prevent="$router.push(`/server/${$route.params.id}`);"
         >Отменить изменения
         </button>
         <button
@@ -34,6 +35,9 @@
         </button>
       </div>
     </div>
+    <pre>
+      {{$v}}
+    </pre>
   </div>
 </template>
 
@@ -50,13 +54,15 @@ export default {
 
   methods: {
     async sendServer() {
-      // if (this.$v.$invalid) {
-      //   this.$v.$touch();
-      //   return;
-      // }
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
       this.serverAdd.server.project_id = this.$route.params.id
       try {
         await this.$store.dispatch('createServer', this.serverAdd)
+        await this.$store.commit('setNotification', 'successes-add-server')
+        await this.$router.push(`/server/${this.$route.params.id}`)
       }catch (e) {}
     },
   },
@@ -77,10 +83,6 @@ export default {
       },
       db_access:{
         host: {
-          required,
-          minLength: minLength(4)
-        },
-        server_name: {
           required,
           minLength: minLength(4)
         },

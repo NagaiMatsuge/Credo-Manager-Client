@@ -1,6 +1,6 @@
 <template>
                  <!-- dark__theme  -->
-  <div id="app"  ref="app">
+  <div id="app" ref="app">
     <vue-topprogress color="#4473F6" ref="topProgress"></vue-topprogress>
     <Alert :error="error" :notification="notification" />
     <component :is="layout">

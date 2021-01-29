@@ -1,7 +1,8 @@
 <template>
   <div class="server__form">
+
     <div class="server__form-title">
-      Основная информация {{server.type_id}}
+      Основная информация
     </div>
     <div class="server__form-group">
       <input
@@ -53,7 +54,7 @@
       </small>
     </div>
 
-    <div class="server__form-group" v-if="validator.server.host.required">
+    <div class="server__form-group">
       <Select
           :options="server.type"
           :value="type"
@@ -61,7 +62,7 @@
           :optionValue="'title'"
           id="projects"
           @change="serverType"
-          :disabled="{disabled:blocked}"
+          :disabled="blocked || $route.params.server_id"
           :class="{
                 invalid: validator.server.type_id.$dirty && !validator.server.type_id.required
               }"

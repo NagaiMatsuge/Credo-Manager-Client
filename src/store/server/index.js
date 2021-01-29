@@ -49,6 +49,9 @@ export default {
         },
         setServerEdit(state, serverEdit) {
             state.serverEdit = serverEdit;
+        },
+        clearServer(state) {
+            state.serverEdit = null;
         }
     },
 
@@ -111,6 +114,20 @@ export default {
                 throw server.message
             }
         },
+        async updateServer({ commit, dispatch }, obj) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            let server = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/servers/update/${obj.server.id}`, obj) ).data;
+            if (server.success) {
+            } else {
+                commit("removeProgress");
+                commit("setError", server.message);
+                commit("clearNotification");
+                throw server.message
+            }
+        },
+
 
 
     },
