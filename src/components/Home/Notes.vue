@@ -154,7 +154,9 @@
         </div>
       </div>
     </div>
-    <div class="notes__input"></div>
+    <div class="notes__input">
+      <textarea />
+    </div>
   </div>
 </template>
 

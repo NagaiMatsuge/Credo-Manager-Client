@@ -1,9 +1,14 @@
 @import "../var.scss";
 .notes {
   width: 393px;
+  padding: 15px 25px;
+  margin-top: 45px;
+  &:hover {
+    background: var(--white);
+  }
   &__title {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   &__title-text {
     font-family: Segoe UI;
@@ -13,6 +18,8 @@
     line-height: 24px;
     text-align: left;
     color: var(--light8);
+    margin-right: auto;
+    margin-left: 17px;
   }
   &__controls {
     display: flex;
@@ -32,7 +39,7 @@
     text-align: left;
     color: var(--light8);
     margin-right: auto;
-    margin-left: 17px;
+    margin-right: 17px;
   }
   &__controls-move {
     display: flex;
@@ -50,5 +57,23 @@
   &__controls-left,
   &__controls-right {
     cursor: pointer;
+  }
+  &__input {
+    margin-top: 12px;
+    textarea {
+      padding: 17px 20px;
+      background: var(--bg);
+      font-family: Segoe UI;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      text-align: left;
+      color: var(--gray4);
+      height: 174px;
+      width: 339px;
+      border-radius: 4px;
+      border: 1px solid var(--Light9);
+    }
   }
 }

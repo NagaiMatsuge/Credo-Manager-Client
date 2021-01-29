@@ -1,22 +1,22 @@
 :root {
---attention: #4473F6;
---attentionBg: #4473F6;
---attentionText: #4473F6;
---error: #e53750;
---wait: #f6b400;
---waitO: rgba(245, 179, 2, 0.15);
---purple: #a38ce8;
---green: #29cc97;
---black: #282b3d;
---gray4: #575a64;
---gray6: #81839c;
---light8: #b4b8cc;
---Light9: #cbcfe6;
---bg: #f5f6fa;
---white: #fff;
---whiteText: #fff;
+  --attention: #4473f6;
+  --attentionBg: #4473f6;
+  --attentionText: #4473f6;
+  --error: #e53750;
+  --wait: #f6b400;
+  --waitO: rgba(245, 179, 2, 0.15);
+  --purple: #a38ce8;
+  --green: #29cc97;
+  --black: #282b3d;
+  --gray4: #575a64;
+  --gray6: #81839c;
+  --light8: #b4b8cc;
+  --Light9: #cbcfe6;
+  --bg: #f5f6fa;
+  --white: #fff;
+  --whiteText: #fff;
 }
-.dark__theme{
+.dark__theme {
   --attention: #707bf1;
   --attentionBg: #707bf1;
   --attentionText: #f7f5ee;
