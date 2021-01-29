@@ -12,7 +12,7 @@ const routes = [
       auth: true,
       title: "Сводная информация",
     },
-    component: () => import("../views/pages/Home.vue"),
+    component: () => import("../views/pages/home/Home.vue"),
   },
   {
     path: "/login",
@@ -75,10 +75,10 @@ const routes = [
       breadcrumb: {
         parent: {
           title: "Команда",
-          path: "/users"
+          path: "/users",
         },
-        child: "Редактирование пользователя"
-      }
+        child: "Редактирование пользователя",
+      },
     },
     component: () => import("../views/pages/users/UserEdit"),
   },
@@ -104,10 +104,10 @@ const routes = [
       breadcrumb: {
         parent: {
           title: "Проекты",
-          path: "/projects"
+          path: "/projects",
         },
-        child: "Создание проекта"
-      }
+        child: "Создание проекта",
+      },
     },
     component: () => import("../views/pages/projects/AddProject.vue"),
   },
@@ -121,57 +121,67 @@ const routes = [
       breadcrumb: {
         parent: {
           title: "Проекты",
-          path: "/projects"
+          path: "/projects",
         },
-        child: "Редактирование проекта"
-      }
+        child: "Редактирование проекта",
+      },
     },
     component: () => import("../views/pages/projects/PutProject.vue"),
   },
   {
     path: "/tasks",
     name: "Tasks",
-    meta: { layout: "main", auth: true, title: "Задачи"
-    },
+    meta: { layout: "main", auth: true, title: "Задачи" },
     component: () => import("../views/pages/task/Tasks.vue"),
   },
   {
     path: "/add-task",
     name: "Add Tasks",
-    meta: { layout: "main", auth: true, title: "Создание задачи",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Создание задачи",
       breadcrumb: {
         parent: {
           title: "Задачи",
-          path: "/tasks"
+          path: "/tasks",
         },
-        child: "Создание задачи"
-      } },
+        child: "Создание задачи",
+      },
+    },
     component: () => import("../views/pages/task/AddTask"),
   },
   {
     path: "/edit-task/:id/:projects_id",
     name: "Edit Tasks",
-    meta: { layout: "main", auth: true, title: "Редактирование задачи",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Редактирование задачи",
       breadcrumb: {
         parent: {
           title: "Задачи",
-          path: "/tasks"
+          path: "/tasks",
         },
-        child: "Редактирование задачи"
-      } },
+        child: "Редактирование задачи",
+      },
+    },
     component: () => import("../views/pages/task/EditTask"),
   },
   {
     path: "/admin-chat/:id",
     name: "Chat Tasks",
-    meta: { layout: "main", auth: true, title: "Работа с задачей",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Работа с задачей",
       breadcrumb: {
         parent: {
           title: "Задачи",
-          path: "/tasks"
+          path: "/tasks",
         },
-      child: "Работа с задачей"
-      }
+        child: "Работа с задачей",
+      },
     },
     component: () => import("../views/pages/task/AdminChat"),
   },
@@ -185,42 +195,51 @@ const routes = [
   {
     path: "/server/:id",
     name: "Server",
-    meta: { layout: "main", auth: true, title: "Сервера и адреса",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Сервера и адреса",
       breadcrumb: {
         parent: {
           title: "Проекты",
-          path: "/projects"
+          path: "/projects",
         },
-        child: "Сервера и адреса"
-      }
+        child: "Сервера и адреса",
+      },
     },
     component: () => import("../views/pages/server/AllServer"),
   },
   {
     path: "/add-server/:id",
     name: "Add Server",
-    meta: { layout: "main", auth: true, title: "Создание сервера",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Создание сервера",
       breadcrumb: {
         parent: {
           title: "Проекты",
-          path: "/projects"
+          path: "/projects",
         },
-        child: "Создание сервера"
-      }
+        child: "Создание сервера",
+      },
     },
     component: () => import("../views/pages/server/AddServer"),
   },
   {
     path: "/edit-server/:server_id/:id",
     name: "Edit Server",
-    meta: { layout: "main", auth: true, title: "Редактирование сервера",
+    meta: {
+      layout: "main",
+      auth: true,
+      title: "Редактирование сервера",
       breadcrumb: {
         parent: {
           title: "Проекты",
-          path: "/projects"
+          path: "/projects",
         },
-        child: "Редактирование сервера"
-      }
+        child: "Редактирование сервера",
+      },
     },
     component: () => import("../views/pages/server/EditServer"),
   },

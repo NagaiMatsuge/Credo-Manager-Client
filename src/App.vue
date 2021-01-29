@@ -1,8 +1,17 @@
 <template>
-                 <!-- dark__theme  -->
-  <div id="app" ref="app">
-    <vue-topprogress color="#4473F6" ref="topProgress"></vue-topprogress>
-    <Alert :error="error" :notification="notification" />
+  <!-- dark__theme  -->
+  <div
+    id="app"
+    ref="app"
+  >
+    <vue-topprogress
+      color="#4473F6"
+      ref="topProgress"
+    ></vue-topprogress>
+    <Alert
+      :error="error"
+      :notification="notification"
+    />
     <component :is="layout">
       <router-view />
     </component>
@@ -12,24 +21,27 @@
 <script>
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";
-import messages from '@/utils/messages'
-import Alert from '@/components/Alert'
+import messages from "@/utils/messages";
+import Alert from "@/components/Alert";
 export default {
   computed: {
     layout() {
       return (this.$route.meta.layout || "auth") + "-layout";
     },
-    progress(){
-      return this.$store.getters.getProgress
+    progress() {
+      return this.$store.getters.getProgress;
     },
-    error(){
-      return (messages[this.$store.getters.error])
+    error() {
+      return messages[this.$store.getters.error];
     },
-    notification(){
-      return (messages[this.$store.getters.notification] || messages[this.$route.query.message])
+    notification() {
+      return (
+        messages[this.$store.getters.notification] ||
+        messages[this.$route.query.message]
+      );
     },
     user() {
-      if (this.$store.getters.getUserCredentials){
+      if (this.$store.getters.getUserCredentials) {
         return this.$store.getters.getUserCredentials;
       }
     },
@@ -38,32 +50,30 @@ export default {
     progress: {
       handler(newValue) {
         if (newValue === "start") {
-          this.$refs.topProgress.start()
+          this.$refs.topProgress.start();
         } else {
-          this.$refs.topProgress.done()
+          this.$refs.topProgress.done();
         }
       },
-      deep: true
+      deep: true,
     },
   },
   components: {
     AuthLayout,
     MainLayout,
-    Alert
-
+    Alert,
   },
 };
 </script>
 <style lang="scss">
-//@import url(//db.onlinewebfonts.com/c/623c7118249e082fe87a78e08506cb4b?family=Segoe+UI);
+@import url(//db.onlinewebfonts.com/c/623c7118249e082fe87a78e08506cb4b?family=Segoe+UI);
 @import "@/assets/scss/base.scss";
-input{
+input {
   padding-left: 15px !important;
   background: var(--white);
   color: var(--black);
 }
-.placeholder{
+.placeholder {
   display: none !important;
 }
-
 </style>
