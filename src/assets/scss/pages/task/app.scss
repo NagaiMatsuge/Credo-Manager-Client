@@ -207,6 +207,9 @@
       margin-top: 20px;
 
     }
+    p{
+      color: var(--black);
+    }
   }
 
   &__body-pause {
@@ -315,8 +318,8 @@
     margin-top: auto;
     button{
       padding: 13px 20px;
-      border: 1px solid var(--attention);
-      background: var(--attention);
+      border: 1px solid var(--attentionBg);
+      background: var(--attentionBg);
       color: var(--whiteText);
       font-size: 14px;
       font-style: normal;

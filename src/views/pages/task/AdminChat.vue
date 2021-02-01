@@ -39,7 +39,9 @@
             </div>
           </div>
           <div class="task__body-worked" v-else>
-            Нет активных задач
+            <p>
+              Нет активных задач
+            </p>
           </div>
           <div class="task__body-not-worked" @click="task.active = !task.active">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
