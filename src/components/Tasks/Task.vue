@@ -18,7 +18,7 @@
             <div class="task__body-time" >
               <span>{{ timeConvert(tasks.data.tasks.active[0].time) }}</span>
               <div>
-                <button @click.prevent="getChat(tasks.data.tasks.active[0].id)">
+                <button @click.prevent="getChat(tasks.data.tasks.active[0])">
                   <div class="count__message" v-if="tasks.data.tasks.active[0].unread_count">{{ tasks.data.tasks.active[0].unread_count }}</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
@@ -53,7 +53,7 @@
               <span>{{timeConvert(inactive.time)}}</span>
               <div>
 
-                <button @click.prevent="getChat(inactive.id)">
+                <button @click.prevent="getChat(inactive)">
                   <div class="count__message" v-if="inactive.unread_count">{{ inactive.unread_count }}</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
@@ -102,10 +102,10 @@ export default {
       }
       return rhours + ":" + rminutes
     },
-    async getChat(id){
-      this.id_chat = id
-      await this.$store.dispatch('userHasReadMessages', id)
-      await this.$store.dispatch('allMessages', id)
+    async getChat(task){
+      this.id_chat = task
+      await this.$store.dispatch('userHasReadMessages', task.id)
+      await this.$store.dispatch('allMessages', task.id)
     }
   },
   computed:{

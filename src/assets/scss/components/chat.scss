@@ -2,10 +2,20 @@
 
 .chat {
   width: 75%;
-
+  &__head{
+    background: var(--white);
+    padding: 20px;
+  }
+  &__head-title{
+    font-size: 14px;
+    color: var(--black);
+  }
+  &__head-subtitle{
+    font-size: 11px;
+    color: var(--gray6);
+  }
   &__body {
     background: var(--white);
-    padding-top: 40px;
     border: 1px solid var(--bg);
     box-sizing: border-box;
     box-shadow: $bs;

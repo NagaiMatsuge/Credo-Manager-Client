@@ -1,7 +1,12 @@
 <template>
   <div class="chat">
+    <div class="chat__head">
+      <div class="chat__head-title">{{id.title}}</div>
+      <div class="chat__head-subtitle">{{id.project.title}}</div>
+    </div>
     <div class="chat__body">
       <div class="chat__message" ref="block" id="block" @scroll="scroll">
+
         <div class="chat__message-list" v-for="(item, idx) in chat.data" :key="idx"
              :class="{you: $store.getters.getUserCredentials.id === item.user_id}">
           <div class="avatar" v-if="item.name">
@@ -218,7 +223,7 @@ export default {
   },
   props: {
     chat: {},
-    id: Number
+    id: {}
   },
   components: {VueEditor}
 }
