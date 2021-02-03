@@ -26,7 +26,7 @@ export default {
   methods: {
     time() {
       let time = new Date();
-      this.timeV = time.getHours() + ":" + time.getMinutes();
+      this.timeV = time.getHours() + ":" + (time.getMinutes().toString().length === 1  ? '0' + time.getMinutes() : time.getMinutes());
     },
     date() {
       let arrayOfWeekdays = [
@@ -39,18 +39,18 @@ export default {
         "Суббота",
       ];
       let monthes = [
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь",
+        "Января",
+        "Февраля",
+        "Марта",
+        "Апреля",
+        "Мая",
+        "Июня",
+        "Июля",
+        "Августа",
+        "Сентября",
+        "Октября",
+        "Ноября",
+        "Декабря",
       ];
 
       let dateObj = new Date();

@@ -103,7 +103,7 @@
       align-items: center;
       border-right: solid 2px var(--light8);
 
-      div {
+      >div {
         padding-right: 31px;
         cursor: pointer;
       }
@@ -169,6 +169,124 @@
           font-size: 11px;
           color: var(--gray6);
         }
+      }
+    }
+  }
+  .notification {
+    position: relative;
+    z-index: 3;
+    &._active{
+      &::before{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 120%;
+      right: 33%;
+      border: 10px solid rgb(255, 255, 255);
+      transform: rotate(-45deg) translateY(50%);
+      z-index: -1;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &__dorpdown {
+      max-height: 265px;
+      overflow-x: auto;
+      width: 465px;
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 20px);
+      transform: translateX(-50%);
+      background: rgb(255, 255, 255);
+      border-radius: 10px;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        border-radius: 5px;
+        border: 1px solid #CBCFE6;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #B4B8CC;
+        border-radius: 5px;
+        border: 1px solid #CBCFE6;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        border-radius: 5px;
+        border: 1px solid #CBCFE6;
+      }
+    }
+
+    &__dorpdown-card {
+      display: flex;
+      padding: 14px;
+      width: 100%;
+    }
+
+    &__dorpdown-img {
+      margin-right: 12px;
+      width: 11%;
+      .no_img{
+        height: 47px;
+        width: 47px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--whiteText);
+        font-size: 22px;
+      }
+    }
+
+    &__dorpdown-name {
+      width: 70%;
+      margin-right: auto;
+      p {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 130%;
+        color: #4473f6;
+        margin-right: 7px;
+      }
+      span {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 140%;
+        color: #81839c;
+      }
+      a {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 140%;
+        color: #b4b8cc;
+        display: inline-block;
+        margin: 0;
+        word-break: break-all;
+      }
+    }
+
+    &__dorpdown-date {
+      width: 19%;
+      span {
+        display: block;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 140%;
+        text-align: right;
+        color: #b4b8cc;
       }
     }
   }

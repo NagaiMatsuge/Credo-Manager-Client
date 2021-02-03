@@ -142,7 +142,7 @@ export default {
         user_id: this.$store.getters.getUserCredentials.id,
         text: this.text,
         files: this.files,
-        task_id: this.id
+        task_id: this.id.id
       }
 
       try {

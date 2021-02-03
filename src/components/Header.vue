@@ -22,19 +22,41 @@
     </div>
     <div class="user_info">
       <div class="controls">
-        <div class="notifications" >
+        <div class="notification">
           <svg
             width="20"
             height="20"
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            :class="{_active: notification}" @click.prevent="notification = !notification"
           >
             <path
               d="M15.9375 15H15.4688V8.35938C15.4688 5.60352 13.4316 3.32422 10.7812 2.94531V2.1875C10.7812 1.75586 10.4316 1.40625 10 1.40625C9.56836 1.40625 9.21875 1.75586 9.21875 2.1875V2.94531C6.56836 3.32422 4.53125 5.60352 4.53125 8.35938V15H4.0625C3.7168 15 3.4375 15.2793 3.4375 15.625V16.25C3.4375 16.3359 3.50781 16.4062 3.59375 16.4062H7.8125C7.8125 17.6133 8.79297 18.5938 10 18.5938C11.207 18.5938 12.1875 17.6133 12.1875 16.4062H16.4062C16.4922 16.4062 16.5625 16.3359 16.5625 16.25V15.625C16.5625 15.2793 16.2832 15 15.9375 15ZM10 17.3438C9.48242 17.3438 9.0625 16.9238 9.0625 16.4062H10.9375C10.9375 16.9238 10.5176 17.3438 10 17.3438Z"
               fill="#B4B8CC"
             />
           </svg>
+          <div v-if="notification" class="notification__dorpdown">
+            <div class="notification__dorpdown-card" v-if="user.notifications.length" v-for="(notif, idx) in user.notifications">
+              <div class="notification__dorpdown-img" >
+                <img v-if="notif.user_photo" :src="domain + notif.user_photo" alt />
+                <div v-else class="no_img" :style="`background: ${notif.user_color};`">
+                  {{ notif.user_name.charAt(0).toUpperCase() }}
+                </div>
+              </div>
+              <div class="notification__dorpdown-name">
+                <p>
+                  {{ notif.user_name }}({{notif.role}})
+                  <span>уведомляет вас</span>
+                </p>
+                <a href="#!">{{ notif.text }}</a>
+              </div>
+              <div class="notification__dorpdown-date">
+                <span>{{notif.publish_date}}</span>
+              </div>
+            </div>
+
+          </div>
         </div>
         <div class="theme" @click="themeEvent">
           <svg
@@ -104,6 +126,7 @@ export default {
       dropdown: false,
       domain: process.env.VUE_APP_DOMAIN,
       theme: false,
+      notification: false
     };
   },
   props: {

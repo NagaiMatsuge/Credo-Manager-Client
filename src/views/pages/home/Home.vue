@@ -2,16 +2,17 @@
   <div class="home">
     <div class="home__app">
       <Time />
-      <Notifications />
-      <Notes />
+      <Notifications v-if="note && note.notifications" :notifications="note.notifications"/>
+      <Notes v-if="note && note.notes" :notes="note.notes"/>
     </div>
     <div class="home__users">
       <Users
       :mid="mid"
       />
     </div>
+    {{right}}
     <div class="home__projects">
-      <Projects />
+      <Projects :right="right"/>
     </div>
   </div>
 </template>
@@ -28,10 +29,18 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('getMidUser')
+    await this.$store.dispatch('getRightUser')
+    await this.$store.dispatch('getNotesUser')
   },
   computed:{
     mid(){
       return this.$store.getters.getMid
+    },
+    right(){
+      return this.$store.getters.getRight
+    },
+    note(){
+      return this.$store.getters.getNote
     }
   },
   components: {
