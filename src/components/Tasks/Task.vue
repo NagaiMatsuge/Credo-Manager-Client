@@ -1,16 +1,11 @@
 <template>
   <div class="task__card-container" v-if="tasks && tasks.data">
     <div class="task__card" >
+
       <div class="task__card-body">
         <div class="task__body">
           <div class="task__body-title" style="margin-top: 15px;" v-if="tasks.data.tasks">Сейчас в работе</div>
           <div class="task__body-worked" v-if="tasks.data.tasks.active.length">
-            <div class="task__body-pause">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66666 2.22217C7.89396 2.22217 8.88889 3.21709 8.88889 4.44439L8.88888 15.5555C8.88888 16.7828 7.89396 17.7777 6.66666 17.7777C5.43936 17.7777 4.44444 16.7828 4.44444 15.5555L4.44444 4.44439C4.44444 3.21709 5.43936 2.22217 6.66666 2.22217Z" fill="#B4B8CC"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.3333 2.22217C14.5606 2.22217 15.5556 3.21709 15.5556 4.44439L15.5556 15.5555C15.5556 16.7828 14.5606 17.7777 13.3333 17.7777C12.106 17.7777 11.1111 16.7828 11.1111 15.5555L11.1111 4.44439C11.1111 3.21709 12.106 2.22217 13.3333 2.22217Z" fill="#B4B8CC"/>
-              </svg>
-            </div>
             <div class="task__body-work-name">
               <p>{{ tasks.data.tasks.active[0].title }}</p>
               <span>{{ tasks.data.tasks.active[0].project.title }}</span>
@@ -22,6 +17,11 @@
                   <div class="count__message" v-if="tasks.data.tasks.active[0].unread_count">{{ tasks.data.tasks.active[0].unread_count }}</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
+                  </svg>
+                </button>
+                <button class="ok" @click.prevent="toCheck(tasks.data.tasks.active[0])">
+                  <svg height="417pt" viewBox="0 -46 417.81333 417" width="417pt" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#4473f6" d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/>
                   </svg>
                 </button>
               </div>
@@ -40,11 +40,7 @@
             </svg>
           </div>
           <div class="task__body-worked pause" v-if="tasks.data.active && tasks.data.tasks" :class="{active: tasks.data.active}" v-for="(inactive, index) in tasks.data.tasks.inactive" :key="index">
-            <div class="task__body-pause">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19.55 10.2598C19.75 10.1443 19.75 9.85566 19.55 9.74019L5.45 1.59955C5.25 1.48408 5 1.62842 5 1.85936L5 18.1406C5 18.3716 5.25 18.5159 5.45 18.4004L19.55 10.2598Z" fill="#39A571"/>
-              </svg>
-            </div>
+
             <div class="task__body-work-name">
               <p>{{ inactive.title }}</p>
               <span>{{ inactive.project.title }}</span>
@@ -59,6 +55,7 @@
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
                   </svg>
                 </button>
+
               </div>
             </div>
           </div>
@@ -106,6 +103,9 @@ export default {
       this.id_chat = task
       await this.$store.dispatch('userHasReadMessages', task.id)
       await this.$store.dispatch('allMessages', task.id)
+    },
+    async toCheck(e){
+      await this.$store.dispatch('toCheck', e.id)
     }
   },
   computed:{

@@ -506,4 +506,127 @@
       }
     }
   }
+  .message{
+    &__title{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+      color: var(--attention);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 18px;
+    }
+    &__body{
+      height: 75vh;
+      overflow: auto;
+      padding-right: 10px;
+    }
+    &__card{
+      width: 100%;
+      background: var(--white);
+      margin-bottom: 15px;
+      box-shadow: 0 1px 2px rgba(9, 45, 147, 0.1);
+      border-radius: 3px;
+      display: flex;
+      padding: 15px 20px;
+    }
+    &__img{
+      width: 70px;
+      height: 70px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-right: 10px;
+      flex-shrink: 0;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+      .no_img{
+        width: 100%;
+        height: 100%;
+        font-size: 36px;
+        color: var(--whiteText);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &__content{
+      width: 100%;
+    }
+    &__name-data{
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      p{
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px;
+        color: var(--black);
+      }
+      span{
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        color: var(--gray6);
+      }
+    }
+    &__task{
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--light8);
+    }
+    &__text{
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--black);
+      word-break: break-all;
+
+      pre{
+        white-space: pre-wrap;
+      }
+    }
+    &__file{
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--bg);
+      display: flex;
+      flex-wrap: wrap;
+
+      a{
+        color: var(--attention);
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        span{
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          margin-right: 7px;
+        }
+        svg{
+          width: 15px;
+          height: 15px;
+        }
+        small{
+          font-size: 11px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 15px;
+        }
+      }
+    }
+  }
 }

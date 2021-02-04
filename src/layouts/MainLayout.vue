@@ -104,6 +104,37 @@ export default {
         }
 
       })
+      Echo.channel(`notification-to-${this.user.id}`).listen("NotificationSent", (e)=>{
+        let notifications = {
+          id: e.notif_id,
+          publish_date: e.date,
+          role: e.from_user.role,
+          text: e.message,
+          user_color: e.from_user.color,
+          user_id: e.from_user.id,
+          user_name: e.from_user.name,
+          user_photo: e.from_user.photo,
+        }
+        if (this.user.id !== e.from_user.id){
+          this.user.notifications.unshift(notifications)
+        }
+      })
+      Echo.channel(`notification-to-${this.user.id}`).listen("TaskChange", (e)=>{
+        let notifications = {
+          id: e.notif_id,
+          publish_date: e.date,
+          role: e.from_user.role,
+          text: e.message,
+          user_color: e.from_user.color,
+          user_id: e.from_user.id,
+          user_name: e.from_user.name,
+          user_photo: e.from_user.photo,
+        }
+        if (this.user.id !== e.from_user.id){
+          this.user.notifications.unshift(notifications)
+        }
+
+      })
     }
   },
   computed: {

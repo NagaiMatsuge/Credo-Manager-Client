@@ -20,26 +20,7 @@
 
 .light__theme {
   //animation: clip2 2s ease;
-  --attention: #4473f6;
-  --attentionBg: #4473f6;
-  --attentionText: #f7f5ee;
-  --error: #e53750;
-  --errorO: rgba(229, 55, 80, 0.5);
-  --wait: #f5c544;
-  --waitO: rgba(245, 179, 2, 0.15);
-  --purple: #a38ce8;
-  --green: #29cc97;
-  --black: #f7f5ee;
-  --gray4: #575a64;
-  --gray6: #81839c;
-  --light8: #b4b8cc;
-  --Light9: #cbcfe6;
-  --bg: #0e0d1a;
-  --white: #161628;
-  --whiteText: #fff;
-}
-.dark__theme {
-  //animation: clip 2s ease;
+
   --attention: #4473f6;
   --attentionBg: #4473f6;
   --attentionText: #4473f6;
@@ -56,6 +37,26 @@
   --Light9: #cbcfe6;
   --bg: #f5f6fa;
   --white: #fff;
+  --whiteText: #fff;
+}
+.dark__theme {
+  //animation: clip 2s ease;
+  --attention: #4473f6;
+  --attentionBg: #4473f6;
+  --attentionText: #f7f5ee;
+  --error: #e53750;
+  --errorO: rgba(229, 55, 80, 0.5);
+  --wait: #f5c544;
+  --waitO: rgba(245, 179, 2, 0.15);
+  --purple: #a38ce8;
+  --green: #29cc97;
+  --black: #f7f5ee;
+  --gray4: #575a64;
+  --gray6: #81839c;
+  --light8: #b4b8cc;
+  --Light9: #cbcfe6;
+  --bg: #0e0d1a;
+  --white: #161628;
   --whiteText: #fff;
 }
 

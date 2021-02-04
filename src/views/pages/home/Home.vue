@@ -10,9 +10,8 @@
       :mid="mid"
       />
     </div>
-    {{right}}
     <div class="home__projects">
-      <Projects :right="right"/>
+      <Projects v-if="right" :right="right"/>
     </div>
   </div>
 </template>

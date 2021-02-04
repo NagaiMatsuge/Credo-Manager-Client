@@ -89,7 +89,10 @@
     right: 17px;
     display: flex;
     width: 50px;
-    justify-content: space-between;
+    justify-content: flex-end;
     cursor: pointer;
+    .notes__input-decline{
+      margin-right: 10px;
+    }
   }
 }

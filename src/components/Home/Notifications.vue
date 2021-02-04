@@ -255,12 +255,17 @@ export default {
       }
     },
     newNotifications(){
-      let today = new Date().toISOString();
+      let today = new Date()
+      let year = today.getFullYear(),
+          month = ((today.getMonth() + 1).toString().length === 1 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1)),
+          day = (today.getDate().toString().length === 1 ? '0' + today.getDate() : today.getDate()),
+          hours = (today.getHours().toString().length === 1 ? '0' + today.getHours() : today.getHours()),
+          minutes = (today.getMinutes().toString().length === 1 ? '0' + today.getMinutes() : today.getMinutes()),
+          seconds = (today.getSeconds().toString().length === 1 ? '0' + today.getSeconds() : today.getSeconds())
       let obj = {
         text: '',
         created_at: new Date(),
-        publish_date: today.slice(0, 10) + ' ' + today.slice(11, 19)
-
+        publish_date: year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
       }
 
       this.notifications.data.unshift(obj)

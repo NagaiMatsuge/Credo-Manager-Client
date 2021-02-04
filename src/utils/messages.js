@@ -10,6 +10,9 @@ export default {
     'auth/email-already-in-use': 'Пользователь с таким Email уже зарегистрирован',
     'auth/user-not-found': 'Пользователь с таким Email не зарегистрирован',
     'auth/wrong-password': 'Введите правельный пороль',
+    'createNotes': 'Заметка успешно создана',
+    'updateNotes': 'Заметка успешно редактирована',
+    'deleteNotes': 'Заметка успешно удалена',
 
     'email-verify': 'Емейл активации аккаунта был отправлен на почту email_of_the_user@gmail.com',
     'auth/email-not-verified': 'Ваш Email не активирован',

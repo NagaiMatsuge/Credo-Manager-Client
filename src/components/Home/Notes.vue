@@ -247,6 +247,8 @@ export default {
         if (this.notes.data[this.id].id){
           try {
             await this.$store.dispatch('deleteNotes', this.notes.data[this.id].id)
+            await this.$store.commit('setNotification', 'deleteNotes')
+
           } catch (e) {}
         }
         this.notes.total--
@@ -271,9 +273,13 @@ export default {
     async saveNotes(item){
       if (item.id){
         await this.$store.dispatch('updateNotes', item)
+        await this.$store.commit('setNotification', 'updateNotes')
+        this.change = false
       }else{
         await this.$store.dispatch('createNotes', item)
         await this.$store.dispatch('getNotesUser')
+        await this.$store.commit('setNotification', 'createNotes')
+        this.change= false
       }
     }
   },

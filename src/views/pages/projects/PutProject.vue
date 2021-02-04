@@ -4,6 +4,8 @@
                     @changed="isChanged"/>
     <ProjectAddStage v-if="getInfoProject" :validator="$v.getInfoProject.steps" :getInfoProject="getInfoProject"/>
     <button class="projectAdd__btn-archive" @click.prevent="archivePush">Переместить проект в архив</button>
+    <button class="projectAdd__btn" @click.prevent="submitHandler">Сохранить</button>
+
     <PaymentsList v-if="getInfoProject && getPayments" :validator="$v.getInfoProject"
                   :getInfoProjectInPayments="getInfoProjectInPayments" :getPayments="getPayments"/>
     <div v-if="getPayments && getPayments.meta.last_page !== 1" class="pagination" >
@@ -15,7 +17,6 @@
       >
       </paginate>
     </div>
-    <button class="projectAdd__btn" @click.prevent="submitHandler">Сохранить</button>
   </div>
 </template>
 <script>
