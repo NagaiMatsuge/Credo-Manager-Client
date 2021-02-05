@@ -50,8 +50,8 @@
       <template v-if="idx === page">
         <div class="notif__controls">
           <div class="notif__controls-time">
-            <p>{{ (new Date(item.created_at)).getDate() }}
-              {{ monthes[(new Date(item.created_at)).getMonth()] }}</p>
+            <p>{{ (dataConvert()).getDate() }}
+              {{ monthes[(dataConvert()).getMonth()] }}</p>
             <svg
                 width="15"
                 height="16"
@@ -98,6 +98,8 @@
                   fill="#CBCFE6"
               />
             </svg>
+            <Datepicker  :language="lang" :disabled-dates="disabledDates" id="deadline" @input="dataConvert($event)"
+                         placeholder="" :format="format"/>
           </div>
           <div class="notif__controls-move">
             <div class="notif__controls-left" v-if="!(page === 0)" @click="page--">
@@ -209,6 +211,9 @@
 
 <script>
 import Modal from "@/components/Modal";
+import Datepicker from 'vuejs-datepicker';
+import lang from 'vuejs-datepicker/dist/locale/translations/ru';
+
 export default {
   data() {
     return {
@@ -216,6 +221,12 @@ export default {
       modal: false,
       page: 0,
       id: null,
+      format: 'yyyy-MM-dd',
+      lang,
+      publish_date: this.dataConvert(),
+      disabledDates: {
+        to: new Date(),
+      },
       monthes: [
         "Января",
         "Февраля",
@@ -234,6 +245,7 @@ export default {
   },
   components: {
     Modal,
+    Datepicker
   },
   methods: {
     async onModal(confirm) {
@@ -255,21 +267,31 @@ export default {
       }
     },
     newNotifications(){
-      let today = new Date()
-      let year = today.getFullYear(),
-          month = ((today.getMonth() + 1).toString().length === 1 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1)),
-          day = (today.getDate().toString().length === 1 ? '0' + today.getDate() : today.getDate()),
-          hours = (today.getHours().toString().length === 1 ? '0' + today.getHours() : today.getHours()),
-          minutes = (today.getMinutes().toString().length === 1 ? '0' + today.getMinutes() : today.getMinutes()),
-          seconds = (today.getSeconds().toString().length === 1 ? '0' + today.getSeconds() : today.getSeconds())
+      this.publish_date = this.dataConvert()
       let obj = {
         text: '',
-        created_at: new Date(),
-        publish_date: year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+        created_at: this.dataConvert(),
+        publish_date: this.dataConvert()
       }
 
       this.notifications.data.unshift(obj)
       this.notifications.total++
+
+    },
+    dataConvert(data){
+      if (data){
+        let today = new Date(data)
+        let year = today.getFullYear(),
+            month = ((today.getMonth() + 1).toString().length === 1 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1)),
+            day = (today.getDate().toString().length === 1 ? '0' + today.getDate() : today.getDate()),
+            hours = (today.getHours().toString().length === 1 ? '0' + today.getHours() : today.getHours()),
+            minutes = (today.getMinutes().toString().length === 1 ? '0' + today.getMinutes() : today.getMinutes()),
+            seconds = (today.getSeconds().toString().length === 1 ? '0' + today.getSeconds() : today.getSeconds())
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+      }else {
+        return  new Date();
+      }
+
 
     },
     async saveNotifications(item){
@@ -289,7 +311,7 @@ export default {
   },
   props:{
     notifications:{}
-  }
+  },
 };
 </script>
 

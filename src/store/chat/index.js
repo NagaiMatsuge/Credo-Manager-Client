@@ -65,7 +65,19 @@ export default {
             axios.defaults.headers.common[
                 "Authorization"
                 ] = `Bearer ${localStorage.token}`;
-            const messages = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/tasks/update/${id}`, {finished: true}) ).data;
+            const messages = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/tasks/finalize`, {task_id: id,finished: true}) ).data;
+            if (messages.success) {
+            } else {
+                commit("setError", messages.message);
+                commit("clearNotification");
+                throw messages.message
+            }
+        },
+        async toFinished({ commit }, obj) {
+            axios.defaults.headers.common[
+                "Authorization"
+                ] = `Bearer ${localStorage.token}`;
+            const messages = ( await axios.post(`${process.env.VUE_APP_SERVICE_URL}/tasks/finalize`, obj) ).data;
             if (messages.success) {
             } else {
                 commit("setError", messages.message);

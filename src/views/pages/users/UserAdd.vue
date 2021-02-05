@@ -3,7 +3,6 @@
     <div class="user__add-info">
       <div class="user__add-info-form">
         <h2>Данные сотрудника</h2>
-
         <form>
 
           <div class="user__add-group">
@@ -140,7 +139,7 @@
           </div>
           <div class="user__add-group">
             <Select
-                :options="roles"
+                :options="roles.roles"
                 :value="role"
                 :optionId="'id'"
                 :optionValue="'name'"
@@ -151,7 +150,6 @@
             <label
                 for="projects"
                 :class="{focus: !(role.name === ''), invalid: ($v.role.$dirty && $v.role.$model.name == '')}"
-
             >
               Выберите роль
             </label>
@@ -159,6 +157,22 @@
               class="error"
               v-if="$v.role.$dirty && $v.role.$model.name == ''"
             >Выберите роль</small>
+          </div>
+          <div class="user__add-group" v-if="role.id === 3 || role.id === 4 || role.id === 5">
+            <Select
+                :options="roles.managers"
+                :value="manager"
+                :optionId="'id'"
+                :optionValue="'name'"
+                id="manager"
+                @change="e => manager = e"
+            />
+            <label
+                for="manager"
+                :class="{focus: !(manager.name === '')}"
+            >
+              Выберите менеджера
+            </label>
           </div>
         </form>
       </div>
@@ -323,6 +337,10 @@ export default {
         id: 0,
         name: "",
       },
+      manager:{
+        id: 0,
+        name: "",
+      },
       color: ["#8F73FC", "#fcb573", "#fc73ad"],
       type: "password",
     };
@@ -359,6 +377,7 @@ export default {
         pause_start_time: this.pause_start_time,
         pause_end_time: this.pause_end_time,
         role: this.role.name,
+        manager_id: this.manager.id,
         working_days: this.working_days,
         color: this.color[this.randomInteger(0, 2)],
       };

@@ -73,12 +73,12 @@ export default {
         throw user.message
       }
     },
-    async fetchRoles({ commit }) {
+    async fetchRoles({ commit }, {id}) {
       axios.defaults.headers.common[
           "Authorization"
           ] = `Bearer ${localStorage.token}`;
       commit("setProgress", "start");
-      const roles = (await axios.get(`${process.env.VUE_APP_SERVICE_URL}/params/roles`))
+      const roles = (await axios.get(`${process.env.VUE_APP_SERVICE_URL}/params/roles/${id}`))
           .data;
       commit("removeProgress");
 

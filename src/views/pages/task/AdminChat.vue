@@ -3,6 +3,7 @@
     <div class="task__card" v-for="(task, index) in taskId()" :key="index" >
       <div class="task__card-body">
         <div class="task__card-head" @click="task.hide = !task.hide">
+
           <div class="task__card-img">
             <img v-if="task.user.photo !== null" :src="domain +task.user.photo" alt="">
             <div v-else class="no-img" :style="`background: ${task.user.color};`">{{task.user.name.charAt(0).toUpperCase() || '--'}}</div>
@@ -33,6 +34,11 @@
                   <div class="count__message" v-if="task.tasks.active[0].unread_count">{{ task.tasks.active[0].unread_count }}</div>
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
+                  </svg>
+                </button>
+                <button class="ok" v-if="task.tasks.active[0].finished" @click.prevent="toFinished(task.user.id, task.tasks.active[0].id)">
+                  <svg height="417pt" viewBox="0 -46 417.81333 417" width="417pt" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#4473f6" d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/>
                   </svg>
                 </button>
               </div>
@@ -135,6 +141,9 @@ export default {
         }
         return res
       }
+    },
+    async toFinished(user_id, task_id){
+      await this.$store.dispatch('toFinished', {user_id: user_id, task_id: task_id, approved: true})
     }
   },
   computed:{

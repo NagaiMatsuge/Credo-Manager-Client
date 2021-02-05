@@ -113,11 +113,7 @@ import Select from "@/components/Select";
 export default {
   data(){
     return{
-      format: 'yyyy-MM-dd',
-      lang,
-      disabledDates: {
-        to: new Date(),
-      },
+      Datepicker
 
     }
   },

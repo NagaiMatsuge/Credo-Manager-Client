@@ -22,7 +22,7 @@
     </div>
     <div class="user_info">
       <div class="controls">
-        <div class="notification">
+        <div class="notification" >
           <svg
             width="20"
             height="20"
@@ -36,7 +36,7 @@
               fill="#B4B8CC"
             />
           </svg>
-          <div v-if="notification" class="notification__dorpdown">
+          <div v-show="notification" class="notification__dorpdown" ref="notification">
             <div class="notification__dorpdown-card" v-if="user.notifications.length" v-for="(notif, idx) in user.notifications">
               <div class="notification__dorpdown-img" >
                 <img v-if="notif.user_photo" :src="domain + notif.user_photo" alt />
@@ -44,7 +44,7 @@
                   {{ notif.user_name.charAt(0).toUpperCase() }}
                 </div>
               </div>
-              <div class="notification__dorpdown-name">
+              <div class="notification__dorpdown-name" >
                 <p>
                   {{ notif.user_name }}({{notif.role}})
                   <span>уведомляет вас</span>
@@ -136,6 +136,15 @@ export default {
   },
   components: {
     DropDown,
+  },
+  mounted() {
+      document.addEventListener('click', (e)=>{
+          if (!e.target.closest('.notification')){
+            this.notification = false
+          }
+      })
+
+
   },
   methods: {
     async logout() {

@@ -8,7 +8,8 @@
           <div class="about__info-user-tel">Телефон</div>
         </div>
         <div class="about__container">
-          <div class="about__add">
+
+          <div class="about__add" v-if="userId.role === 'Admin'">
             <form>
               <div class="about__info-user-name">
               </div>

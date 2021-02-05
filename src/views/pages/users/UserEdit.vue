@@ -132,7 +132,7 @@
           <div class="user__add-group">
 
             <Select
-                :options="roles"
+                :options="roles.roles"
                 :value="role"
                 :optionId="'id'"
                 :optionValue="'name'"
@@ -143,7 +143,6 @@
             <label
                 for="projects"
                 :class="{focus: !(role.name === ''),invalid: ($v.role.$dirty && $v.role.$model.name == '')}"
-
             >
               Выберите роль
             </label>
@@ -151,6 +150,23 @@
               class="error"
               v-if="$v.role.$dirty && $v.role.$model.name == ''"
             >Выберите роль</small>
+          </div>
+          <div class="user__add-group" v-if="(role.id === 3 || role.id === 4 || role.id === 5) && manager.id">
+            <Select
+                :options="roles.managers"
+                :value="manager"
+                :optionId="'id'"
+                :optionValue="'name'"
+                id="manager"
+                @change="e => manager = e"
+            />
+            <label
+                for="manager"
+                :class="{focus: !(manager.name === '')}"
+                style="left: 25px;"
+            >
+              Выберите менеджера
+            </label>
           </div>
         </form>
       </div>
@@ -316,13 +332,17 @@ export default {
         id: 0,
         name: "",
       },
+      manager: {
+        id: null,
+        name: "",
+      },
       color: null,
       type: "password",
     };
   },
   async mounted() {
     const id = this.$route.params.id;
-    await this.$store.dispatch("fetchRoles");
+    await this.$store.dispatch("fetchRoles", {id});
     await this.$store.dispatch("fetchUser", { id });
   },
 
@@ -353,6 +373,7 @@ export default {
         pause_start_time: this.pause_start_time,
         pause_end_time: this.pause_end_time,
         role: this.role.name,
+        manager_id: this.manager.id,
         working_days: this.working_days,
       };
 
@@ -386,6 +407,11 @@ export default {
         this.working_days = user_info[0].working_days;
         this.role = {
           name: user_info[0].role,
+          id: user_info[0].role_id,
+        };
+        this.manager = {
+          name: user_info[0].manager_name || '',
+          id: user_info[0].manager_id || null,
         };
         this.color = user_info[0].color;
       }
