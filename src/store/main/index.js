@@ -25,6 +25,8 @@ export default {
                     }
                 }
                 state.not = not;
+            }else{
+                state.not = not;
             }
 
         },
