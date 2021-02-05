@@ -377,10 +377,13 @@ export default {
         pause_start_time: this.pause_start_time,
         pause_end_time: this.pause_end_time,
         role: this.role.name,
-        manager_id: this.manager.id,
         working_days: this.working_days,
         color: this.color[this.randomInteger(0, 2)],
       };
+      if(this.manager.id){
+        formData.manager_id = this.manager.id
+      }
+
       console.log(formData);
       try {
         await this.$store.dispatch("createUserCredentials", formData);
