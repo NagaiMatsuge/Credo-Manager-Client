@@ -8,12 +8,16 @@ export default {
                 ] = `Bearer ${localStorage.token}`;
             commit("setProgress", "start");
             const projects = ( await axios.get(url) ).data;
+            console.log(url)
             if (projects.success) {
                 if (name === 'tasks'){
                     commit("setTask", projects);
                 }
                 if (name === 'payments'){
                     commit("setPayments", projects);
+                }
+                if (name === 'user'){
+                    commit("setUsersCredentials", projects.data);
                 }
                 commit("removeProgress");
             } else {

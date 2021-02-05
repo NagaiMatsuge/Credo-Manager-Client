@@ -344,6 +344,7 @@
   }
   &__info-user-rol {
     width: 19.55%;
+    font-weight: bold;
   }
   &__info-user-email {
     width: 26.05%;
@@ -358,44 +359,28 @@
     background: var(--white);
     box-shadow: 0px 1px 2px rgba(9, 45, 147, 0.1);
     border-radius: 3px;
-    padding: 10px 0;
+    padding: 10px 50px;
     margin-bottom: 5px;
-    form {
-      width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .add__button{
+      margin-left: auto;
+    }
+    button {
+      padding: 10px 45px;
+      background: var(--attentionBg);
+      border-radius: 3px;
+      border: 0;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 140%;
       display: flex;
       align-items: center;
-      input {
-        background: var(--white);
-        border: 1px solid #cbcfe6;
-        border-radius: 5px;
-        height: 42px;
-        width: 80%;
-        padding-left: 15px;
-        outline: 0;
-        box-shadow: none;
-        &::placeholder {
-          font-style: normal;
-          font-weight: normal;
-          font-size: 14px;
-          line-height: 140%;
-          color: var(--light8);
-        }
-      }
-      button {
-        padding: 10px 45px;
-        background: var(--attentionBg);
-        border-radius: 3px;
-        border: 0;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 140%;
-        display: flex;
-        align-items: center;
-        color: var(--whiteText);
-        outline: 0;
-        cursor: pointer;
-      }
+      color: var(--whiteText);
+      outline: 0;
+      cursor: pointer;
     }
   }
   &__card {
@@ -411,20 +396,30 @@
       box-shadow: $bsactive;
     }
     .about{
-      &__info-user-name,
-      &__info-user-rol,
-      &__info-user-email,
-      &__info-user-tel{
-        align-items: center;
-        display: flex;
-        color: var(--black);
-      }
       &__info-user-name{
         align-items: center;
         display: flex;
+        font-weight: bold;
+        color: var(--black);
+
         img{
           margin-right: 10px;
         }
+      }
+      &__info-user-rol{
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+        color: var(--attention);
+      }
+      &__info-user-email{
+        align-items: center;
+        display: flex;
+      }
+      &__info-user-tel{
+        align-items: center;
+        display: flex;
+
       }
     }
 

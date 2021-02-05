@@ -5,22 +5,23 @@
         Проекты
       </div>
       <div class="home__projects-content">
-        <div class="home__projects-card" v-for="(item, idx) in right" :key="idx">
-          <div class="home__projects-card__head">
-            <div class="home__projects-card__img">
-              <img :src="domain + item.photo" v-if="item.photo" alt="">
-              <div class="no_img" v-else :style="`background: ${item.color};`">
-                {{ item.title.charAt(0).toUpperCase() }}
+        <template v-if="right.length" >
+          <div class="home__projects-card" v-for="(item, idx) in right" :key="idx">
+            <div class="home__projects-card__head">
+              <div class="home__projects-card__img">
+                <img :src="domain + item.photo" v-if="item.photo" alt="">
+                <div class="no_img" v-else :style="`background: ${item.color};`">
+                  {{ item.title.charAt(0).toUpperCase() }}
+                </div>
               </div>
-            </div>
-            <div class="home__projects-card__info">
-              <p>{{ item.title }}</p>
-              <span>дата начала: {{ item.created_at }}</span>
-            </div>
-            <div class="home__projects-card__deadline" :class="{deadline: item.deadline.values.days < 7}">
-              <p>дедлайн через</p>
-              <span
-                  v-if="item.deadline && !(dataTime(item.deadline.values.y, 'y', item.deadline.value.date) === 'null')">
+              <div class="home__projects-card__info">
+                <p>{{ item.title }}</p>
+                <span>дата начала: {{ item.created_at }}</span>
+              </div>
+              <div class="home__projects-card__deadline" :class="{deadline: item.deadline.values.days < 7}">
+                <p>дедлайн через</p>
+                <span
+                    v-if="item.deadline && !(dataTime(item.deadline.values.y, 'y', item.deadline.value.date) === 'null')">
                   <template
                       v-if="item.deadline.values.y">{{ dataTime(item.deadline.values.y, 'y', item.deadline.value.date) }}</template>
                   <template
@@ -30,23 +31,34 @@
                   <template
                       v-if="item.deadline.values.h">{{ dataTime(item.deadline.values.h, 'h', item.deadline.value.date) }}</template>
                 </span>
-              <span v-else>
+                <span v-else>
                   Истёк
                 </span>
-            </div>
-          </div>
-          <div class="home__projects-card__dev">
-            <p>Исполнители</p>
-            <div class="img" v-for="(dev, index) in item.participants" :key="index"
-                 @click="$router.push(`/user-edit/${dev.user_id}`)">
-              <img :src="domain + dev.photo" v-if="dev.photo" alt="">
-              <div class="no_img" v-else :style="`background: ${dev.color};`">{{ dev.name.charAt(0).toUpperCase() }}
               </div>
             </div>
+            <div class="home__projects-card__dev">
+              <p>Исполнители</p>
+              <div class="img" v-for="(dev, index) in item.participants" :key="index"
+                   @click="$router.push(`/user-edit/${dev.user_id}`)">
+                <img :src="domain + dev.photo" v-if="dev.photo" alt="">
+                <div class="no_img" v-else :style="`background: ${dev.color};`">{{ dev.name.charAt(0).toUpperCase() }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <div class="home__projects-card" v-else>
+          <div class="home__projects-card__head">
+            У вас нет проектов перейдите во вкладку "Проекты" и создайте новый проект
+          </div>
+          <div class="home__projects-card__head">
+            Или же ваш проект находится в архиве
           </div>
         </div>
       </div>
     </div>
+
     <div v-if="right && right.message" class="message">
       <div class="message__title">
         Новые сообщения

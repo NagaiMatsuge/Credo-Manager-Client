@@ -1,12 +1,12 @@
 <template>
   <div>
     <template v-if="mid && mid.tasks">
-      <div  class="task">
+      <div class="task">
         <div class="task__title">
           Мои задачи
         </div>
         <div class="task__body">
-          <div class="task__card" >
+          <div class="task__card">
             <div class="task__card-body">
               <div class="task__body">
                 <div class="task__body-title" style="margin-top: 15px;" v-if="mid.tasks">Сейчас в работе</div>
@@ -16,13 +16,17 @@
                     <p>{{ mid.tasks.active[0].title }}</p>
                     <span>{{ mid.tasks.active[0].project.title }}</span>
                   </div>
-                  <div class="task__body-time" >
+                  <div class="task__body-time">
                     <span>{{ timeConvert(mid.tasks.active[0].time) }}</span>
                     <div>
                       <button @click.prevent="getChat(mid.tasks.active[0])">
-                        <div class="count__message" v-if="mid.tasks.active[0].unread_count">{{ mid.tasks.active[0].unread_count }}</div>
+                        <div class="count__message" v-if="mid.tasks.active[0].unread_count">
+                          {{ mid.tasks.active[0].unread_count }}
+                        </div>
                         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
+                          <path
+                              d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z"
+                              fill="#CBCFE6"/>
                         </svg>
                       </button>
                     </div>
@@ -33,27 +37,33 @@
                 </div>
                 <div class="task__body-not-worked" @click="mid.active = !mid.active">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.33332 13.3332C8.79166 13.3332 9.16666 12.9582 9.16666 12.4998V7.49984C9.16666 7.0415 8.79166 6.6665 8.33332 6.6665C7.87499 6.6665 7.49999 7.0415 7.49999 7.49984V12.4998C7.49999 12.9582 7.87499 13.3332 8.33332 13.3332ZM9.99999 1.6665C5.39999 1.6665 1.66666 5.39984 1.66666 9.99984C1.66666 14.5998 5.39999 18.3332 9.99999 18.3332C14.6 18.3332 18.3333 14.5998 18.3333 9.99984C18.3333 5.39984 14.6 1.6665 9.99999 1.6665ZM9.99999 16.6665C6.32499 16.6665 3.33332 13.6748 3.33332 9.99984C3.33332 6.32484 6.32499 3.33317 9.99999 3.33317C13.675 3.33317 16.6667 6.32484 16.6667 9.99984C16.6667 13.6748 13.675 16.6665 9.99999 16.6665ZM11.6667 13.3332C12.125 13.3332 12.5 12.9582 12.5 12.4998V7.49984C12.5 7.0415 12.125 6.6665 11.6667 6.6665C11.2083 6.6665 10.8333 7.0415 10.8333 7.49984V12.4998C10.8333 12.9582 11.2083 13.3332 11.6667 13.3332Z" fill="#F5C544"/>
+                    <path
+                        d="M8.33332 13.3332C8.79166 13.3332 9.16666 12.9582 9.16666 12.4998V7.49984C9.16666 7.0415 8.79166 6.6665 8.33332 6.6665C7.87499 6.6665 7.49999 7.0415 7.49999 7.49984V12.4998C7.49999 12.9582 7.87499 13.3332 8.33332 13.3332ZM9.99999 1.6665C5.39999 1.6665 1.66666 5.39984 1.66666 9.99984C1.66666 14.5998 5.39999 18.3332 9.99999 18.3332C14.6 18.3332 18.3333 14.5998 18.3333 9.99984C18.3333 5.39984 14.6 1.6665 9.99999 1.6665ZM9.99999 16.6665C6.32499 16.6665 3.33332 13.6748 3.33332 9.99984C3.33332 6.32484 6.32499 3.33317 9.99999 3.33317C13.675 3.33317 16.6667 6.32484 16.6667 9.99984C16.6667 13.6748 13.675 16.6665 9.99999 16.6665ZM11.6667 13.3332C12.125 13.3332 12.5 12.9582 12.5 12.4998V7.49984C12.5 7.0415 12.125 6.6665 11.6667 6.6665C11.2083 6.6665 10.8333 7.0415 10.8333 7.49984V12.4998C10.8333 12.9582 11.2083 13.3332 11.6667 13.3332Z"
+                        fill="#F5C544"/>
                   </svg>
                   В ожидании
-                  <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg" :class="{active: mid.active}">
+                  <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg"
+                       :class="{active: mid.active}">
                     <path d="M4 4L7.4641 0.249999L0.535897 0.25L4 4Z" fill="#F5C544"/>
                   </svg>
                 </div>
-                <div class="task__body-worked pause" v-if="mid.active && mid.tasks" :class="{active: mid.active}" v-for="(inactive, index) in mid.tasks.inactive" :key="index">
+                <div class="task__body-worked pause" v-if="mid.active && mid.tasks" :class="{active: mid.active}"
+                     v-for="(inactive, index) in mid.tasks.inactive" :key="index">
 
                   <div class="task__body-work-name">
                     <p>{{ inactive.title }}</p>
                     <span>{{ inactive.project.title }}</span>
                   </div>
                   <div class="task__body-time">
-                    <span>{{timeConvert(inactive.time)}}</span>
+                    <span>{{ timeConvert(inactive.time) }}</span>
                     <div>
 
                       <button @click.prevent="getChat(inactive)">
                         <div class="count__message" v-if="inactive.unread_count">{{ inactive.unread_count }}</div>
                         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z" fill="#CBCFE6"/>
+                          <path
+                              d="M10.8333 1.0835H2.16668C1.56922 1.0835 1.08334 1.56775 1.08334 2.1625V8.67116C1.08334 9.26591 1.56922 9.75016 2.16668 9.75016H3.79168V11.9168L7.2318 9.75016H10.8333C11.4308 9.75016 11.9167 9.26591 11.9167 8.67116V2.1625C11.9158 1.87584 11.8013 1.60124 11.5982 1.39895C11.3951 1.19666 11.12 1.08321 10.8333 1.0835Z"
+                              fill="#CBCFE6"/>
                         </svg>
                       </button>
                     </div>
@@ -87,11 +97,14 @@
               <a href="#!" v-else-if="!item.task_count">{{ 'Нет задач' }}</a>
 
               <a href="#!" v-else-if="!item.project_title">{{ 'Нет активных задач' }}</a>
-              <div class="tuday__work-content-info" v-if="item.task_count && !item.project_title" style="color: #F5C544;">
+              <div class="tuday__work-content-info" v-if="item.task_count && !item.project_title"
+                   style="color: #F5C544;">
               <span>
                 <div class="img">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6.66665 10.6667C7.03331 10.6667 7.33331 10.3667 7.33331 10V6.00004C7.33331 5.63337 7.03331 5.33337 6.66665 5.33337C6.29998 5.33337 5.99998 5.63337 5.99998 6.00004V10C5.99998 10.3667 6.29998 10.6667 6.66665 10.6667ZM7.99998 1.33337C4.31998 1.33337 1.33331 4.32004 1.33331 8.00004C1.33331 11.68 4.31998 14.6667 7.99998 14.6667C11.68 14.6667 14.6666 11.68 14.6666 8.00004C14.6666 4.32004 11.68 1.33337 7.99998 1.33337ZM7.99998 13.3334C5.05998 13.3334 2.66665 10.94 2.66665 8.00004C2.66665 5.06004 5.05998 2.66671 7.99998 2.66671C10.94 2.66671 13.3333 5.06004 13.3333 8.00004C13.3333 10.94 10.94 13.3334 7.99998 13.3334ZM9.33331 10.6667C9.69998 10.6667 9.99998 10.3667 9.99998 10V6.00004C9.99998 5.63337 9.69998 5.33337 9.33331 5.33337C8.96665 5.33337 8.66665 5.63337 8.66665 6.00004V10C8.66665 10.3667 8.96665 10.6667 9.33331 10.6667Z" fill="#F5C544"/>
+                    <path
+                        d="M6.66665 10.6667C7.03331 10.6667 7.33331 10.3667 7.33331 10V6.00004C7.33331 5.63337 7.03331 5.33337 6.66665 5.33337C6.29998 5.33337 5.99998 5.63337 5.99998 6.00004V10C5.99998 10.3667 6.29998 10.6667 6.66665 10.6667ZM7.99998 1.33337C4.31998 1.33337 1.33331 4.32004 1.33331 8.00004C1.33331 11.68 4.31998 14.6667 7.99998 14.6667C11.68 14.6667 14.6666 11.68 14.6666 8.00004C14.6666 4.32004 11.68 1.33337 7.99998 1.33337ZM7.99998 13.3334C5.05998 13.3334 2.66665 10.94 2.66665 8.00004C2.66665 5.06004 5.05998 2.66671 7.99998 2.66671C10.94 2.66671 13.3333 5.06004 13.3333 8.00004C13.3333 10.94 10.94 13.3334 7.99998 13.3334ZM9.33331 10.6667C9.69998 10.6667 9.99998 10.3667 9.99998 10V6.00004C9.99998 5.63337 9.69998 5.33337 9.33331 5.33337C8.96665 5.33337 8.66665 5.63337 8.66665 6.00004V10C8.66665 10.3667 8.96665 10.6667 9.33331 10.6667Z"
+                        fill="#F5C544"/>
                   </svg>
                </div>
               </span>
@@ -126,8 +139,22 @@
                   parseInt((item.given_time - (parseInt(item.time_spent) + item.additional_time)) % 60) + ' минут'
                 }}
               </div>
-              <div v-if="item.task_type === 2" class="tuday__work-timer">{{item.deadline}}</div>
-              <div v-if="item.task_type === 3" class="tuday__work-timer">{{parseInt((item.time_spent + item.additional_time) / 60)+ ' часов ' + parseInt((item.time_spent + item.additional_time) % 60) + ' минут'}}</div>
+              <div v-if="item.task_type === 2" class="tuday__work-timer">{{ item.deadline }}</div>
+              <div v-if="item.task_type === 3" class="tuday__work-timer">
+                {{ parseInt((item.time_spent + item.additional_time) / 60) + ' часов ' + parseInt((item.time_spent + item.additional_time) % 60) + ' минут' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="tuday__work">
+        <div class="tuday__work-title">
+          Сегодня работают
+        </div>
+        <div class="tuday__work-body">
+          <div class="tuday__work-card">
+            <div class="tuday__work-content" style="width: 100%; padding-right: 20px;">
+              Увас нет команды перейдите во вкладку "Команда" и создайте нового работника
             </div>
           </div>
         </div>
@@ -139,10 +166,10 @@
 
 <script>
 export default {
-  props:{
-    mid:{}
+  props: {
+    mid: {}
   },
-  methods:{
+  methods: {
     timeConvert(n) {
       let num = n;
       let hours = (num / 60);
@@ -151,10 +178,10 @@ export default {
       let rminutes = Math.round(minutes);
       let toStringHours = (rhours + "").length
       let toStringMinutes = (rminutes + "").length
-      if (toStringHours === 1){
+      if (toStringHours === 1) {
         rhours = '0' + rhours
       }
-      if (toStringMinutes === 1){
+      if (toStringMinutes === 1) {
         rminutes = '0' + rminutes
       }
       return rhours + ":" + rminutes

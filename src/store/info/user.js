@@ -37,6 +37,11 @@ export default {
       if (user.success) {
         commit("setUserCredentials", user.data);
       } else {
+        console.log(user.message)
+        if (user.message === 'Unauthenticated.'){
+          localStorage.clear()
+          document.location.reload();
+        }
         commit("setError", user.message);
         throw user.message
       }

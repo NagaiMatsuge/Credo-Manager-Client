@@ -9,21 +9,23 @@
         </div>
         <div class="about__container">
 
-          <div class="about__add" v-if="userId.role === 'Admin'">
-            <form>
-              <div class="about__info-user-name">
-              </div>
-              <div class="about__info-user-rol">
-              </div>
-              <div class="about__info-user-email">
-              </div>
-              <div class="about__info-user-tel">
-                <button @click.prevent="$router.push('/user-add')" type="submit">Добавить сотрудника</button>
-              </div>
-            </form>
-          </div>
+
         </div>
         <UserList v-if="users && userId" :users="users" :userId="userId" />
+        <div class="about__add" v-if="userId.role === 'Admin'">
+            <div class="about__add-pagination pagination" v-if="users && users.last_page > 1">
+              <paginate
+                  :page-count="users.last_page"
+                  :prev-text="''"
+                  :next-text="''"
+                  :clickHandler="paginationLink"
+              >
+              </paginate>
+            </div>
+            <div class="add__button">
+              <button @click.prevent="$router.push('/user-add')" type="submit">Добавить сотрудника</button>
+            </div>
+        </div>
       </div>
   </div>
 </template>
@@ -35,6 +37,12 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('fetchUsersCredentials')
+  },
+  methods:{
+    async paginationLink(url) {
+        await this.$store.dispatch('paginationLink', {url:this.users.links[url].url, name: "user"})
+        await this.users
+    },
   },
   computed:{
     users(){
