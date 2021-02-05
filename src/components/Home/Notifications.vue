@@ -50,56 +50,16 @@
       <template v-if="idx === page">
         <div class="notif__controls">
           <div class="notif__controls-time">
-            <p>{{ (dataConvert()).getDate() }}
-              {{ monthes[(dataConvert()).getMonth()] }}</p>
-            <svg
-                width="15"
-                height="16"
-                viewBox="0 0 15 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                  d="M5.83797 8.57757C5.83797 8.40935 5.69706 8.27307 5.52318 8.27307H4.42468C4.25101 8.27307 4.11006 8.40935 4.11006 8.57757V9.64106C4.11006 9.80949 4.25101 9.94582 4.42468 9.94582H5.52318C5.69706 9.94582 5.83797 9.80949 5.83797 9.64106V8.57757Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M8.58327 8.57757C8.58327 8.40935 8.44232 8.27307 8.26879 8.27307H7.17015C6.99648 8.27307 6.85553 8.40935 6.85553 8.57757V9.64106C6.85553 9.80949 6.99648 9.94582 7.17015 9.94582H8.26879C8.44232 9.94582 8.58327 9.80949 8.58327 9.64106V8.57757Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M11.3287 8.57757C11.3287 8.40935 11.1877 8.27307 11.014 8.27307H9.91554C9.74167 8.27307 9.60075 8.40935 9.60075 8.57757V9.64106C9.60075 9.80949 9.74167 9.94582 9.91554 9.94582H11.014C11.1877 9.94582 11.3287 9.80949 11.3287 9.64106V8.57757Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M5.83797 11.2359C5.83797 11.0674 5.69706 10.9313 5.52318 10.9313H4.42468C4.25101 10.9313 4.11006 11.0674 4.11006 11.2359V12.2992C4.11006 12.4676 4.25101 12.6039 4.42468 12.6039H5.52318C5.69706 12.6039 5.83797 12.4675 5.83797 12.2992V11.2359Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M8.58327 11.2359C8.58327 11.0674 8.44232 10.9313 8.26879 10.9313H7.17015C6.99648 10.9313 6.85553 11.0674 6.85553 11.2359V12.2992C6.85553 12.4676 6.99648 12.6039 7.17015 12.6039H8.26879C8.44232 12.6039 8.58327 12.4675 8.58327 12.2992V11.2359Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M11.3287 11.2359C11.3287 11.0674 11.1877 10.9313 11.0142 10.9313H9.91554C9.74167 10.9313 9.60075 11.0674 9.60075 11.2359V12.2992C9.60075 12.4676 9.74167 12.6039 9.91554 12.6039H11.0142C11.1877 12.6039 11.3287 12.4675 11.3287 12.2992V11.2359Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M13.2929 4.28879V2.6644C13.9555 2.68374 14.5 3.21463 14.5 3.86717V13.3869C14.5 14.0506 13.9425 14.5977 13.2569 14.5977H2.18183C1.49523 14.5977 0.938721 14.0517 0.938721 13.3869V3.86717C0.938721 3.21463 1.48321 2.68374 2.14583 2.6644V4.28879C2.14583 5.023 2.76095 5.61466 3.51909 5.61466H4.38559C5.1437 5.61466 5.76698 5.023 5.76698 4.28879V2.65857H9.67175V4.28879C9.67175 5.023 10.295 5.61466 11.0533 5.61466H11.9196C12.6778 5.61466 13.2929 5.023 13.2929 4.28879ZM12.353 13.3144C12.6498 13.3144 12.8904 13.0814 12.8904 12.7941L12.8904 7.87677C12.8904 7.58936 12.6498 7.35628 12.353 7.35628H3.06181C2.76494 7.35628 2.52439 7.58936 2.52439 7.87677V12.7941C2.52439 13.0814 2.76497 13.3144 3.06181 13.3144H12.353Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M3.51613 4.74382H4.37305C4.63315 4.74382 4.84404 4.53992 4.84404 4.28808V1.62509C4.84404 1.37322 4.63315 1.16919 4.37305 1.16919H3.51613C3.256 1.16919 3.04514 1.37322 3.04514 1.62509V4.28808C3.04514 4.53992 3.256 4.74382 3.51613 4.74382Z"
-                  fill="#CBCFE6"
-              />
-              <path
-                  d="M11.0423 4.74382H11.8992C12.1591 4.74382 12.37 4.53992 12.37 4.28808V1.62509C12.37 1.37322 12.1592 1.16919 11.8992 1.16919H11.0423C10.7822 1.16919 10.5713 1.37322 10.5713 1.62509V4.28808C10.5713 4.53992 10.7822 4.74382 11.0423 4.74382Z"
-                  fill="#CBCFE6"
-              />
-            </svg>
-            <Datepicker  :language="lang" :disabled-dates="disabledDates" id="deadline" @input="dataConvert($event)"
-                         placeholder="" :format="format"/>
+            <date-picker
+                v-model="item.publish_date"
+                type="datetime"
+                value-type="YYYY-MM-DD HH:mm:ss"
+                format="DD MMMM YYYY HH:mm:ss"
+                placeholder="Выберите дату"
+                :lang="lang"
+                :disabled="item.published"
+                @change="change = true"
+            ></date-picker>
           </div>
           <div class="notif__controls-move">
             <div class="notif__controls-left" v-if="!(page === 0)" @click="page--">
@@ -175,7 +135,7 @@
             </div>
             <div
                 class="notif__input-approve"
-                v-if="change"
+                v-if="change && !(item.text === '')"
                 @click="saveNotifications(item)"
             >
               <svg
@@ -211,8 +171,10 @@
 
 <script>
 import Modal from "@/components/Modal";
-import Datepicker from 'vuejs-datepicker';
-import lang from 'vuejs-datepicker/dist/locale/translations/ru';
+
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
+import 'vue2-datepicker/locale/ru';
 
 export default {
   data() {
@@ -221,12 +183,13 @@ export default {
       modal: false,
       page: 0,
       id: null,
-      format: 'yyyy-MM-dd',
-      lang,
-      publish_date: this.dataConvert(),
-      disabledDates: {
-        to: new Date(),
+      lang: {
+        formatLocale: {
+          firstDayOfWeek: 1,
+        },
+        monthBeforeYear: false,
       },
+
       monthes: [
         "Января",
         "Февраля",
@@ -245,7 +208,7 @@ export default {
   },
   components: {
     Modal,
-    Datepicker
+    DatePicker
   },
   methods: {
     async onModal(confirm) {
@@ -267,20 +230,16 @@ export default {
       }
     },
     newNotifications(){
-      this.publish_date = this.dataConvert()
       let obj = {
         text: '',
         created_at: this.dataConvert(),
         publish_date: this.dataConvert()
       }
-
       this.notifications.data.unshift(obj)
       this.notifications.total++
-
     },
-    dataConvert(data){
-      if (data){
-        let today = new Date(data)
+    dataConvert(){
+        let today = new Date()
         let year = today.getFullYear(),
             month = ((today.getMonth() + 1).toString().length === 1 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1)),
             day = (today.getDate().toString().length === 1 ? '0' + today.getDate() : today.getDate()),
@@ -288,11 +247,6 @@ export default {
             minutes = (today.getMinutes().toString().length === 1 ? '0' + today.getMinutes() : today.getMinutes()),
             seconds = (today.getSeconds().toString().length === 1 ? '0' + today.getSeconds() : today.getSeconds())
         return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
-      }else {
-        return  new Date();
-      }
-
-
     },
     async saveNotifications(item){
       if (item.id){

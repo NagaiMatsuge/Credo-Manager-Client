@@ -12,8 +12,17 @@ export default {
         },
         setRight(state, right) {
             state.right = right;
+
         },
         setNot(state, not) {
+            for (const notKey of not.notifications.data) {
+                let today = new Date()
+                let diff = Math.floor((Date.parse(notKey.publish_date) - Date.parse(today)) / 86400000);
+                notKey.published = false
+                if (diff < 0) {
+                    notKey.published = true
+                }
+            }
             state.not = not;
         },
     },

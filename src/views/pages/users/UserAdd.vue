@@ -346,7 +346,7 @@ export default {
     };
   },
   async mounted() {
-    await this.$store.dispatch("fetchRoles");
+    await this.$store.dispatch("fetchRoles", {id:0});
   },
 
   validations: {

@@ -28,6 +28,18 @@
   &__controls-time {
     display: flex;
     align-items: center;
+    width: 100%;
+    padding-right: 10px;
+    .mx-datepicker{
+      width: 100%;
+    }
+    .mx-input-wrapper{
+      input{
+        border: none;
+        background: var(--bg);
+        box-shadow: none;
+      }
+    }
     p {
       margin-right: 10px;
       font-size: 11px;
